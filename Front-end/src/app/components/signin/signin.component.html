@@ -1,0 +1,64 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div
+    class="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg w-96 min-h-[350px]"
+  >
+    <h3 class="text-2xl font-bold text-center">Login to your account</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
+      <div class="mt-4 space-y-6">
+        <div class="relative">
+          <label class="block" for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            required
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 h-10"
+          />
+          <span
+            *ngIf="
+              loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+            "
+            class="absolute text-xs text-red-600 block mt-1 top-full"
+            >Please enter a valid email address</span
+          >
+        </div>
+        <div class="relative">
+          <label class="block" for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            required
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 h-10"
+          />
+          <span
+            *ngIf="
+              loginForm.get('password')?.invalid &&
+              loginForm.get('password')?.touched
+            "
+            class="absolute text-xs text-red-600 block mt-1 top-full"
+            >Password must be at least 6 characters long</span
+          >
+        </div>
+        <div class="flex items-baseline justify-center space-x-4">
+          <button
+            type="submit"
+            [disabled]="loginForm.invalid"
+            class="px-6 py-2 text-white bg-purple_accent rounded-lg hover:bg-purple_accent"
+          >
+            Login
+          </button>
+          <a href="#" class="text-sm text-purple_accent hover:underline"
+            >Forgot password?</a
+          >
+        </div>
+      </div>
+    </form>
+    <div class="mt-4 text-sm text-center">
+      Don't have an account?
+      <a routerLink="/signup" class="text-purple_accent hover:underline"
+        >Sign up</a
+      >
+    </div>
+  </div>
+</div>

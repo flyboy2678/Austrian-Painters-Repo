@@ -1,0 +1,24 @@
+<div class="w-full h-full flex bg-white justify-end px-10">
+  <div
+    class="flex flex-row items-center text-center hover:cursor-pointer gap-2"
+  >
+    <div class="rounded-full bg-dashboard_bg w-fit p-2">HT</div>
+
+    <h1 nz-dropdown [nzDropdownMenu]="menu" class="text-center">
+      Hope
+
+      <fa-icon
+        [icon]="faChevronDown"
+        class="text-text_primary text-xs"
+      ></fa-icon>
+    </h1>
+
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu nzSelectable class="w-24">
+        <li nz-menu-item>Edit Profile</li>
+
+        <li nz-menu-item nzDanger>Log Out</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+</div>

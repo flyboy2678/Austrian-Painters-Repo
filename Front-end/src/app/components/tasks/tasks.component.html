@@ -1,0 +1,44 @@
+<main class="w-full h-full flex flex-col p-10 justify-center">
+  <h1 class="mb-5 text-lg font-semibold text-text_secondary">Tasks</h1>
+  <div class="w-full h-full bg-white rounded-md p-10">
+    <table class="w-full">
+      <thead>
+        <tr class="text-text_secondary">
+          <th class="text-left">Task</th>
+          <th class="text-left">Description</th>
+          <th class="text-left">Due Date</th>
+          <th class="text-center">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Task 1</td>
+          <td>Task 1 Description</td>
+          <td>2021-10-10</td>
+          <td class="flex flex-row gap-2 justify-center font-semibold">
+            <button
+              class="px-2 rounded-md border border-gray-400 text-gray-400 hover:bg-gray-400 hover:text-white"
+            >
+              Not Started
+            </button>
+            <button
+              class="px-2 rounded-md border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white"
+            >
+              In Progress
+            </button>
+            <button
+              class="px-2 rounded-md border border-green-400 text-green-400 hover:bg-green-400 hover:text-white"
+            >
+              Completed
+            </button>
+            <button
+              class="px-2 rounded-md border border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+            >
+              Stuck
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

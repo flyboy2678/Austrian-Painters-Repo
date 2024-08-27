@@ -1,0 +1,30 @@
+<main class="w-full h-full flex flex-col p-10 justify-center">
+  <h1 class="mb-5 text-lg font-semibold text-text_secondary">Manage users</h1>
+  <div class="w-full h-full bg-white rounded-md p-10">
+    <table class="w-full text-text_primary">
+      <thead>
+        <tr class="text-text_secondary">
+          <th class="p-2">Name</th>
+          <th class="p-2">Email</th>
+          <th class="p-2">Role</th>
+          <th class="p-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="p-2 text-center">Tony</td>
+          <td class="p-2 text-center">example123.com</td>
+          <td class="p-2 text-center">Manager</td>
+          <td class="p-2 text-center flex flex-row justify-center gap-2">
+            <button class="text-purple_accent p-2 rounded-md">
+              <fa-icon [icon]="faEdit" />
+            </button>
+            <button class="text-red-500 p-2 rounded-md">
+              <fa-icon [icon]="faTrashCan" />
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
