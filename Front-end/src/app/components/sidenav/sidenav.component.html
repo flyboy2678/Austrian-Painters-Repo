@@ -4,36 +4,41 @@
   <div class="w-full flex flex-col">
     <h1 class="mb-10 text-2xl bold text-center p-2 font-semibold">Logo Here</h1>
     <div class="flex flex-col gap-3 w-full text-text_primary">
-      <a routerLink=""
-        ><button class="{{ buttonStyle }} bg-dashboard_bg text-purple_accent">
-          <fa-icon [icon]="faNewspaper"></fa-icon>
-          Dashboard
-        </button></a
+      <button
+        routerLink="/dashboard"
+        [ngClass]="isActive('/dashboard') ? activeStyle : inactiveStyle"
       >
-      <a routerLink="/manageusers"
-        ><button class="{{ buttonStyle }} text-text_primary">
-          <fa-icon [icon]="faUsers"></fa-icon>
-          Manage Users
-        </button></a
+        <fa-icon [icon]="faNewspaper"></fa-icon>
+        Dashboard
+      </button>
+      <button
+        routerLink="/manageusers"
+        [ngClass]="isActive('/manageusers') ? activeStyle : inactiveStyle"
       >
-      <a routerLink="/tasks">
-        <button class="{{ buttonStyle }} text-text_primary">
-          <fa-icon [icon]="faListCheck"></fa-icon>
-          Tasks
-        </button></a
+        <fa-icon [icon]="faUsers"></fa-icon>
+        Manage Users
+      </button>
+      <button
+        routerLink="/tasks"
+        [ngClass]="isActive('/tasks') ? activeStyle : inactiveStyle"
       >
-      <a routerLink="/managetasks">
-        <button class="{{ buttonStyle }} text-text_primary">
-          <fa-icon [icon]="faThumbTack"></fa-icon>
-          Manage Tasks
-        </button></a
+        <fa-icon [icon]="faListCheck"></fa-icon>
+        Tasks
+      </button>
+      <button
+        routerLink="/managetasks"
+        [ngClass]="isActive('/managetasks') ? activeStyle : inactiveStyle"
       >
-      <a routerLink="/loghours"
-        ><button class="{{ buttonStyle }} text-text_primary">
-          <fa-icon [icon]="faHourglass"></fa-icon>
-          Log Hours
-        </button></a
+        <fa-icon [icon]="faThumbTack"></fa-icon>
+        Manage Tasks
+      </button>
+      <button
+        routerLink="/loghours"
+        [ngClass]="isActive('/loghours') ? activeStyle : inactiveStyle"
       >
+        <fa-icon [icon]="faHourglass"></fa-icon>
+        Log Hours
+      </button>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -25,6 +25,11 @@ export class HeaderComponent {
   faChevronDown = faChevronDown;
   faDoorOpen = faDoorOpen;
   isVisible = false;
+  user: any;
+
+  constructor() {
+    this.user = this.authservice.getCurrentUser();
+  }
 
   showModal(): void {
     this.modalService.showModal();
