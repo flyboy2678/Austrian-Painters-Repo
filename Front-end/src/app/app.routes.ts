@@ -24,7 +24,7 @@ export const routes: Routes = [
       {
         path: 'managetasks',
         component: ManagetasksComponent,
-        canActivate: [adminGuard],
+        canActivate: [adminGuard]
       },
       {
         path: 'manageusers',

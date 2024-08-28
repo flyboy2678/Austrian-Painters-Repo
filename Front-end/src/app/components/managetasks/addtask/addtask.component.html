@@ -1,0 +1,69 @@
+<nz-modal
+  [nzVisible]="isVisible"
+  nzTitle="Add New Task"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleSubmit()"
+>
+  <ng-container *nzModalContent>
+    <form [formGroup]="taskForm">
+      <!-- Task Name Field -->
+      <label for="taskName">Task Name</label>
+      <input
+        type="text"
+        id="taskName"
+        formControlName="taskName"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="
+            taskForm.get('taskName')?.invalid &&
+            taskForm.get('taskName')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a task name</span
+        >
+      </div>
+
+      <!-- Description Field -->
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-24"
+      ></textarea>
+      <div class="h-7">
+        <span
+          *ngIf="
+            taskForm.get('description')?.invalid &&
+            taskForm.get('description')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a description</span
+        >
+      </div>
+
+      <!-- Due Date Field -->
+      <label for="dueDate">Due Date</label>
+      <input
+        type="date"
+        id="dueDate"
+        formControlName="dueDate"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="
+            taskForm.get('dueDate')?.invalid &&
+            taskForm.get('dueDate')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please select a due date</span
+        >
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>
