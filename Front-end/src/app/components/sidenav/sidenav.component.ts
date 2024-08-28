@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   RouterLink,
@@ -24,9 +24,10 @@ import {
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css',
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
   authservice = inject(AuthService);
   activeLink: string = '';
+  user: any;
   inactiveStyle: string = 'rounded-md w-full py-2 flex flex-row gap-3 px-3';
   activeStyle: string =
     this.inactiveStyle + ' bg-dashboard_bg text-purple_accent';
@@ -36,8 +37,8 @@ export class SidenavComponent implements OnInit {
   faThumbTack = faThumbTack;
   faUsers = faUsers;
 
-  constructor(private router: Router) {}
-  ngOnInit(): void {
+  constructor(private router: Router) {
+    this.user = this.authservice.getCurrentUser();
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {

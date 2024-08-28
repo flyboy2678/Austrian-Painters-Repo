@@ -4,7 +4,9 @@
     [nzDropdownMenu]="menu"
     class="flex flex-row items-center text-center hover:cursor-pointer gap-2"
   >
-    <div class="rounded-full bg-dashboard_bg w-fit p-2">HT</div>
+    <div class="rounded-full bg-dashboard_bg w-fit p-2 font-bold">
+      {{ initials }}
+    </div>
     <h1 class="text-center">
       {{ user?.firstName }}
       <fa-icon

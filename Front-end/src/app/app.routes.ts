@@ -9,6 +9,8 @@ import { ManageusersComponent } from './components/manageusers/manageusers.compo
 import { NgModule } from '@angular/core';
 import { LoghoursComponent } from './components/loghours/loghours.component';
 import { authGuard } from './guards/auth/auth.guard';
+import { adminGuard } from './guards/admin/admin.guard';
+import { notloggedinGuard } from './guards/notloggedin/notloggedin.guard';
 import { TestComponent } from './components/test/test.component';
 
 export const routes: Routes = [
@@ -19,14 +21,30 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'tasks', component: TasksComponent },
-      { path: 'managetasks', component: ManagetasksComponent },
-      { path: 'manageusers', component: ManageusersComponent },
+      {
+        path: 'managetasks',
+        component: ManagetasksComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'manageusers',
+        component: ManageusersComponent,
+        canActivate: [adminGuard],
+      },
       { path: 'loghours', component: LoghoursComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [notloggedinGuard],
+  },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    canActivate: [notloggedinGuard],
+  },
   { path: 'test', component: TestComponent },
 ];
 
