@@ -9,7 +9,7 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { authInterceptor } from './auth.interceptor';
+import { authInterceptor } from './interceptors/auth/auth.interceptor';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
 export const appConfig: ApplicationConfig = {

@@ -8,9 +8,8 @@ import { ManagetasksComponent } from './components/managetasks/managetasks.compo
 import { ManageusersComponent } from './components/manageusers/manageusers.component';
 import { NgModule } from '@angular/core';
 import { LoghoursComponent } from './components/loghours/loghours.component';
-import { authGuard } from './auth.guard';
+import { authGuard } from './guards/auth/auth.guard';
 import { TestComponent } from './components/test/test.component';
-import { EditprofileComponent } from './components/header/editprofile/editprofile.component';
 
 export const routes: Routes = [
   {
