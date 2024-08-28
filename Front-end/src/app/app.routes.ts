@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { LoghoursComponent } from './components/loghours/loghours.component';
 import { authGuard } from './auth.guard';
 import { TestComponent } from './components/test/test.component';
+import { EditprofileComponent } from './components/header/editprofile/editprofile.component';
 
 export const routes: Routes = [
   {

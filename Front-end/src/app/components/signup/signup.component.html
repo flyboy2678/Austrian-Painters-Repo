@@ -3,7 +3,7 @@
     class="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg w-96 h-auto"
   >
     <h3 class="text-2xl font-bold text-center">Create an account</h3>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit($event)">
       <div class="mt-4 space-y-4">
         <div class="relative">
           <label class="block" for="email">Email</label>
@@ -68,7 +68,6 @@
         <div class="flex justify-center">
           <button
             type="submit"
-            (click)="onSubmit()"
             [disabled]="signupForm.invalid"
             class="px-6 py-2 text-white bg-purple_accent rounded-lg hover:bg-purple_accent disabled:opacity-50"
           >

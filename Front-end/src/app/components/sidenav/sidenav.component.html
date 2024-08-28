@@ -11,33 +11,29 @@
         </button></a
       >
       <a routerLink="/manageusers"
-        ><button class="{{ buttonStyle }}">
+        ><button class="{{ buttonStyle }} text-text_primary">
           <fa-icon [icon]="faUsers"></fa-icon>
           Manage Users
         </button></a
       >
       <a routerLink="/tasks">
-        <button class="{{ buttonStyle }}">
+        <button class="{{ buttonStyle }} text-text_primary">
           <fa-icon [icon]="faListCheck"></fa-icon>
           Tasks
         </button></a
       >
       <a routerLink="/managetasks">
-        <button class="{{ buttonStyle }}">
+        <button class="{{ buttonStyle }} text-text_primary">
           <fa-icon [icon]="faThumbTack"></fa-icon>
           Manage Tasks
         </button></a
       >
       <a routerLink="/loghours"
-        ><button class="{{ buttonStyle }}">
+        ><button class="{{ buttonStyle }} text-text_primary">
           <fa-icon [icon]="faHourglass"></fa-icon>
           Log Hours
         </button></a
       >
     </div>
   </div>
-  <button (click)="logout()" class="{{ buttonStyle }} mb-20 text-text_primary">
-    <fa-icon [icon]="faDoorOpen"></fa-icon>
-    Log Out
-  </button>
 </div>

@@ -56,4 +56,35 @@ const getUserByEmail = (email, callback) => {
 	});
 };
 
-module.exports = { createUser, getUserByEmail };
+const getUserById = (id, callback) => {
+	const query = `SELECT * FROM EMPLOYEES WHERE Emp_id = ?`;
+
+	connection.query(query, [id], (err, results) => {
+		if (err) {
+			console.log("Error getting user: ", err);
+			return;
+		}
+		// console.log("User found: ", results);
+		callback(null, results);
+	});
+};
+
+const updateUser = (user, callback) => {
+	//update the firstName, LastName, and email
+	const query = `UPDATE EMPLOYEES SET FirstName = ?, LastName = ?, Email = ? WHERE Emp_id = ?`;
+
+	connection.query(
+		query,
+		[user.firstName, user.lastName, user.email, user.id],
+		(err, results) => {
+			if (err) {
+				console.log("Error updating user: ", err);
+				return;
+			}
+			console.log("User updated: ", results);
+			callback(null, results);
+		}
+	);
+};
+
+module.exports = { createUser, getUserByEmail, updateUser, getUserById };

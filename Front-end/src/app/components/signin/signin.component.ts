@@ -34,10 +34,8 @@ export class SigninComponent {
       this.authService
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe((res: any) => {
-          console.log(res);
           this.router.navigate(['/dashboard']);
         });
-      console.log('Login form submitted', this.loginForm.value);
     }
   }
 }
