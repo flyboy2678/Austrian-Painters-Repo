@@ -1,12 +1,11 @@
 <nz-modal
-  [nzVisible]="isVisible"
+  [nzVisible]="modalService.getVisible()"
   nzTitle="Add New Task"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleSubmit()"
 >
   <ng-container *nzModalContent>
     <form [formGroup]="taskForm">
-      <!-- Task Name Field -->
       <label for="taskName">Task Name</label>
       <input
         type="text"
@@ -25,8 +24,6 @@
           >Please enter a task name</span
         >
       </div>
-
-      <!-- Description Field -->
       <label for="description">Description</label>
       <textarea
         id="description"
@@ -44,8 +41,19 @@
           >Please enter a description</span
         >
       </div>
-
-      <!-- Due Date Field -->
+      <label for="assignTo">Assign To</label>
+      <nz-select
+        id="assignTo"
+        formControlName="assignTo"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      >
+        <nz-option
+          *ngFor="let user of users"
+          [nzLabel]="user.FirstName"
+          [nzValue]="user.Emp_id"
+        ></nz-option>
+      </nz-select>
       <label for="dueDate">Due Date</label>
       <input
         type="date"
@@ -57,8 +65,7 @@
       <div class="h-7">
         <span
           *ngIf="
-            taskForm.get('dueDate')?.invalid &&
-            taskForm.get('dueDate')?.touched
+            taskForm.get('dueDate')?.invalid && taskForm.get('dueDate')?.touched
           "
           class="text-xs text-red-600 block mt-1"
           >Please select a due date</span

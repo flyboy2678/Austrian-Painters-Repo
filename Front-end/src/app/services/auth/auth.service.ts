@@ -18,9 +18,14 @@ export class AuthService {
 
   constructor() {}
 
-  signup(email: string, password: string): Observable<any> {
+  signup(
+    name: string,
+    surname: string,
+    email: string,
+    password: string
+  ): Observable<any> {
     console.log('email: ', email, 'password: ', password);
-    const user = { email, password };
+    const user = { name, surname, email, password };
 
     return this.http.post('http://localhost:3000/api/signup', user);
   }
