@@ -26,9 +26,11 @@ export class HeaderComponent {
   faDoorOpen = faDoorOpen;
   isVisible = false;
   user: any;
+  initials: string;
 
   constructor() {
     this.user = this.authservice.getCurrentUser();
+    this.initials = this.user.firstName[0] + this.user.lastName[0];
   }
 
   showModal(): void {

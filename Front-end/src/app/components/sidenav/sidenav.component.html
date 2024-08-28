@@ -11,6 +11,7 @@
         <fa-icon [icon]="faNewspaper"></fa-icon>
         Dashboard
       </button>
+      @if (user.admin == 1 ) {
       <button
         routerLink="/manageusers"
         [ngClass]="isActive('/manageusers') ? activeStyle : inactiveStyle"
@@ -18,6 +19,7 @@
         <fa-icon [icon]="faUsers"></fa-icon>
         Manage Users
       </button>
+      }
       <button
         routerLink="/tasks"
         [ngClass]="isActive('/tasks') ? activeStyle : inactiveStyle"
@@ -25,6 +27,7 @@
         <fa-icon [icon]="faListCheck"></fa-icon>
         Tasks
       </button>
+      @if (user.admin == 1 ) {
       <button
         routerLink="/managetasks"
         [ngClass]="isActive('/managetasks') ? activeStyle : inactiveStyle"
@@ -32,6 +35,7 @@
         <fa-icon [icon]="faThumbTack"></fa-icon>
         Manage Tasks
       </button>
+      }
       <button
         routerLink="/loghours"
         [ngClass]="isActive('/loghours') ? activeStyle : inactiveStyle"
