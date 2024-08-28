@@ -12,4 +12,14 @@ export class UserService {
   updateUser(user: any): Observable<any> {
     return this.http.put('http://localhost:3000/api/updateUser', user);
   }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/getAllUsers');
+  }
+
+  deleteUser(user: any): Observable<any> {
+    return this.http.delete(
+      `http://localhost:3000/api/deleteUser/${user.Emp_id}`
+    );
+  }
 }

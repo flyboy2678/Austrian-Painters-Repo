@@ -11,19 +11,26 @@
         </tr>
       </thead>
       <tbody>
+        @for (user of users; track $index) {
         <tr>
-          <td class="p-2 text-center">Tony</td>
-          <td class="p-2 text-center">example123.com</td>
-          <td class="p-2 text-center">Manager</td>
+          <td class="p-2 text-center">{{ user.FirstName }}</td>
+          <td class="p-2 text-center">{{ user.Email }}</td>
+          <td class="p-2 text-center">
+            @if (user.Admin == 1) { Manager} @else { Employee}
+          </td>
           <td class="p-2 text-center flex flex-row justify-center gap-2">
             <button class="text-purple_accent p-2 rounded-md">
               <fa-icon [icon]="faEdit" />
             </button>
-            <button class="text-red-500 p-2 rounded-md">
+            <button
+              class="text-red-500 p-2 rounded-md"
+              (click)="deleteUser(user)"
+            >
               <fa-icon [icon]="faTrashCan" />
             </button>
           </td>
         </tr>
+        }
       </tbody>
     </table>
   </div>
