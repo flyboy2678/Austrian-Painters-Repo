@@ -10,9 +10,11 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor } from './auth.interceptor';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: NZ_I18N, useValue: en_US },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),

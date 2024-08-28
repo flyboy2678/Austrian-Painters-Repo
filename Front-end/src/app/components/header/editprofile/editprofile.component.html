@@ -1,0 +1,66 @@
+<nz-modal
+  [nzVisible]="modalService.getVisible()"
+  nzTitle="Edit Profile"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleSubmit()"
+>
+  <ng-container *nzModalContent>
+    <form [formGroup]="profileForm">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        id="firstName"
+        formControlName="firstName"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="
+            profileForm.get('firstName')?.invalid &&
+            profileForm.get('firstName')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a first name</span
+        >
+      </div>
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        id="lastName"
+        formControlName="lastName"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="
+            profileForm.get('lastName')?.invalid &&
+            profileForm.get('lastName')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a last name</span
+        >
+      </div>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        value="{{ user.email }}"
+        formControlName="email"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="
+            profileForm.get('email')?.invalid &&
+            profileForm.get('email')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a valid email address</span
+        >
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>

@@ -38,14 +38,13 @@ export class SignupComponent {
       : { mismatch: true };
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
     if (this.signupForm.valid) {
       // Implement your sign-up logic here
-      // event.preventDefault();
+      event.preventDefault();
       this.authService
         .signup(this.signupForm.value.email, this.signupForm.value.password)
         .subscribe((res: any) => {
-          console.log(res);
           this.router.navigate(['/signin']);
         });
     }

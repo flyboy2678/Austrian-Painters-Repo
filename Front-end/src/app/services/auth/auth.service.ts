@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 import { StorageService } from '../localstorage/localstorage.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { StorageService } from '../localstorage/localstorage.service';
 })
 export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
-  private loggedUser?: string;
+  private loggedUser: string = '';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private router = inject(Router);
   private http = inject(HttpClient);
@@ -21,10 +22,7 @@ export class AuthService {
     console.log('email: ', email, 'password: ', password);
     const user = { email, password };
 
-    return this.http.post(
-      'http://localhost:3000/api/signup',
-      JSON.parse(JSON.stringify(user))
-    );
+    return this.http.post('http://localhost:3000/api/signup', user);
   }
 
   login(email: string, password: string): Observable<any> {
@@ -53,8 +51,41 @@ export class AuthService {
     this.router.navigate(['/signin']);
   }
 
-  getCurrentUserAuthUser() {
-    return this.http.get('http://localhost:3000/api/authUser');
+  getCurrentUser(): any {
+    const token = this.localStorage.get(this.JWT_TOKEN);
+    if (token) {
+      try {
+        return jwtDecode(token);
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
+  }
+
+  isTokenExpired() {
+    const tokens = this.localStorage.get(this.JWT_TOKEN);
+    if (!tokens) return true;
+    const token = JSON.parse(tokens).access_token;
+    const decoded = jwtDecode(token);
+    if (!decoded.exp) return true;
+    const expirationDate = decoded.exp * 1000;
+    const now = new Date().getTime();
+
+    return expirationDate < now;
+  }
+
+  refreshToken(): Observable<any> {
+    const refreshToken = JSON.parse(
+      this.localStorage.get(this.JWT_TOKEN) as string
+    );
+    return this.http
+      .post('http://localhost:3000/api/refreshToken', { refreshToken })
+      .pipe(
+        tap((tokens: any) => {
+          this.storeJwtToken(JSON.stringify(tokens));
+        })
+      );
   }
 
   isLoggedIn(): boolean {
