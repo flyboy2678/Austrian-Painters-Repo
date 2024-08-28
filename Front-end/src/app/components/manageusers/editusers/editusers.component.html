@@ -1,0 +1,63 @@
+<nz-modal
+  [nzVisible]="isVisible"
+  nzTitle="Add User"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleSubmit()"
+>
+  <ng-container *nzModalContent>
+    <form [formGroup]="taskForm">
+        <!-- Name Field -->
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched"
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a name</span
+        >
+      </div>
+
+      <!-- Email Field -->
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="taskForm.get('email')?.invalid && taskForm.get('email')?.touched"
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a valid email address</span
+        >
+      </div>
+
+      <!-- Role Field (Dropdown) -->
+      <label for="role">Role</label>
+      <nz-select
+        id="role"
+        formControlName="role"
+        class="w-full mt-2"
+        placeholder="Select a role"
+      >
+        <nz-option nzValue="Manager" nzLabel="Manager"></nz-option>
+        <nz-option nzValue="User" nzLabel="User"></nz-option>
+      </nz-select>
+      <div class="h-7">
+        <span
+          *ngIf="taskForm.get('role')?.invalid && taskForm.get('role')?.touched"
+          class="text-xs text-red-600 block mt-1"
+          >Please select a role</span
+        >
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>
