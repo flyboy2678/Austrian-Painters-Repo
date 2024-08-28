@@ -1,10 +1,14 @@
 const connection = require("../config/db");
 const bcrypt = require("bcrypt");
+const { uid } = require("uid");
 
 const createUser = async (user, callback) => {
-	const query = `INSERT INTO EMPLOYEES (Email, Password) VALUES (?, ?)`;
+	const query = `INSERT INTO EMPLOYEES (Emp_id, FirstName, LastName, Email, Password) VALUES (?, ?, ?, ?, ?)`;
 	//check if user exists
 	const userExistsQuery = `SELECT * FROM EMPLOYEES WHERE Email = ?`;
+
+	const userId = uid(16);
+
 	connection.query(userExistsQuery, [user.email], (err, results) => {
 		if (err) {
 			console.log("Error checking if user exists: ", err);
@@ -25,13 +29,7 @@ const createUser = async (user, callback) => {
 	//create user in the database
 	connection.query(
 		query,
-		[
-			user?.email,
-			hashedPassword,
-			user?.first_name,
-			user?.last_name,
-			user?.role,
-		],
+		[userId, user?.name, user?.surname, user?.email, hashedPassword],
 		(err, results) => {
 			if (err) {
 				// console.log("Error creating user: ", err);

@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import {
   FormGroup,
   FormBuilder,
@@ -7,48 +8,41 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AddtaskmodalService } from '../../../services/addtaskmodal/addtaskmodal.service';
 import { UserService } from '../../../services/user/user.service';
-import { ModalService } from '../../../services/modal/modal.service';
-import { AuthService } from '../../../services/auth/auth.service';
-
-
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [NzModalModule, ReactiveFormsModule, CommonModule],
+  imports: [NzModalModule, ReactiveFormsModule, CommonModule, NzSelectModule],
   templateUrl: './addtask.component.html',
   styleUrl: './addtask.component.css',
 })
 export class AddTaskComponent implements OnInit {
-  modalService = inject(ModalService);
-  userService = inject(UserService);
-  authService = inject(AuthService);
+  modalService = inject(AddtaskmodalService);
   taskForm: FormGroup;
-  
-  // Add a property to control modal visibility
-  isVisible: boolean = true; // Set initial visibility as needed
+  userService = inject(UserService);
+  users: any;
 
+  // Add a property to control modal visibility
   constructor(private fb: FormBuilder) {
     this.taskForm = this.fb.group({
       taskName: ['', [Validators.required]],
       description: ['', [Validators.required]],
       dueDate: ['', [Validators.required]],
     });
+    // Fetch users
+    this.userService.getAllUsers().subscribe((users) => {
+      this.users = users;
+    });
   }
 
   ngOnInit(): void {}
 
   handleSubmit(): void {
-    const taskDetails = { ...this.taskForm.value };
-    this.userService.updateUser(taskDetails).subscribe((res: any) => {
-      this.authService.refreshToken().subscribe((res: any) => {});
-      this.isVisible = false; // Close the modal after adding task
-      this.modalService.closeModal(); // Or handle via service if applicable
-    });
+    this.modalService.closeModal();
   }
 
   handleCancel(): void {
-    this.isVisible = false; // Close the modal on cancel
-    this.modalService.closeModal(); // Or handle via service if applicable
+    this.modalService.closeModal();
   }
 }

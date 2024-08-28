@@ -24,8 +24,8 @@ export class SignupComponent {
   constructor(private fb: FormBuilder) {
     this.signupForm = this.fb.group(
       {
-        name: ['', [Validators.required]],  // Added Name field
-        surname: ['', [Validators.required]],  // Added Surname field
+        name: ['', [Validators.required]], // Added Name field
+        surname: ['', [Validators.required]], // Added Surname field
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
@@ -45,9 +45,8 @@ export class SignupComponent {
       event.preventDefault();
       // Include name and surname in the sign-up logic if needed
       const { name, surname, email, password } = this.signupForm.value;
-
       this.authService
-        .signup(email, password)
+        .signup(name, surname, email, password)
         .subscribe((res: any) => {
           this.router.navigate(['/signin']);
         });

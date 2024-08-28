@@ -1,8 +1,10 @@
 <main class="w-full h-full flex flex-col p-10 justify-center">
+  <app-add-task />
   <h1 class="mb-5 text-lg font-semibold text-text_secondary">Manage Tasks</h1>
   <div class="w-full h-full bg-white rounded-md p-10 flex flex-col gap-10">
     <button
       class="bg-purple_accent p-2 w-fit rounded-md font-semibold text-white"
+      (click)="handleAddTask()"
     >
       <fa-icon [icon]="faPlus"></fa-icon>
       Add Task
