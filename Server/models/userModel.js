@@ -28,16 +28,16 @@ const createUser = async (user, callback) => {
 		[
 			user?.email,
 			hashedPassword,
-			// user.first_name,
-			// user.last_name,
-			// user.role,
+			user?.first_name,
+			user?.last_name,
+			user?.role,
 		],
 		(err, results) => {
 			if (err) {
-				console.log("Error creating user: ", err);
+				// console.log("Error creating user: ", err);
 				return;
 			}
-			console.log("User created: ", results);
+			// console.log("User created: ", results);
 			callback(null, results);
 		}
 	);
@@ -48,7 +48,7 @@ const getUserByEmail = (email, callback) => {
 
 	connection.query(query, [email], (err, results) => {
 		if (err) {
-			console.log("Error getting user: ", err);
+			// console.log("Error getting user: ", err);
 			return;
 		}
 		// console.log("User found: ", results);
@@ -61,7 +61,7 @@ const getUserById = (id, callback) => {
 
 	connection.query(query, [id], (err, results) => {
 		if (err) {
-			console.log("Error getting user: ", err);
+			// console.log("Error getting user: ", err);
 			return;
 		}
 		// console.log("User found: ", results);
@@ -78,13 +78,46 @@ const updateUser = (user, callback) => {
 		[user.firstName, user.lastName, user.email, user.id],
 		(err, results) => {
 			if (err) {
-				console.log("Error updating user: ", err);
+				// console.log("Error updating user: ", err);
 				return;
 			}
-			console.log("User updated: ", results);
+			// console.log("User updated: ", results);
 			callback(null, results);
 		}
 	);
 };
 
-module.exports = { createUser, getUserByEmail, updateUser, getUserById };
+const getAllUsers = (callback) => {
+	const query = `SELECT * FROM EMPLOYEES`;
+
+	connection.query(query, (err, results) => {
+		if (err) {
+			console.log("Error getting users: ", err);
+			return;
+		}
+		console.log("Users found: ", results);
+		callback(null, results);
+	});
+};
+
+const deleteUser = (id, callback) => {
+	const query = `DELETE FROM EMPLOYEES WHERE Emp_id = ?`;
+
+	connection.query(query, [id], (err, results) => {
+		if (err) {
+			console.log("Error deleting user: ", err);
+			return;
+		}
+		console.log("User deleted: ", results);
+		callback(null, results);
+	});
+};
+
+module.exports = {
+	createUser,
+	getUserByEmail,
+	updateUser,
+	getUserById,
+	getAllUsers,
+	deleteUser,
+};

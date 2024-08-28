@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserService } from '../../services/user/user.service';
 import {
   faEdit,
   faUserPen,
@@ -14,7 +15,21 @@ import {
   styleUrl: './manageusers.component.css',
 })
 export class ManageusersComponent {
+  userService = inject(UserService);
   faEdit = faEdit;
   faUserPen = faUserPen;
   faTrashCan = faTrashCan;
+  users: any;
+
+  constructor() {
+    this.userService.getAllUsers().subscribe((users) => {
+      this.users = users;
+    });
+  }
+
+  deleteUser(user: any) {
+    this.userService.deleteUser(user).subscribe(() => {
+      this.users = this.users.filter((u: any) => u.Emp_id !== user.Emp_id);
+    });
+  }
 }

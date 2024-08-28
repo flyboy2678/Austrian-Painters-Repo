@@ -33,4 +33,32 @@ const updateUser = (req, res) => {
 	});
 };
 
-module.exports = { createUser, updateUser, getUserByEmail };
+const getAllUsers = (req, res) => {
+	userModel.getAllUsers((err, result) => {
+		if (err) {
+			res.status(500).send("Error getting users");
+			return;
+		}
+		res.status(200).send(result);
+	});
+};
+
+const deleteUser = (req, res) => {
+	const id = req.params.id;
+	console.log("id", id);
+	userModel.deleteUser(id, (err, result) => {
+		if (err) {
+			res.status(500).send("Error deleting user");
+			return;
+		}
+		res.status(200).send(result);
+	});
+};
+
+module.exports = {
+	createUser,
+	updateUser,
+	getUserByEmail,
+	getAllUsers,
+	deleteUser,
+};
