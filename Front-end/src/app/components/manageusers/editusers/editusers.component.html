@@ -1,12 +1,11 @@
 <nz-modal
-  [nzVisible]="isVisible"
+  [nzVisible]="this.editUserModalService.getVisible()"
   nzTitle="Add User"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleSubmit()"
 >
   <ng-container *nzModalContent>
     <form [formGroup]="taskForm">
-        <!-- Name Field -->
       <label for="name">Name</label>
       <input
         type="text"
@@ -22,8 +21,23 @@
           >Please enter a name</span
         >
       </div>
-
-      <!-- Email Field -->
+      <label for="surname">Surname</label>
+      <input
+        type="text"
+        id="surname"
+        formControlName="surname"
+        required
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
+      <div class="h-7">
+        <span
+          *ngIf="
+            taskForm.get('surname')?.invalid && taskForm.get('surname')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please enter a surname</span
+        >
+      </div>
       <label for="email">Email</label>
       <input
         type="email"
@@ -34,13 +48,13 @@
       />
       <div class="h-7">
         <span
-          *ngIf="taskForm.get('email')?.invalid && taskForm.get('email')?.touched"
+          *ngIf="
+            taskForm.get('email')?.invalid && taskForm.get('email')?.touched
+          "
           class="text-xs text-red-600 block mt-1"
           >Please enter a valid email address</span
         >
       </div>
-
-      <!-- Role Field (Dropdown) -->
       <label for="role">Role</label>
       <nz-select
         id="role"
@@ -48,8 +62,8 @@
         class="w-full mt-2"
         placeholder="Select a role"
       >
-        <nz-option nzValue="Manager" nzLabel="Manager"></nz-option>
-        <nz-option nzValue="User" nzLabel="User"></nz-option>
+        <nz-option nzValue="1" nzLabel="Manager"></nz-option>
+        <nz-option nzValue="0" nzLabel="User"></nz-option>
       </nz-select>
       <div class="h-7">
         <span

@@ -22,9 +22,31 @@ const getUserByEmail = (req, res) => {
 	});
 };
 
+const getUserById = (req, res) => {
+	const id = req.params.id;
+	userModel.getUserById(id, (err, result) => {
+		if (err) {
+			res.status(500).send("Error getting user");
+			return;
+		}
+		res.status(200).send(result);
+	});
+};
+
 const updateUser = (req, res) => {
 	const user = req.body;
 	userModel.updateUser(user, (err, result) => {
+		if (err) {
+			res.status(500).send("Error updating user");
+			return;
+		}
+		res.status(200).send(result);
+	});
+};
+
+const adminUpdateUser = (req, res) => {
+	const user = req.body;
+	userModel.adminUpdateUser(user, (err, result) => {
 		if (err) {
 			res.status(500).send("Error updating user");
 			return;
@@ -45,7 +67,6 @@ const getAllUsers = (req, res) => {
 
 const deleteUser = (req, res) => {
 	const id = req.params.id;
-	console.log("id", id);
 	userModel.deleteUser(id, (err, result) => {
 		if (err) {
 			res.status(500).send("Error deleting user");
@@ -58,7 +79,9 @@ const deleteUser = (req, res) => {
 module.exports = {
 	createUser,
 	updateUser,
+	adminUpdateUser,
 	getUserByEmail,
 	getAllUsers,
+	getUserById,
 	deleteUser,
 };

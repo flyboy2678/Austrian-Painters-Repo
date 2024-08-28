@@ -10,6 +10,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { AddtaskmodalService } from '../../../services/addtaskmodal/addtaskmodal.service';
 import { UserService } from '../../../services/user/user.service';
+import { TasksService } from '../../../services/tasks/tasks.service';
+
 @Component({
   selector: 'app-add-task',
   standalone: true,
@@ -19,6 +21,7 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class AddTaskComponent implements OnInit {
   modalService = inject(AddtaskmodalService);
+  tasksService = inject(TasksService);
   taskForm: FormGroup;
   userService = inject(UserService);
   users: any;
@@ -28,6 +31,7 @@ export class AddTaskComponent implements OnInit {
     this.taskForm = this.fb.group({
       taskName: ['', [Validators.required]],
       description: ['', [Validators.required]],
+      assignee: ['', [Validators.required]],
       dueDate: ['', [Validators.required]],
     });
     // Fetch users
@@ -39,6 +43,8 @@ export class AddTaskComponent implements OnInit {
   ngOnInit(): void {}
 
   handleSubmit(): void {
+    this.tasksService.createTask(this.taskForm.value).subscribe(() => {});
+    this.taskForm.reset();
     this.modalService.closeModal();
   }
 

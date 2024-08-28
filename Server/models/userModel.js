@@ -67,6 +67,24 @@ const getUserById = (id, callback) => {
 	});
 };
 
+const adminUpdateUser = (user, callback) => {
+	//update the firstName, LastName, and email
+	const query = `UPDATE EMPLOYEES SET FirstName = ?, LastName = ?, Email = ?, Admin = ? WHERE Emp_id = ?`;
+
+	connection.query(
+		query,
+		[user.name, user.surname, user.email, user.role, user.id],
+		(err, results) => {
+			if (err) {
+				// console.log("Error updating user: ", err);
+				return;
+			}
+			// console.log("User updated: ", results);
+			callback(null, results);
+		}
+	);
+};
+
 const updateUser = (user, callback) => {
 	//update the firstName, LastName, and email
 	const query = `UPDATE EMPLOYEES SET FirstName = ?, LastName = ?, Email = ? WHERE Emp_id = ?`;
@@ -118,4 +136,5 @@ module.exports = {
 	getUserById,
 	getAllUsers,
 	deleteUser,
+	adminUpdateUser,
 };

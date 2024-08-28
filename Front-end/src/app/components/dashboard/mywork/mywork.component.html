@@ -6,9 +6,11 @@
     </h1>
     <h1 class="font-medium text-sm cursor-pointer">Done</h1>
   </div>
-  <div class="w-full bg-gray-300 h-[0.5px] mt-1"></div>
-  <div class="flex flex-row justify-between mt-5 text-sm">
-    <p class="text-text_secondary">Task 1</p>
-    <p class="text-red-500">9/12/2012</p>
+  <div class="w-full bg-gray-300 h-[0.5px] mt-1 mb-5"></div>
+  @for (task of tasks; track $index) {
+  <div class="flex flex-row justify-between gap-2 text-sm">
+    <p class="text-text_secondary">{{ task.Name }}</p>
+    <p class="text-red-500">{{ task.DueDate }}</p>
   </div>
+  }
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import {
   FormGroup,
@@ -7,11 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../../services/user/user.service'; // Import your user service
-import { ModalService } from '../../../services/modal/modal.service';
-import { NzSelectModule } from 'ng-zorro-antd/select'; // Import for dropdown
-import { AuthService } from '../../../services/auth/auth.service';
-
+import { UserService } from '../../../services/user/user.service';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { EditusermodalService } from '../../../services/editusermodal/editusermodal.service';
 
 @Component({
   selector: 'app-user-form',
@@ -20,35 +18,33 @@ import { AuthService } from '../../../services/auth/auth.service';
   templateUrl: './editusers.component.html',
   styleUrls: ['./editusers.component.css'],
 })
-export class UserFormComponent implements OnInit {
-  modalService = inject(ModalService);
-  userService = inject(UserService); // Inject your user service
-  authService = inject(AuthService);
+export class UserFormComponent {
+  userService = inject(UserService);
+  editUserModalService = inject(EditusermodalService);
   taskForm: FormGroup;
-
-  isVisible: boolean = true; // Property to control modal visibility
+  user: any;
 
   constructor(private fb: FormBuilder) {
+    this.user = this.editUserModalService.getUser();
     this.taskForm = this.fb.group({
-      name: ['', [Validators.required]], // Name field
-      email: ['', [Validators.required, Validators.email]], // Email field
-      role: ['', [Validators.required]], // Role field (dropdown)
+      name: [this.user.FirstName, [Validators.required]],
+      surname: [this.user.LastName, [Validators.required]],
+      email: [this.user.Email, [Validators.required, Validators.email]],
+      role: [this.user.Admin, [Validators.required]],
     });
   }
 
-  ngOnInit(): void {}
-
   handleSubmit(): void {
-    const taskDetails = { ...this.taskForm.value };
-    this.userService.updateUser(taskDetails).subscribe((res: any) => {
-      this.authService.refreshToken().subscribe((res: any) => {});
-      this.isVisible = false; // Close the modal after adding task
-      this.modalService.closeModal(); // Or handle via service if applicable
-    });
+    this.userService
+      .adminUpdateUser(this.user.Emp_id, this.taskForm.value)
+      .subscribe(() => {
+        this.editUserModalService.closeModal();
+      });
+    this.taskForm.reset();
   }
 
   handleCancel(): void {
-    this.isVisible = false; // Close the modal on cancel
-    this.modalService.closeModal(); // Or handle via service if applicable
+    this.editUserModalService.closeModal();
+    this.taskForm.reset();
   }
 }
