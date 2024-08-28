@@ -38,12 +38,12 @@ export const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
-    canActivate: [notloggedinGuard],
+    // canActivate: [notloggedinGuard],
   },
   {
     path: 'signin',
     component: SigninComponent,
-    canActivate: [notloggedinGuard],
+    // canActivate: [notloggedinGuard],
   },
   { path: 'test', component: TestComponent },
 ];

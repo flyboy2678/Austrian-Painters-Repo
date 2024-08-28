@@ -1,0 +1,23 @@
+<div class="flex flex-col justify-center items-center">
+  <p-calendar
+    [readonlyInput]="true"
+    [inline]="true"
+    inputId="calendar-24h"
+    [(ngModel)]="datetime24h"
+    [showTime]="true"
+    [minDate]="datetime24h"
+    [maxDate]="datetime24h"
+    monthNavigator="false"
+    yearNavigator="false"
+    showOtherMonths="false"
+  ></p-calendar>
+  <button
+    nz-button
+    nzType="primary"
+    class="w-3/5"
+    [disabled]="disabled"
+    (click)="onClick()"
+  >
+    {{ data }}
+  </button>
+</div>
