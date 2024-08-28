@@ -20,13 +20,25 @@
         </tr>
       </thead>
       <tbody>
+        @for (task of tasks; track $index) {
         <tr>
-          <td class="text-left">Employee 1</td>
-          <td class="text-left">Task 1</td>
-          <td class="text-left">Task 1 Description</td>
-          <td class="text-left">2021-10-10</td>
-          <td class="text-center text-green-400 font-semibold">Completed</td>
+          <td class="text-left">{{ task.Emp_id }}</td>
+          <td class="text-left">{{ task.Name }}</td>
+          <td class="text-left">{{ task.Description }}</td>
+          <td class="text-left">{{ task.DueDate }}</td>
+          <td
+            class="text-center"
+            [ngClass]="{
+              'text-green-400': task.status === 'Completed',
+              'text-gray-400': task.status === 'Not Started',
+              'text-orange-400': task.status === 'In Progress',
+              'text-red-400': task.status === 'Stuck',
+            }"
+          >
+            {{ task.Status }}
+          </td>
         </tr>
+        }
       </tbody>
     </table>
   </div>

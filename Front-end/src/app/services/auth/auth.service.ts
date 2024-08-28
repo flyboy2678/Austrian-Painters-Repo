@@ -26,7 +26,6 @@ export class AuthService {
   ): Observable<any> {
     console.log('email: ', email, 'password: ', password);
     const user = { name, surname, email, password };
-
     return this.http.post('http://localhost:3000/api/signup', user);
   }
 

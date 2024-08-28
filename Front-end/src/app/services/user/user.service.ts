@@ -22,4 +22,14 @@ export class UserService {
       `http://localhost:3000/api/deleteUser/${user.Emp_id}`
     );
   }
+
+  getUserById(id: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/api/getUserById/${id}`);
+  }
+
+  adminUpdateUser(userid: string, user: any): Observable<any> {
+    user.id = userid;
+    console.log(user);
+    return this.http.put('http://localhost:3000/api/adminUpdateUser', user);
+  }
 }

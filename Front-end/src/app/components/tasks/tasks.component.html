@@ -11,10 +11,11 @@
         </tr>
       </thead>
       <tbody>
+        @for (task of tasks; track $index) {
         <tr>
-          <td>Task 1</td>
-          <td>Task 1 Description</td>
-          <td>2021-10-10</td>
+          <td>{{ task.Name }}</td>
+          <td>{{ task.Description }}</td>
+          <td>{{ task.DueDate }}</td>
           <td class="flex flex-row gap-2 justify-center font-semibold">
             <button
               class="px-2 rounded-md border border-gray-400 text-gray-400 hover:bg-gray-400 hover:text-white"
@@ -38,6 +39,7 @@
             </button>
           </td>
         </tr>
+        }
       </tbody>
     </table>
   </div>
