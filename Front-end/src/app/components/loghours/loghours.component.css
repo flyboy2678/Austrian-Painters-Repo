@@ -1,0 +1,13 @@
+.p-datepicker {
+    /* Adjust the datepicker container, e.g., for padding or border issues */
+    padding: 0;
+}
+
+.p-datepicker-header {
+    display: none; /* Hide the entire header (navigation buttons) */
+}
+
+.p-datepicker-calendar {
+    /* Customize the appearance of the date table */
+    background-color: #7b1111;
+}

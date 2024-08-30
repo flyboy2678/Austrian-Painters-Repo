@@ -1,4 +1,29 @@
 <main class="w-full h-full flex flex-col p-10 justify-center">
   <h1 class="mb-5 text-lg font-semibold text-text_secondary">Log hours</h1>
-  <div class="w-full h-full bg-white rounded-md"></div>
+  <div class="w-full h-full bg-white rounded-md">
+    <div class="flex lg:flex-row flex-col lg:gap-0 gap-24 justify-between pb-14">
+      <!-- Clock In -->
+      <app-custom-cal
+        data="Clock In"
+        (click)="clockIn()"
+        [disabled]="disableClockIn"
+      ></app-custom-cal>
+
+      <!-- time worked header -->
+      <div class="flex flex-col justify-center items-center">
+        <h2 class="text-text_secondary text-xl">Time Worked</h2>
+        <p>
+          {{ timeCounterService.elapsedHours() }} hours
+          {{ timeCounterService.elapsedMinutes() }} minutes
+        </p>
+      </div>
+
+      <!-- Clock Out -->
+      <app-custom-cal
+        data="Clock Out"
+        (click)="clockOut()"
+        [disabled]="disableClockOut"
+      ></app-custom-cal>
+    </div>
+  </div>
 </main>
