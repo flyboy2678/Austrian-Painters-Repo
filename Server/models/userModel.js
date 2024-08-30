@@ -135,6 +135,16 @@ const getAllUsers = (callback) => {
 const deleteUser = (id, callback) => {
 	const query = `DELETE FROM EMPLOYEES WHERE Emp_id = ?`;
 
+	const deleteTasksQuery = `DELETE FROM Tasks WHERE Emp_id = ?`;
+
+	connection.query(deleteTasksQuery, [id], (err, results) => {
+		if (err) {
+			console.log("Error deleting user tasks: ", err);
+			return;
+		}
+		console.log("User tasks deleted: ", results);
+	});
+
 	connection.query(query, [id], (err, results) => {
 		if (err) {
 			console.log("Error deleting user: ", err);
