@@ -9,6 +9,10 @@ export class UserService {
 
   constructor() {}
 
+  createUser(user: any): Observable<any> {
+    return this.http.post('http://localhost:3000/api/createUser', user);
+  }
+
   updateUser(user: any): Observable<any> {
     return this.http.put('http://localhost:3000/api/updateUser', user);
   }
@@ -31,5 +35,15 @@ export class UserService {
     user.id = userid;
     console.log(user);
     return this.http.put('http://localhost:3000/api/adminUpdateUser', user);
+  }
+
+  changePassword(userObj: any, passwords: any): Observable<any> {
+    const user = {
+      id: userObj.id,
+      oldPassword: userObj.password,
+      newPassword: passwords,
+    };
+
+    return this.http.put('http://localhost:3000/api/changePassword', user);
   }
 }

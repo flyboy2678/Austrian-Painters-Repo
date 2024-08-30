@@ -23,7 +23,7 @@ export class TasksService {
 
   setProgress(taskid: string, progress: string): Observable<any> {
     return this.http.put(`http://localhost:3000/api/setProgress/${taskid}`, {
-      progress,
+      status: progress,
     });
   }
 

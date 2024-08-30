@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { faChevronDown, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { ChangepasswordmodalService } from '../../services/changepasswordmodal/changepasswordmodal.service';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +17,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     NzDropDownModule,
     NzIconModule,
     EditprofileComponent,
+    ChangepasswordComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
@@ -22,6 +25,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 export class HeaderComponent {
   authservice = inject(AuthService);
   modalService = inject(ModalService);
+  changepasswordmodalService = inject(ChangepasswordmodalService);
   faChevronDown = faChevronDown;
   faDoorOpen = faDoorOpen;
   isVisible = false;
@@ -35,6 +39,10 @@ export class HeaderComponent {
 
   showModal(): void {
     this.modalService.showModal();
+  }
+
+  showChangePasswordModal(): void {
+    this.changepasswordmodalService.showModal();
   }
 
   logout(): void {

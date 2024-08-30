@@ -34,7 +34,7 @@ const getAllTasks = (req, res) => {
 
 const setProgress = (req, res) => {
 	const id = req.params.id;
-	const progress = req.body.progress;
+	const progress = req.body.status;
 	tasksModel.setProgress(id, progress, (err, result) => {
 		if (err) {
 			res.status(500).send("Error updating progress");

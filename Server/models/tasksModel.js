@@ -1,5 +1,4 @@
 const connection = require("../config/db");
-const bcrypt = require("bcrypt");
 
 const createTask = async (task, callback) => {
 	const query = `INSERT INTO Tasks (Emp_id, Name, Description, DueDate, Status) VALUES (?, ?, ?, ?, ?)`;

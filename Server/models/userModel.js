@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { uid } = require("uid");
 
 const createUser = async (user, callback) => {
-	const query = `INSERT INTO EMPLOYEES (Emp_id, FirstName, LastName, Email, Password) VALUES (?, ?, ?, ?, ?)`;
+	const query = `INSERT INTO EMPLOYEES (Emp_id, FirstName, LastName, Email, Password, Admin) VALUES (?, ?, ?, ?, ?, ?)`;
 	//check if user exists
 	const userExistsQuery = `SELECT * FROM EMPLOYEES WHERE Email = ?`;
 
@@ -20,16 +20,32 @@ const createUser = async (user, callback) => {
 			return;
 		}
 	});
-	//hash password
-	try {
-		var hashedPassword = await bcrypt.hash(user.password, 10);
-	} catch (err) {
-		console.log("Error hashing password: ", err);
+
+	if (user.password) {
+		//hash password
+		try {
+			var password = await bcrypt.hash(user.password, 10);
+		} catch (err) {
+			console.log("Error hashing password: ", err);
+		}
+	} else {
+		try {
+			var password = await bcrypt.hash("password123", 10);
+		} catch (err) {
+			console.log("Error hashing password: ", err);
+		}
 	}
+
+	if (user.role) {
+		var role = user.role;
+	} else {
+		var role = 0;
+	}
+
 	//create user in the database
 	connection.query(
 		query,
-		[userId, user?.name, user?.surname, user?.email, hashedPassword],
+		[userId, user?.name, user?.surname, user?.email, password, role],
 		(err, results) => {
 			if (err) {
 				// console.log("Error creating user: ", err);
@@ -129,6 +145,25 @@ const deleteUser = (id, callback) => {
 	});
 };
 
+const changePassword = async (user, callback) => {
+	const query = `UPDATE EMPLOYEES SET Password = ? WHERE Emp_id = ?`;
+
+	//hash password
+	try {
+		var newPassword = await bcrypt.hash(user.password, 10);
+	} catch (err) {
+		console.log("Error hashing password: ", err);
+	}
+	connection.query(query, [newPassword, user.id], (err, results) => {
+		if (err) {
+			console.log("Error updating password: ", err);
+			return;
+		}
+		console.log("Password updated: ", results);
+		callback(null, results);
+	});
+};
+
 module.exports = {
 	createUser,
 	getUserByEmail,
@@ -137,4 +172,5 @@ module.exports = {
 	getAllUsers,
 	deleteUser,
 	adminUpdateUser,
+	changePassword,
 };

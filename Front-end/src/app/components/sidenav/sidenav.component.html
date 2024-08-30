@@ -2,14 +2,16 @@
   class="flex flex-col w-full h-full bg-white items-start px-3 justify-between"
 >
   <div class="w-full flex flex-col">
-    <h1 class="mb-10 text-2xl bold text-center p-2 font-semibold">Logo Here</h1>
+    <h1 class="mb-10 lg:text-2xl bold text-center p-2 font-semibold">
+      Logo Here
+    </h1>
     <div class="flex flex-col gap-3 w-full text-text_primary">
       <button
         routerLink="/dashboard"
         [ngClass]="isActive('/dashboard') ? activeStyle : inactiveStyle"
       >
         <fa-icon [icon]="faNewspaper"></fa-icon>
-        Dashboard
+        <span class="hidden lg:block">Dashboard</span>
       </button>
       @if (user.admin == 1 ) {
       <button
@@ -17,7 +19,7 @@
         [ngClass]="isActive('/manageusers') ? activeStyle : inactiveStyle"
       >
         <fa-icon [icon]="faUsers"></fa-icon>
-        Manage Users
+        <span class="hidden lg:block">Manage Users</span>
       </button>
       }
       <button
@@ -25,7 +27,7 @@
         [ngClass]="isActive('/tasks') ? activeStyle : inactiveStyle"
       >
         <fa-icon [icon]="faListCheck"></fa-icon>
-        Tasks
+        <span class="hidden lg:block">Tasks</span>
       </button>
       @if (user.admin == 1 ) {
       <button
@@ -33,7 +35,7 @@
         [ngClass]="isActive('/managetasks') ? activeStyle : inactiveStyle"
       >
         <fa-icon [icon]="faThumbTack"></fa-icon>
-        Manage Tasks
+        <span class="hidden lg:block"> Manage Tasks </span>
       </button>
       }
       <button
@@ -41,7 +43,7 @@
         [ngClass]="isActive('/loghours') ? activeStyle : inactiveStyle"
       >
         <fa-icon [icon]="faHourglass"></fa-icon>
-        Log Hours
+        <span class="hidden lg:block"> Log Hours </span>
       </button>
     </div>
   </div>

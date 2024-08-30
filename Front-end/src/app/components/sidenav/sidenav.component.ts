@@ -28,7 +28,8 @@ export class SidenavComponent {
   authservice = inject(AuthService);
   activeLink: string = '';
   user: any;
-  inactiveStyle: string = 'rounded-md w-full py-2 flex flex-row gap-3 px-3';
+  inactiveStyle: string =
+    'rounded-md w-fit lg:w-full py-2 flex flex-row gap-3 px-3 ';
   activeStyle: string =
     this.inactiveStyle + ' bg-dashboard_bg text-purple_accent';
   faNewspaper = faNewspaper;

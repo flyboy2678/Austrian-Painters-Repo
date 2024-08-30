@@ -76,6 +76,17 @@ const deleteUser = (req, res) => {
 	});
 };
 
+const changePassword = (req, res) => {
+	const user = req.body;
+	userModel.changePassword(user, (err, result) => {
+		if (err) {
+			res.status(500).send("Error changing password");
+			return;
+		}
+		res.status(200).send(result);
+	});
+};
+
 module.exports = {
 	createUser,
 	updateUser,
@@ -84,4 +95,5 @@ module.exports = {
 	getAllUsers,
 	getUserById,
 	deleteUser,
+	changePassword,
 };

@@ -18,10 +18,12 @@
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu nzSelectable class="w-40 rounded-xl">
       <li nz-menu-item (click)="showModal()">Edit Profile</li>
+      <li nz-menu-item (click)="showChangePasswordModal()">Change Password</li>
       <li nz-menu-item nzDanger (click)="logout()">
         <fa-icon [icon]="faDoorOpen" /> Log Out
       </li>
     </ul>
   </nz-dropdown-menu>
   <app-editprofile />
+  <app-changepassword />
 </div>

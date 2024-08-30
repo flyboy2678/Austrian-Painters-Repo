@@ -1,7 +1,9 @@
-<main class="w-full h-full flex flex-col p-10 justify-center">
+<main class="w-full h-full flex flex-col p-5 lg:p-10 justify-center">
   <app-add-task />
   <h1 class="mb-5 text-lg font-semibold text-text_secondary">Manage Tasks</h1>
-  <div class="w-full h-full bg-white rounded-md p-10 flex flex-col gap-10">
+  <div
+    class="w-full h-full bg-white rounded-md p-5 lg:p-10 flex flex-col gap-5 lg:gap-10 text-xs lg:text-base"
+  >
     <button
       class="bg-purple_accent p-2 w-fit rounded-md font-semibold text-white"
       (click)="handleAddTask()"
@@ -15,8 +17,9 @@
           <th class="text-left">Employee</th>
           <th class="text-left">Task</th>
           <th class="text-left">Description</th>
-          <th class="text-left">Due Date</th>
-          <th class="text-center">Status</th>
+          <th class="text-left hidden lg:block">Due Date</th>
+          <th class="lg:text-center">Status</th>
+          <th class="text-center hidden lg:block">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -25,19 +28,36 @@
           <td class="text-left">{{ task.Emp_id }}</td>
           <td class="text-left">{{ task.Name }}</td>
           <td class="text-left">{{ task.Description }}</td>
-          <td class="text-left">{{ task.DueDate }}</td>
+          <td class="text-left hidden lg:block">{{ task.DueDate }}</td>
           <td
-            class="text-center"
+            class="lg:text-center"
             [ngClass]="{
-              'text-green-400': task.status === 'Completed',
-              'text-gray-400': task.status === 'Not Started',
-              'text-orange-400': task.status === 'In Progress',
-              'text-red-400': task.status === 'Stuck',
+              'text-green-400': task.Status === 'Completed',
+              'text-gray-400': task.Status === 'Not Started',
+              'text-orange-400': task.Status === 'In Progress',
+              'text-red-400': task.Status === 'Stuck',
             }"
           >
             {{ task.Status }}
           </td>
+          <td class="text-center hidden lg:block">
+            <button
+              class="text-purple_accent p-2 rounded-md"
+              (click)="handleEditTask(task.Task_id)"
+            >
+              <fa-icon [icon]="faEdit"></fa-icon>
+              Edit
+            </button>
+            <button
+              class="text-red-500 p-2 rounded-md"
+              (click)="handleDeleteTask(task.Task_id)"
+            >
+              <fa-icon [icon]="faTrash"></fa-icon>
+              Delete
+            </button>
+          </td>
         </tr>
+
         }
       </tbody>
     </table>

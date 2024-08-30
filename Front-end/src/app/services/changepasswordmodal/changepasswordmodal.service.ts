@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class ModalService {
-  constructor() {}
-  private isVisible = false;
+export class ChangepasswordmodalService {
+  private isVisible: boolean = false;
 
   showModal(): void {
     this.isVisible = true;
@@ -15,7 +14,9 @@ export class ModalService {
     this.isVisible = false;
   }
 
-  getVisible(): boolean {
+  getIsVisible(): boolean {
     return this.isVisible;
   }
+
+  constructor() {}
 }

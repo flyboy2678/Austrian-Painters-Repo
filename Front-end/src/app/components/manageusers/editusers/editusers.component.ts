@@ -23,6 +23,8 @@ export class UserFormComponent {
   editUserModalService = inject(EditusermodalService);
   taskForm: FormGroup;
   user: any;
+  admin: number = 1;
+  employee: number = 0;
 
   constructor(private fb: FormBuilder) {
     this.user = this.editUserModalService.getUser();

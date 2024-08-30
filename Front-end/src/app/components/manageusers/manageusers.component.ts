@@ -10,11 +10,12 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { UserFormComponent } from './editusers/editusers.component';
+import { AdduserComponent } from './adduser/adduser.component';
 
 @Component({
   selector: 'app-manageusers',
   standalone: true,
-  imports: [FontAwesomeModule, UserFormComponent],
+  imports: [FontAwesomeModule, UserFormComponent, AdduserComponent],
   templateUrl: './manageusers.component.html',
   styleUrl: './manageusers.component.css',
 })

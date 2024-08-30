@@ -1,11 +1,11 @@
 <nz-modal
-  [nzVisible]="this.editUserModalService.getVisible()"
+  [nzVisible]="this.addUserModalService.getVisible()"
   nzTitle="Add User"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleSubmit()"
 >
   <ng-container *nzModalContent>
-    <form [formGroup]="taskForm">
+    <form [formGroup]="addUserForm">
       <label for="name">Name</label>
       <input
         type="text"
@@ -16,7 +16,9 @@
       />
       <div class="h-7">
         <span
-          *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched"
+          *ngIf="
+            addUserForm.get('name')?.invalid && addUserForm.get('name')?.touched
+          "
           class="text-xs text-red-600 block mt-1"
           >Please enter a name</span
         >
@@ -32,7 +34,8 @@
       <div class="h-7">
         <span
           *ngIf="
-            taskForm.get('surname')?.invalid && taskForm.get('surname')?.touched
+            addUserForm.get('surname')?.invalid &&
+            addUserForm.get('surname')?.touched
           "
           class="text-xs text-red-600 block mt-1"
           >Please enter a surname</span
@@ -49,7 +52,8 @@
       <div class="h-7">
         <span
           *ngIf="
-            taskForm.get('email')?.invalid && taskForm.get('email')?.touched
+            addUserForm.get('email')?.invalid &&
+            addUserForm.get('email')?.touched
           "
           class="text-xs text-red-600 block mt-1"
           >Please enter a valid email address</span
@@ -67,7 +71,9 @@
       </nz-select>
       <div class="h-7">
         <span
-          *ngIf="taskForm.get('role')?.invalid && taskForm.get('role')?.touched"
+          *ngIf="
+            addUserForm.get('role')?.invalid && addUserForm.get('role')?.touched
+          "
           class="text-xs text-red-600 block mt-1"
           >Please select a role</span
         >

@@ -1,6 +1,12 @@
-<main class="w-full h-full flex flex-col p-10 justify-center">
-  <h1 class="mb-5 text-lg font-semibold text-text_secondary">Tasks</h1>
-  <div class="w-full h-full bg-white rounded-md p-10">
+<main
+  class="w-full h-full flex flex-col p-5 lg:p-10 justify-start lg:justify-center text-xs lg:text-base"
+>
+  <h1
+    class="mb-2 lg:mb-5 text-base lg:text-lg font-semibold text-text_secondary"
+  >
+    Tasks
+  </h1>
+  <div class="w-full sm:h-fit lg:h-full bg-white rounded-md p-5 lg:p-10">
     <table class="w-full">
       <thead>
         <tr class="text-text_secondary">
@@ -16,24 +22,42 @@
           <td>{{ task.Name }}</td>
           <td>{{ task.Description }}</td>
           <td>{{ task.DueDate }}</td>
-          <td class="flex flex-row gap-2 justify-center font-semibold">
+          <td
+            class="flex flex-col lg:flex-row gap-2 justify-center font-semibold"
+          >
             <button
-              class="px-2 rounded-md border border-gray-400 text-gray-400 hover:bg-gray-400 hover:text-white"
+              class="lg:px-2 rounded-md border border-gray-400 text-gray-400 hover:bg-gray-400 hover:text-white"
+              [ngClass]="{
+                'bg-gray-400 text-white': task.Status === 'Not Started'
+              }"
+              (click)="setStatus(task, 'Not Started')"
             >
               Not Started
             </button>
             <button
-              class="px-2 rounded-md border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white"
+              class="lg:px-2 rounded-md border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white"
+              [ngClass]="{
+                'bg-orange-400 text-white': task.Status === 'In Progress'
+              }"
+              (click)="setStatus(task, 'In Progress')"
             >
               In Progress
             </button>
             <button
               class="px-2 rounded-md border border-green-400 text-green-400 hover:bg-green-400 hover:text-white"
+              [ngClass]="{
+                'bg-green-400 text-white': task.Status === 'Completed'
+              }"
+              (click)="setStatus(task, 'Completed')"
             >
               Completed
             </button>
             <button
               class="px-2 rounded-md border border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+              [ngClass]="{
+                'bg-red-400 text-white': task.Status === 'Stuck'
+              }"
+              (click)="setStatus(task, 'Stuck')"
             >
               Stuck
             </button>

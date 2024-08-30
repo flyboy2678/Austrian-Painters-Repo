@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { AddtaskmodalService } from '../../services/addtaskmodal/addtaskmodal.service';
 import { AddTaskComponent } from './addtask/addtask.component';
 import { TasksService } from '../../services/tasks/tasks.service';
@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 export class ManagetasksComponent {
   tasksService = inject(TasksService);
   faPlus = faPlus;
+  faTrash = faTrash;
+  faEdit = faEdit;
   modalService = inject(AddtaskmodalService);
   tasks: any;
   constructor() {
@@ -28,5 +30,13 @@ export class ManagetasksComponent {
   handleAddTask(): void {
     console.log('Open');
     this.modalService.showModal();
+  }
+
+  handleEditTask(taskId: string): void {}
+
+  handleDeleteTask(taskId: string): void {
+    this.tasksService.deleteTask(taskId).subscribe(() => {
+      this.tasks = this.tasks.filter((task: any) => task.Task_id !== taskId);
+    });
   }
 }
