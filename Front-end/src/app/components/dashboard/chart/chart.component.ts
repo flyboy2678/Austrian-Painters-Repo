@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { FilterComponent } from "./filter/filter.component";
+import { FilterComponent } from './filter/filter.component';
+import { LogHoursService } from '../../../services/logHours/log-hours.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-chart',
@@ -9,56 +11,46 @@ import { FilterComponent } from "./filter/filter.component";
   templateUrl: './chart.component.html',
 })
 
-export class CharComponent{
 
+export class CharComponent implements OnInit{
+  hours = inject(LogHoursService);
+  user = inject(AuthService);
 
-  data =[{
-    "name": "Current User Stats",
-    "series": [
-      {
-        "value": 8,
-        "name": "Date 1"
-      },
-      {
-        "value": 4,
-        "name": "Date 2"
-      },
-      {
-        "value": 7,
-        "name": "Date 3"
-      },
-      {
-        "value": 6,
-        "name": "Date 4"
-      },
-      {
-        "value": 2,
-        "name": "Date 5"
-      }
-    ]
-  }];
+  
+
+  data : any[] = [];
   
 
   // view: any = [550, 350];
 
   // options
   showGridLines = true;
-  colorScheme = "nightLights";
+  colorScheme = 'nightLights';
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = false;
   showXAxisLabel = true;
-  xAxisLabel = 'Participants';
+  xAxisLabel = 'Date';
   showYAxisLabel = true;
-  yAxisLabel = 'Aura Level';
-  title = 'Aura'
+  yAxisLabel = 'Total Work Hours';
+  // title = '';
 
   // colorScheme = {
   //   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   // };
 
   constructor() {
-    Object.assign(this.data)
+    Object.assign(this.data);
+    
+  }
+
+  ngOnInit(): void {
+    // Subscribe to the dates$ observable to get live updates
+    this.hours.dates.subscribe((dates: any[]) => {
+      this.data = dates;
+    });
+
+    
   }
 }
