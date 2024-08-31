@@ -25,6 +25,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@swimlane/ngx-charts": "^20.5.0",
     "chart.js": "4.4.2",
     "cron-parser": "^4.9.0",
     "d3-drag": "^3.0.0",

@@ -35,7 +35,14 @@ app.use("/insert", (req, res) => {
 });
 
 app.use("/get", (req, res) => {
-  getTimeEntriesByDate("6");
+  const data = {
+    user_id: "6",
+    entry_date1: "2024-08-28",
+    entry_date2: "2024-08-31",
+  };
+
+  getTimeEntriesByDate(data);
+
   res.send("Getting data");
 });
 

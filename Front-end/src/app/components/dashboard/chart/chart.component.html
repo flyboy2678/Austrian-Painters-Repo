@@ -1,0 +1,28 @@
+<div
+  class="bg-white w-full flex flex-col items-center justify-center rounded-xl p-5"
+>
+  <div class="w-full flex flex-row justify-between">
+    <h1 class="font-semibold text-text_secondary mb-5">Work Hours</h1>
+
+      <app-filter/>
+  </div>
+  <div class="w-full lg:w-full h-60">
+    <ngx-charts-line-chart
+      [scheme]="colorScheme"
+      [animations]="false"
+      [showGridLines]="showGridLines"
+      [results]="data"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [title]="title"
+      class="w-full h-64 sm:h-80 md:h-96"
+    >
+    </ngx-charts-line-chart>
+  </div>
+</div>
