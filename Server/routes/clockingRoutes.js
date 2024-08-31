@@ -11,9 +11,9 @@ router.put("/logHours/clockIn/:id/", clockingController.clockIn);
 // update an existing time entry's clock-out time
 router.put("/logHours/clockOut/:id/", clockingController.updateClockOut);
 
-// get time entries for a specific date and user
+// get time entries for a specific user and / or date
 router.get(
-	"/time-entries/getUser/:id",
+	"/logHours/getUser/:id/:start/:end",
 	clockingController.getTimeEntriesByDate
 );
 

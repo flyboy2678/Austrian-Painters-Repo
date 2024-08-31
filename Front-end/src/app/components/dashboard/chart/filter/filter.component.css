@@ -1,3 +1,14 @@
 p{
     font-weight: bold;
 }
+
+.custom-confirm-button .ant-btn-primary {
+    background-color: #8146FF;
+    border-color: #8146FF;
+  }
+  
+  .custom-confirm-button .ant-btn-primary:hover {
+    background-color: #6b2fce; /* Slightly darker for hover effect */
+    border-color: #6b2fce;
+  }
+  

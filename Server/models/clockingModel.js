@@ -71,41 +71,41 @@ function addOneDay(entry_date) {
 	return nextDay;
 }
 
-const getTimeEntriesByDate = (data) => {
+const getTimeEntriesByDate = (user_id, start, end, callback) => {
 	var query = null;
-	if (data.entry_date1 == null) {
+	if (start == null) {
 		query = `
       SELECT * FROM time_entries
       WHERE user_id = ?
+      ORDER BY entry_date ASC;
 	  `;
-	} else if (data.entry_date2 == null) {
-		data.entry_date1 = addOneDay(data.entry_date1);
+	} else if (end == null) {
+		start = addOneDay(start);
 
 		query = `
       SELECT * FROM time_entries
       WHERE user_id = ? AND entry_date = ?
+      ORDER BY entry_date ASC;
     `;
-	} else if (data.entry_date1 != null && data.entry_date2 != null) {
-		data.entry_date1 = addOneDay(data.entry_date1);
-		data.entry_date2 = addOneDay(data.entry_date2);
+	} else if (start != null && end != null) {
+		start = addOneDay(start);
+		end = addOneDay(end);
 
 		query = `
       SELECT * FROM time_entries
       WHERE user_id = ? AND entry_date BETWEEN ? AND ?
+      ORDER BY entry_date ASC;
     `;
 	}
 
-	connection.query(
-		query,
-		[data.user_id, data.entry_date1, data.entry_date2],
-		(err, results) => {
-			if (err) {
-				console.error("Error fetching data:", err);
-				return;
-			}
-			// console.log("Time entries:", results);
+	connection.query(query, [user_id, start, end], (err, results) => {
+		if (err) {
+			console.error("Error fetching data:", err);
+			return;
 		}
-	);
+		console.log("Time entries:", results);
+		callback(null, results);
+	});
 };
 
 const setDuration = (data, callback) => {
