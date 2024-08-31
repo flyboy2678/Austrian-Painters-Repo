@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::ng-deep .ant-tabs-tab {
+  @apply text-text_primary hover:text-purple_accent; /* Text color with hover effect */
+}
+
+::ng-deep .ant-tabs-tab-active .ant-tabs-tab-btn {
+  @apply text-purple_accent; /* Active tab text color with bold font */
+}
+
+::ng-deep .ant-tabs-ink-bar {
+  @apply bg-purple_accent; /* Ink bar (underline) color */
+}
+
+::ng-deep .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #8146ff !important; /* Fallback to ensure text color changes */
+}

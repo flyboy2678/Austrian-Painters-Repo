@@ -1,29 +1,33 @@
-<div class="w-full h-full flex bg-white justify-end px-10 flex-row">
+<div
+  class="w-full h-full flex bg-white justify-end px-10 flex-row items-center"
+>
   <div
     nz-dropdown
     [nzDropdownMenu]="menu"
     class="flex flex-row items-center text-center hover:cursor-pointer gap-2"
   >
-    <div class="rounded-full bg-dashboard_bg w-fit p-2 font-bold">
+    <div
+      class="rounded-full bg-dashboard_bg w-fit p-2 font-bold text-purple_accent"
+    >
       {{ initials }}
     </div>
     <h1 class="text-center">
       {{ user?.firstName }}
       <fa-icon
         [icon]="faChevronDown"
-        class="text-text_primary text-xs"
+        class="text-purple_accent text-xs"
       ></fa-icon>
     </h1>
   </div>
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu nzSelectable class="w-40 rounded-xl">
       <li nz-menu-item (click)="showModal()">Edit Profile</li>
-      <li nz-menu-item (click)="showChangePasswordModal()">Change Password</li>
+      <!-- <li nz-menu-item (click)="showChangePasswordModal()">Change Password</li> -->
       <li nz-menu-item nzDanger (click)="logout()">
         <fa-icon [icon]="faDoorOpen" /> Log Out
       </li>
     </ul>
   </nz-dropdown-menu>
   <app-editprofile />
-  <app-changepassword />
+  <!-- <app-changepassword /> -->
 </div>

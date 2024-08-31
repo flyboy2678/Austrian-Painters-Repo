@@ -18,7 +18,7 @@ import { EditusermodalService } from '../../../services/editusermodal/editusermo
   templateUrl: './editusers.component.html',
   styleUrls: ['./editusers.component.css'],
 })
-export class UserFormComponent {
+export class EditusersComponent {
   userService = inject(UserService);
   editUserModalService = inject(EditusermodalService);
   taskForm: FormGroup;

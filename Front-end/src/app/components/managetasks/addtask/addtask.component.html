@@ -1,8 +1,8 @@
 <nz-modal
   [nzVisible]="modalService.getVisible()"
   nzTitle="Add New Task"
+  [nzFooter]="modalFooter"
   (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleSubmit()"
 >
   <ng-container *nzModalContent>
     <form [formGroup]="taskForm">
@@ -14,13 +14,13 @@
         required
         class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
       />
-      <div class="h-7">
+      <div class="h-5">
         <span
           *ngIf="
             taskForm.get('taskName')?.invalid &&
             taskForm.get('taskName')?.touched
           "
-          class="text-xs text-red-600 block mt-1"
+          class="text-xs text-red-600 block"
           >Please enter a task name</span
         >
       </div>
@@ -31,7 +31,7 @@
         required
         class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-24"
       ></textarea>
-      <div class="h-7">
+      <div class="h-5">
         <span
           *ngIf="
             taskForm.get('description')?.invalid &&
@@ -46,7 +46,7 @@
         id="assignee"
         formControlName="assignee"
         required
-        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+        class="w-full focus:ring-1 focus:ring-purple_accent"
       >
         <nz-option
           *ngFor="let user of users"
@@ -54,6 +54,16 @@
           [nzValue]="user.Emp_id"
         ></nz-option>
       </nz-select>
+      <div class="h-5">
+        <span
+          *ngIf="
+            taskForm.get('assignee')?.invalid &&
+            taskForm.get('assignee')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please select an assignee</span
+        >
+      </div>
       <label for="dueDate">Due Date</label>
       <input
         type="date"
@@ -62,7 +72,7 @@
         required
         class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
       />
-      <div class="h-7">
+      <div class="h-5">
         <span
           *ngIf="
             taskForm.get('dueDate')?.invalid && taskForm.get('dueDate')?.touched
@@ -73,4 +83,23 @@
       </div>
     </form>
   </ng-container>
+  <ng-template #modalFooter>
+    <button
+      nz-button
+      nzType="default"
+      (click)="handleCancel()"
+      class="border border-gray-400 p-2 mr-2 rounded-md"
+    >
+      Cancel
+    </button>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="handleSubmit()"
+      [disabled]="taskForm.invalid"
+      class="bg-purple_accent text-white p-2 rounded-md disabled:opacity-50"
+    >
+      Add Task
+    </button>
+  </ng-template>
 </nz-modal>

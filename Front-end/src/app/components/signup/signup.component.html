@@ -1,6 +1,6 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
+<div class="flex items-center justify-center h-screen bg-gray-100">
   <div
-    class="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg w-96 h-auto"
+    class="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg w-full md:w-96 h-full md:h-auto justify-center md:justify-normal content-center md:content-normal"
   >
     <h3 class="text-2xl font-bold text-center">Create an account</h3>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit($event)">
@@ -13,7 +13,8 @@
             id="name"
             formControlName="name"
             required
-            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 h-10"
+            placeholder="Name"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
           />
           <div class="h-5">
             <span
@@ -34,8 +35,9 @@
             type="text"
             id="surname"
             formControlName="surname"
+            placeholder="Surname"
             required
-            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 h-10"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
           />
           <div class="h-5">
             <span
@@ -56,8 +58,9 @@
             type="email"
             id="email"
             formControlName="email"
+            placeholder="Email"
             required
-            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 h-10"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:bg-purple_accent h-10"
           />
           <div class="h-5">
             <span
@@ -78,8 +81,9 @@
             type="password"
             id="password"
             formControlName="password"
+            placeholder="Password"
             required
-            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 h-10"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
           />
           <div class="h-5">
             <span
@@ -101,7 +105,7 @@
             id="confirmPassword"
             formControlName="confirmPassword"
             required
-            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 h-10"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
           />
           <div class="h-5">
             <span

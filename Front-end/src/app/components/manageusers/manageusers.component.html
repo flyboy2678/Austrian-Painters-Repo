@@ -1,55 +1,106 @@
 <main
-  class="w-full h-full flex flex-col p-5 lg:p-10 justify-start lg:justify-center text-xs lg:text-base"
+  class="w-full h-full flex flex-col p-5 lg:p-10 justify-start text-xs lg:text-base"
 >
   <h1
     class="mb-2 lg:mb-5 text-base lg:text-lg font-semibold text-text_secondary"
   >
     Manage users
   </h1>
-  <div class="w-full h-fit bg-white rounded-md p-5 lg:p-10">
+  <div class="w-full h-fit lg:h-full bg-white p-5 lg:p-10 rounded-md">
     <button
-      class="bg-purple_accent p-2 w-fit rounded-md font-semibold text-white lg:ml-10 mb-5"
+      class="bg-purple_accent p-2 w-full sm:w-auto rounded-md font-semibold text-white mb-5"
       (click)="openAddUserModal()"
     >
       <fa-icon [icon]="faPlus"></fa-icon>
       Add User
     </button>
-    <table class="w-full text-text_primary">
-      <thead>
-        <tr class="text-text_secondary">
-          <th class="p-2">Name</th>
-          <th class="p-2">Email</th>
-          <th class="p-2">Role</th>
-          <th class="p-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (user of users; track $index) {
-        <tr>
-          <td class="p-2 text-center">{{ user.FirstName }}</td>
-          <td class="p-2 text-center">{{ user.Email }}</td>
-          <td class="p-2 text-center">
-            @if (user.Admin == 1) { Manager} @else { Employee}
-          </td>
-          <td class="p-2 text-center flex flex-row justify-center gap-2">
-            <button
-              class="text-purple_accent p-2 rounded-md"
-              (click)="openEditUserModal(user)"
+    <div class="overflow-x-auto">
+      <nz-table
+        #basicTable
+        [nzData]="filteredUsers"
+        class="min-w-full rounded-none"
+        [nzPageSize]="6"
+      >
+        <thead>
+          <tr class="text-text_secondary rounded-none">
+            <th nzCustomFilter class="rounded-none">
+              Name
+              <nz-filter-trigger
+                [(nzVisible)]="visible"
+                [nzActive]="searchName.length > 0"
+                [nzDropdownMenu]="menu"
+              >
+                <fa-icon
+                  [icon]="faSearch"
+                  class="text-purple_accent hover:bg-transparent"
+                ></fa-icon>
+              </nz-filter-trigger>
+            </th>
+            <th class="p-2 rounded-none">Email</th>
+            <th class="p-2 rounded-none">Role</th>
+            <th class="p-2 rounded-none">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of basicTable.data; track $index) {
+          <tr class="rounded-none">
+            <td class="p-2 text-center rounded-none">{{ user.FirstName }}</td>
+            <td class="p-2 text-center rounded-none">{{ user.Email }}</td>
+            <td class="p-2 text-center rounded-none">
+              @if (user.Admin == 1) { Manager } @else { Employee }
+            </td>
+            <td
+              class="p-2 text-center flex flex-row justify-center gap-2 rounded-none"
             >
-              <fa-icon [icon]="faEdit" />
-            </button>
-            <button
-              class="text-red-500 p-2 rounded-md"
-              (click)="deleteUser(user)"
-            >
-              <fa-icon [icon]="faTrashCan" />
-            </button>
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
-    @if (editUserModalService.getVisible()) { <app-user-form />}
+              <button
+                class="text-purple_accent p-2 rounded-md"
+                (click)="openEditUserModal(user)"
+              >
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <button
+                class="text-red-500 p-2 rounded-md"
+                (click)="deleteUser(user)"
+              >
+                <fa-icon [icon]="faTrashCan"></fa-icon>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </nz-table>
+    </div>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <div class="p-4 bg-white shadow-lg rounded-md">
+        <input
+          type="text"
+          nz-input
+          placeholder="Search name"
+          [(ngModel)]="searchName"
+          class="mb-2 p-2 border rounded w-full"
+        />
+        <div class="flex justify-end gap-2">
+          <button
+            nz-button
+            nzSize="small"
+            nzType="primary"
+            (click)="filterUsers()"
+            class="p-2 bg-purple_accent text-white rounded-md"
+          >
+            Search
+          </button>
+          <button
+            nz-button
+            nzSize="small"
+            (click)="reset()"
+            class="p-2 border border-gray text-text_primary rounded-md"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+    </nz-dropdown-menu>
+    @if (editUserModalService.getVisible()) { <app-user-form /> }
     <app-adduser />
   </div>
 </main>

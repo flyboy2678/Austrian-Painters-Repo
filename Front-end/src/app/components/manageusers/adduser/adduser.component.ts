@@ -26,12 +26,25 @@ export class AdduserComponent {
   employee: number = 0;
 
   constructor(private fb: FormBuilder) {
-    this.addUserForm = this.fb.group({
-      name: ['', [Validators.required]],
-      surname: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      role: ['', [Validators.required]],
-    });
+    this.addUserForm = this.fb.group(
+      {
+        name: ['', [Validators.required]],
+        surname: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required]],
+        role: ['', [Validators.required]],
+      },
+      {
+        validator: this.passwordMatchValidator,
+      }
+    );
+  }
+
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('password')?.value === g.get('confirmPassword')?.value
+      ? null
+      : { mismatch: true };
   }
 
   handleSubmit(): void {

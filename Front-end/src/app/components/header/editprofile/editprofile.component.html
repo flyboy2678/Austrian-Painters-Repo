@@ -1,8 +1,8 @@
 <nz-modal
   [nzVisible]="modalService.getVisible()"
+  [nzFooter]="modalFooter"
   nzTitle="Edit Profile"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleSubmit()"
+  (onCancel)="handleCancel()"
 >
   <ng-container *nzModalContent>
     <form [formGroup]="profileForm">
@@ -63,4 +63,23 @@
       </div>
     </form>
   </ng-container>
+  <ng-template #modalFooter>
+    <button
+      nz-button
+      nzType="default"
+      (click)="handleCancel()"
+      class="border border-gray-300 rounded-md p-2 mr-2"
+    >
+      Cancel
+    </button>
+    <button
+      nz-button
+      nzType="primary"
+      [disabled]="profileForm.invalid"
+      (click)="handleSubmit()"
+      class="bg-purple_accent p-2 rounded-md text-white disabled:opacity-50"
+    >
+      Save
+    </button>
+  </ng-template>
 </nz-modal>

@@ -21,19 +21,11 @@ const createUser = async (user, callback) => {
 		}
 	});
 
-	if (user.password) {
-		//hash password
-		try {
-			var password = await bcrypt.hash(user.password, 10);
-		} catch (err) {
-			console.log("Error hashing password: ", err);
-		}
-	} else {
-		try {
-			var password = await bcrypt.hash("password123", 10);
-		} catch (err) {
-			console.log("Error hashing password: ", err);
-		}
+	//hash password
+	try {
+		var password = await bcrypt.hash(user.password, 10);
+	} catch (err) {
+		console.log("Error hashing password: ", err);
 	}
 
 	if (user.role) {
@@ -127,7 +119,7 @@ const getAllUsers = (callback) => {
 			console.log("Error getting users: ", err);
 			return;
 		}
-		console.log("Users found: ", results);
+		// console.log("Users found: ", results);
 		callback(null, results);
 	});
 };

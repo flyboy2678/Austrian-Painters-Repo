@@ -2,44 +2,62 @@
   <h1 class="font-semibold text-text_secondary mb-3">My work</h1>
   <nz-tabset>
     <nz-tab nzTitle="Due">
-      @for (task of dueTasks; track $index) {
-      <table class="w-full">
-        <tr class="border-b border-gray-300">
-          <td class="text-text_secondary">{{ task.Name }}</td>
-          <td class="text-red-500">{{ task.DueDate }}</td>
-          <td
-            [ngClass]="{
-            'text-green-400': task.Status === 'Completed',
-            'text-gray-400': task.Status === 'Not Started',
-            'text-orange-400': task.Status === 'In Progress',
-            'text-red-400': task.Status === 'Stuck',
-          }"
-          >
-            {{ task.Status }}
-          </td>
-        </tr>
-      </table>
-      }
+      <nz-table #basicTable [nzData]="dueTasks" [nzPageSize]="3">
+        <thead class="hidden">
+          <tr class="hidden">
+            <th class="text-text_secondary">Task</th>
+            <th class="text-text_secondary">Due Date</th>
+            <th class="text-text_secondary">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of basicTable.data; track $index) {
+          <tr class="border-b border-gray-300">
+            <td class="text-text_secondary">{{ user.Name }}</td>
+            <td class="text-red-500">{{ user.DueDate }}</td>
+            <td
+              [ngClass]="{
+              'text-green-400': user.Status === 'Completed',
+              'text-gray-400': user.Status === 'Not Started',
+              'text-orange-400': user.Status === 'In Progress',
+              'text-red-400': user.Status === 'Stuck',
+            }"
+            >
+              {{ user.Status }}
+            </td>
+          </tr>
+          }
+        </tbody>
+      </nz-table>
     </nz-tab>
-    <nz-tab nzTitle="Overdue"
-      >@for (task of overDueTasks; track $index) {
-      <table class="w-full">
-        <tr class="border-b border-gray-300">
-          <td class="text-text_secondary">{{ task.Name }}</td>
-          <td class="text-red-500">{{ task.DueDate }}</td>
-          <td
-            [ngClass]="{
-            'text-green-400': task.Status === 'Completed',
-            'text-gray-400': task.Status === 'Not Started',
-            'text-orange-400': task.Status === 'In Progress',
-            'text-red-400': task.Status === 'Stuck',
-          }"
-          >
-            {{ task.Status }}
-          </td>
-        </tr>
-      </table>
-      }</nz-tab
-    >
+    <nz-tab nzTitle="Overdue">
+      <nz-table #overDueTable [nzData]="overDueTasks" [nzPageSize]="3">
+        <thead class="hidden">
+          <tr class="hidden">
+            <th class="text-text_secondary">Task</th>
+            <th class="text-text_secondary">Due Date</th>
+            <th class="text-text_secondary">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of overDueTable.data; track $index) {
+          <tr class="border-b border-gray-300">
+            <td class="text-text_secondary">{{ user.Name }}</td>
+            <td class="text-red-500">{{ user.DueDate }}</td>
+            <td
+              [ngClass]="{
+              'text-green-400': user.Status === 'Completed',
+              'text-gray-400': user.Status === 'Not Started',
+              'text-orange-400': user.Status === 'In Progress',
+              'text-red-400': user.Status === 'Stuck',
+            }"
+            >
+              {{ user.Status }}
+            </td>
+          </tr>
+          }
+        </tbody>
+      </nz-table>
+    </nz-tab>
   </nz-tabset>
 </div>

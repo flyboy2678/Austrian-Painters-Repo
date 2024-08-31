@@ -5,11 +5,12 @@ import { AddtaskmodalService } from '../../services/addtaskmodal/addtaskmodal.se
 import { AddTaskComponent } from './addtask/addtask.component';
 import { TasksService } from '../../services/tasks/tasks.service';
 import { CommonModule } from '@angular/common';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'app-managetasks',
   standalone: true,
-  imports: [FontAwesomeModule, AddTaskComponent, CommonModule],
+  imports: [FontAwesomeModule, AddTaskComponent, CommonModule, NzTableModule],
   templateUrl: './managetasks.component.html',
   styleUrl: './managetasks.component.css',
 })
@@ -22,13 +23,16 @@ export class ManagetasksComponent {
   tasks: any;
   constructor() {
     this.tasksService.getAllTasks().subscribe((data) => {
+      //split date from time
+      data.forEach((task: any) => {
+        task.DueDate = task.DueDate.split('T')[0];
+      });
       this.tasks = data;
       console.log(this.tasks);
     });
   }
 
   handleAddTask(): void {
-    console.log('Open');
     this.modalService.showModal();
   }
 
