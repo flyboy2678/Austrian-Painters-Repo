@@ -1,0 +1,39 @@
+<button nz-button nzType="primary" (click)="showModal()">
+  <fa-icon
+    [icon]="faFilter"
+    class="hover:text-purple_accent duration-200 mr-5"
+  />
+</button>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Filter by date"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading"
+>
+  <div *nzModalContent>
+    <p>Start Day</p>
+
+    <input
+      [value]="startDate"
+      type="date"
+      id="day"
+      name="day"
+      formControlName="day"
+      required
+      class="w-full border border-gray-300 rounded-lg p-2 focus:outline-purple_accent mb-10"
+    />
+    <p>End Day</p>
+
+    <input
+      [value]="endDate"
+      type="date"
+      id="day"
+      name="day"
+      formControlName="day"
+      required
+      class="w-full border border-gray-300 rounded-lg p-2 focus:outline-purple_accent"
+    />
+  </div>
+</nz-modal>

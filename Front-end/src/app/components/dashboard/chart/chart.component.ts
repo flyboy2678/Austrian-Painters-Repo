@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { FilterComponent } from "./filter/filter.component";
 
 @Component({
   selector: 'app-chart',
   standalone: true,
-  imports: [NgxChartsModule],
+  imports: [NgxChartsModule, FilterComponent],
   templateUrl: './chart.component.html',
 })
 
 export class CharComponent{
+
+
   data =[{
     "name": "Current User Stats",
     "series": [
