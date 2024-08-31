@@ -33,4 +33,17 @@ export class LogHoursService {
       data
     );
   }
+
+  setDuration(user_id: string, day: string, duration: number): Observable<any> {
+    const data = {
+      user_id: user_id,
+      duration: duration,
+      day: day,
+    };
+
+    return this.http.put(
+      `http://localhost:3000/api/logHours/setDuration/`,
+      data
+    );
+  }
 }

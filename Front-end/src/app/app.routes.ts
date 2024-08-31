@@ -12,6 +12,7 @@ import { authGuard } from './guards/auth/auth.guard';
 import { adminGuard } from './guards/admin/admin.guard';
 import { notloggedinGuard } from './guards/notloggedin/notloggedin.guard';
 import { TestComponent } from './components/test/test.component';
+import { HoursComponent } from './components/hours/hours.component';
 
 export const routes: Routes = [
   {
@@ -31,7 +32,7 @@ export const routes: Routes = [
         component: ManageusersComponent,
         canActivate: [adminGuard],
       },
-      { path: 'loghours', component: LoghoursComponent },
+      { path: 'hours', component: HoursComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

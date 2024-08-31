@@ -13,9 +13,11 @@ router.put("/logHours/clockOut/:id/", clockingController.updateClockOut);
 
 // get time entries for a specific date and user
 router.get(
-  "/time-entries/getUser/:id",
-  clockingController.getTimeEntriesByDate
+	"/time-entries/getUser/:id",
+	clockingController.getTimeEntriesByDate
 );
+
+router.post("/setDuration/", clockingController.setDuration);
 
 // delete a time entry
 router.delete("/time-entries/:id", clockingController.deleteTimeEntry);
