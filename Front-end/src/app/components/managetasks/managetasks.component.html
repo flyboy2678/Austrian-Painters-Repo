@@ -1,65 +1,79 @@
-<main class="w-full h-full flex flex-col p-5 lg:p-10 justify-center">
-  <app-add-task />
-  <h1 class="mb-5 text-lg font-semibold text-text_secondary">Manage Tasks</h1>
-  <div
-    class="w-full h-full bg-white rounded-md p-5 lg:p-10 flex flex-col gap-5 lg:gap-10 text-xs lg:text-base"
+<main
+  class="w-full h-full flex flex-col p-5 lg:p-10 justify-start text-xs lg:text-base"
+>
+  <h1
+    class="mb-2 lg:mb-5 text-base lg:text-lg font-semibold text-text_secondary"
   >
+    Manage Tasks
+  </h1>
+  <div class="w-full h-fit lg:h-full bg-white p-5 lg:p-10 rounded-md">
     <button
-      class="bg-purple_accent p-2 w-fit rounded-md font-semibold text-white"
+      class="bg-purple_accent p-2 w-full sm:w-auto rounded-md font-semibold text-white mb-5"
       (click)="handleAddTask()"
     >
       <fa-icon [icon]="faPlus"></fa-icon>
       Add Task
     </button>
-    <table class="w-full">
-      <thead>
-        <tr class="text-text_secondary">
-          <th class="text-left">Employee</th>
-          <th class="text-left">Task</th>
-          <th class="text-left">Description</th>
-          <th class="text-left hidden lg:block">Due Date</th>
-          <th class="lg:text-center">Status</th>
-          <th class="text-center hidden lg:block">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (task of tasks; track $index) {
-        <tr>
-          <td class="text-left">{{ task.Emp_id }}</td>
-          <td class="text-left">{{ task.Name }}</td>
-          <td class="text-left">{{ task.Description }}</td>
-          <td class="text-left hidden lg:block">{{ task.DueDate }}</td>
-          <td
-            class="lg:text-center"
-            [ngClass]="{
-              'text-green-400': task.Status === 'Completed',
-              'text-gray-400': task.Status === 'Not Started',
-              'text-orange-400': task.Status === 'In Progress',
-              'text-red-400': task.Status === 'Stuck',
-            }"
-          >
-            {{ task.Status }}
-          </td>
-          <td class="text-center hidden lg:block">
-            <button
-              class="text-purple_accent p-2 rounded-md"
-              (click)="handleEditTask(task.Task_id)"
+    <div class="overflow-x-auto">
+      <nz-table
+        #basicTable
+        [nzData]="tasks"
+        class="min-w-full rounded-none"
+        [nzPageSize]="6"
+      >
+        <thead>
+          <tr class="text-text_secondary rounded-none">
+            <th class="rounded-none">Employee</th>
+            <th class="rounded-none">Task</th>
+            <th class="rounded-none">Description</th>
+            <th class="hidden lg:table-cell rounded-none">Due Date</th>
+            <th class="rounded-none">Status</th>
+            <th class="hidden lg:table-cell rounded-none">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (task of basicTable.data; track $index) {
+          <tr class="rounded-none">
+            <td class="p-2 text-center rounded-none">
+              {{ task.employee_name }}
+            </td>
+            <td class="p-2 text-center rounded-none">{{ task.Name }}</td>
+            <td class="p-2 text-center rounded-none">{{ task.Description }}</td>
+            <td class="hidden lg:table-cell p-2 text-center rounded-none">
+              {{ task.DueDate }}
+            </td>
+            <td
+              class="p-2 text-center rounded-none"
+              [ngClass]="{
+                'text-green-400': task.Status === 'Completed',
+                'text-gray-400': task.Status === 'Not Started',
+                'text-orange-400': task.Status === 'In Progress',
+                'text-red-400': task.Status === 'Stuck'
+              }"
             >
-              <fa-icon [icon]="faEdit"></fa-icon>
-              Edit
-            </button>
-            <button
-              class="text-red-500 p-2 rounded-md"
-              (click)="handleDeleteTask(task.Task_id)"
-            >
-              <fa-icon [icon]="faTrash"></fa-icon>
-              Delete
-            </button>
-          </td>
-        </tr>
-
-        }
-      </tbody>
-    </table>
+              {{ task.Status }}
+            </td>
+            <td class="hidden lg:table-cell text-center rounded-none">
+              <button
+                class="text-purple_accent p-2 rounded-md"
+                (click)="handleEditTask(task.Task_id)"
+              >
+                <fa-icon [icon]="faEdit"></fa-icon>
+                Edit
+              </button>
+              <button
+                class="text-red-500 p-2 rounded-md"
+                (click)="handleDeleteTask(task.Task_id)"
+              >
+                <fa-icon [icon]="faTrash"></fa-icon>
+                Delete
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </nz-table>
+    </div>
   </div>
+  <app-add-task />
 </main>

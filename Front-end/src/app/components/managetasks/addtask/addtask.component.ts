@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {
@@ -19,7 +19,7 @@ import { TasksService } from '../../../services/tasks/tasks.service';
   templateUrl: './addtask.component.html',
   styleUrl: './addtask.component.css',
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent {
   modalService = inject(AddtaskmodalService);
   tasksService = inject(TasksService);
   taskForm: FormGroup;
@@ -40,10 +40,13 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
   handleSubmit(): void {
-    this.tasksService.createTask(this.taskForm.value).subscribe(() => {});
+    const firstname: string = this.users.find(
+      (user: any) => user.Emp_id === this.taskForm.value.assignee
+    ).FirstName;
+    this.tasksService
+      .createTask({ ...this.taskForm.value, firstname })
+      .subscribe(() => {});
     this.taskForm.reset();
     this.modalService.closeModal();
   }

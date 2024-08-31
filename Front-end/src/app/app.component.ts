@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RouterOutlet } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,13 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent {
   title = 'AustrianPainters';
+  authService = inject(AuthService);
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private primengConfig: PrimeNGConfig) {
+    if (this.authService.isTokenExpired()) {
+      this.authService.logout();
+    }
+  }
 
   ngOnInit() {
     this.primengConfig.ripple = true; // Enable ripple effect

@@ -2,14 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { StorageService } from '../localstorage/localstorage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly JWT_TOKEN: string = 'JWT_TOKEN';
   private loggedUser: string = '';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private router = inject(Router);
@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   getCurrentUser(): any {
-    const token = this.localStorage.get(this.JWT_TOKEN);
+    const token: string | null = this.localStorage.get(this.JWT_TOKEN);
     if (token) {
       try {
         return jwtDecode(token);
@@ -68,10 +68,9 @@ export class AuthService {
   }
 
   isTokenExpired() {
-    const tokens = this.localStorage.get(this.JWT_TOKEN);
-    if (!tokens) return true;
-    const token = JSON.parse(tokens).access_token;
-    const decoded = jwtDecode(token);
+    const token: string | null = this.localStorage.get(this.JWT_TOKEN);
+    if (!token) return true;
+    const decoded: JwtPayload = jwtDecode(token);
     if (!decoded.exp) return true;
     const expirationDate = decoded.exp * 1000;
     const now = new Date().getTime();

@@ -3,11 +3,12 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { TasksService } from '../../../services/tasks/tasks.service';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { CommonModule } from '@angular/common';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'app-mywork',
   standalone: true,
-  imports: [CommonModule, NzTabsModule],
+  imports: [CommonModule, NzTabsModule, NzTableModule],
   templateUrl: './mywork.component.html',
   styleUrl: './mywork.component.css',
 })
@@ -16,14 +17,15 @@ export class MyworkComponent {
   authService = inject(AuthService);
   user: any;
   tasks: any;
-  dueTasks: any = [];
-  overDueTasks: any = [];
+  dueTasks: any;
+  overDueTasks: any;
 
   constructor() {
     this.user = this.authService.getCurrentUser();
     this.taskService.getUserTasks(this.user.id).subscribe((data) => {
       this.tasks = data;
-
+      this.dueTasks = [];
+      this.overDueTasks = [];
       //get overdue tasks
       this.tasks.forEach((task: any) => {
         if (new Date(task.DueDate) < new Date()) {
