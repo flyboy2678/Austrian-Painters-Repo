@@ -1,0 +1,54 @@
+<div class="w-full h-full flex flex-col rounded-lg p-5">
+  <form [formGroup]="form">
+    <h1>Enter hours worked</h1>
+    <label for="day">Select date</label>
+    <input
+      type="date"
+      id="day"
+      name="day"
+      formControlName="day"
+      required
+      class="w-full border border-gray-300 rounded-lg p-2 focus:outline-purple_accent"
+    />
+    <div class="h-7">
+      <span
+        class="text-xs text-red-600 block mt-1"
+        *ngIf="form.get('day')?.invalid && form.get('day')?.touched"
+        >Please enter a date</span
+      >
+      <span
+        class="text-xs text-red-600 block mt-1"
+        *ngIf="form.hasError('invalidDate')"
+        >Date cannot be greater than today</span
+      >
+    </div>
+    <label for="hours">Enter hours worked</label>
+    <input
+      type="number"
+      id="hours"
+      name="hours"
+      formControlName="hours"
+      required
+      class="w-full border border-gray-300 rounded-lg p-2 focus:outline-purple_accent"
+    />
+    <div class="h-7">
+      <span
+        class="text-xs text-red-600 block mt-1"
+        *ngIf="form.get('hours')?.invalid && form.get('hours')?.touched"
+        >Please enter hours worked</span
+      >
+      <span
+        class="text-xs text-red-600 block mt-1"
+        *ngIf="form.hasError('invalidHours')"
+        >Hours must be between 0 and 24</span
+      >
+    </div>
+    <button
+      [disabled]="form.invalid"
+      class="bg-purple_accent text-white rounded-lg p-2 mt-2 disabled:opacity-50"
+      (click)="submit()"
+    >
+      Add Hours
+    </button>
+  </form>
+</div>

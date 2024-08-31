@@ -97,3 +97,30 @@ exports.deleteTimeEntry = (req, res) => {
 		});
 	});
 };
+
+exports.getHours = (req, res) => {
+	const user_id = req.params.id;
+	timeEntryModel.getHours(user_id, (err, results) => {
+		if (err) {
+			return res
+				.status(500)
+				.json({ message: "Error fetching data", error: err });
+		}
+		res.status(200).json(results);
+	});
+};
+
+exports.updateHours = (req, res) => {
+	const data = req.body;
+	timeEntryModel.updateHours(data, (err, results) => {
+		if (err) {
+			return res
+				.status(500)
+				.json({ message: "Error updating hours", error: err });
+		}
+		res.status(200).json({
+			message: "Hours updated successfully",
+			affectedRows: results.affectedRows,
+		});
+	});
+};

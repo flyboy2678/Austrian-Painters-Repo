@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RouterOutlet } from '@angular/router';
@@ -12,15 +12,11 @@ import { AuthService } from './services/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'AustrianPainters';
   authService = inject(AuthService);
 
-  constructor(private primengConfig: PrimeNGConfig) {
-    if (this.authService.isTokenExpired()) {
-      this.authService.logout();
-    }
-  }
+  constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit() {
     this.primengConfig.ripple = true; // Enable ripple effect

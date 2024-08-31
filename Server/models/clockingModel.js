@@ -4,46 +4,46 @@ const connection = require("../config/db");
 // user_id will reference Emp_id
 // on initial
 const insertTimeEntry = (data) => {
-  const query = `
+	const query = `
       INSERT INTO time_entries (user_id, entry_date, clock_in, clock_out)
       VALUES (?, ?, ?, ?)
     `;
 
-  connection.query(
-    query,
-    [data.user_id, data.entry_date, data.clock_in, data.clock_out],
-    (err, results) => {
-      if (err) {
-        console.error("Error inserting data:", err);
-        return;
-      }
+	connection.query(
+		query,
+		[data.user_id, data.entry_date, data.clock_in, data.clock_out],
+		(err, results) => {
+			if (err) {
+				console.error("Error inserting data:", err);
+				return;
+			}
 
-      console.log("Data inserted successfully:", results.insertId);
-    }
-  );
+			console.log("Data inserted successfully:", results.insertId);
+		}
+	);
 };
 
 const clockIn = (user_id, data) => {
-  const query = `
+	const query = `
       INSERT INTO time_entries (user_id, clock_in)
       VALUES (?, ?)
     `;
 
-  connection.query(query, [user_id, data.clock_in], (err, results) => {
-    if (err) {
-      console.error("Error inserting data:", err);
-      return;
-    }
-    console.log(
-      "Clock-in successful, new entry created with ID:",
-      results.insertId
-    );
-  });
+	connection.query(query, [user_id, data.clock_in], (err, results) => {
+		if (err) {
+			console.error("Error inserting data:", err);
+			return;
+		}
+		console.log(
+			"Clock-in successful, new entry created with ID:",
+			results.insertId
+		);
+	});
 };
 
 // updates the clockout
 const updateClockOut = (user_id, data) => {
-  const query = `
+	const query = `
       UPDATE time_entries
       SET clock_out = ?, 
           duration = TIMEDIFF(GREATEST(?, clock_in), LEAST(?, clock_in))
@@ -51,100 +51,130 @@ const updateClockOut = (user_id, data) => {
       ORDER BY id DESC LIMIT 1;
     `;
 
-  connection.query(
-    query,
-    [data.clock_out, data.clock_out, data.clock_out, user_id],
-    (err, results) => {
-      if (err) {
-        console.error("Error updating data:", err);
-        return;
-      }
-      console.log("Data updated successfully:", results.affectedRows);
-    }
-  );
+	connection.query(
+		query,
+		[data.clock_out, data.clock_out, data.clock_out, user_id],
+		(err, results) => {
+			if (err) {
+				console.error("Error updating data:", err);
+				return;
+			}
+			console.log("Data updated successfully:", results.affectedRows);
+		}
+	);
 };
 
 function addOneDay(entry_date) {
-  const date = new Date(entry_date); // Convert entry_date to a Date object
-  date.setDate(date.getDate() + 1); // Add one day
-  const nextDay = date.toISOString().split("T")[0]; // Convert back to YYYY-MM-DD format
-  return nextDay;
+	const date = new Date(entry_date); // Convert entry_date to a Date object
+	date.setDate(date.getDate() + 1); // Add one day
+	const nextDay = date.toISOString().split("T")[0]; // Convert back to YYYY-MM-DD format
+	return nextDay;
 }
 
 const getTimeEntriesByDate = (data) => {
-  var query = null;
-  if (data.entry_date1 == null) {
-    query = `
+	var query = null;
+	if (data.entry_date1 == null) {
+		query = `
       SELECT * FROM time_entries
       WHERE user_id = ?
 	  `;
-  } else if (data.entry_date2 == null) {
-    data.entry_date1 = addOneDay(data.entry_date1);
+	} else if (data.entry_date2 == null) {
+		data.entry_date1 = addOneDay(data.entry_date1);
 
-    query = `
+		query = `
       SELECT * FROM time_entries
       WHERE user_id = ? AND entry_date = ?
     `;
-  } else if (data.entry_date1 != null && data.entry_date2 != null) {
-    data.entry_date1 = addOneDay(data.entry_date1);
-    data.entry_date2 = addOneDay(data.entry_date2);
+	} else if (data.entry_date1 != null && data.entry_date2 != null) {
+		data.entry_date1 = addOneDay(data.entry_date1);
+		data.entry_date2 = addOneDay(data.entry_date2);
 
-    query = `
+		query = `
       SELECT * FROM time_entries
       WHERE user_id = ? AND entry_date BETWEEN ? AND ?
     `;
-  }
+	}
 
-  connection.query(
-    query,
-    [data.user_id, data.entry_date1, data.entry_date2],
-    (err, results) => {
-      if (err) {
-        console.error("Error fetching data:", err);
-        return;
-      }
-      console.log("Time entries:", results);
-    }
-  );
+	connection.query(
+		query,
+		[data.user_id, data.entry_date1, data.entry_date2],
+		(err, results) => {
+			if (err) {
+				console.error("Error fetching data:", err);
+				return;
+			}
+			// console.log("Time entries:", results);
+		}
+	);
 };
 
 const setDuration = (data, callback) => {
-  const query = `INSERT INTO time_entries (user_id, entry_date, hours) VALUES (?, ?, ?)`;
+	const query = `INSERT INTO time_entries (user_id, entry_date, hours) VALUES (?, ?, ?)`;
 
-  connection.query(
-    query,
-    [data.id, data.day, data.duration],
-    (err, results) => {
-      if (err) {
-        console.error("Error setting duration:", err);
-        callback(err, null);
-        return;
-      }
-      console.log("Duration set successfully:", results.affectedRows);
-      callback(null, results);
-    }
-  );
+	connection.query(
+		query,
+		[data.id, data.day, data.duration],
+		(err, results) => {
+			if (err) {
+				console.error("Error setting duration:", err);
+				callback(err, null);
+				return;
+			}
+			// console.log("Duration set successfully:", results.affectedRows);
+			callback(null, results);
+		}
+	);
 };
 
 const deleteTimeEntry = (entryId, callback) => {
-  const query = `DELETE FROM time_entries WHERE id = ?`;
+	const query = `DELETE FROM time_entries WHERE id = ?`;
 
-  connection.query(query, [entryId], (err, results) => {
-    if (err) {
-      console.error("Error deleting time entry:", err);
-      callback(err, null);
-      return;
-    }
-    console.log("Time entry deleted successfully:", results.affectedRows);
-    callback(null, results);
-  });
+	connection.query(query, [entryId], (err, results) => {
+		if (err) {
+			console.error("Error deleting time entry:", err);
+			callback(err, null);
+			return;
+		}
+		console.log("Time entry deleted successfully:", results.affectedRows);
+		callback(null, results);
+	});
+};
+
+const getHours = (userId, callback) => {
+	const query = `SELECT * FROM time_entries WHERE user_id = ?`;
+	console.log("userId:", userId);
+
+	connection.query(query, [userId], (err, results) => {
+		if (err) {
+			console.error("Error fetching data:", err);
+			return;
+		}
+		// console.log("Time entries:", results);
+		callback(null, results);
+	});
+};
+
+const updateHours = (data, callback) => {
+	const query = `UPDATE time_entries SET hours = ? WHERE id = ?`;
+
+	connection.query(query, [data.hours, data.id], (err, results) => {
+		if (err) {
+			console.error("Error updating hours:", err);
+			callback(err, null);
+			return;
+		}
+		// console.log("Hours updated successfully:", results.affectedRows);
+		callback(null, results);
+	});
 };
 
 module.exports = {
-  insertTimeEntry,
-  clockIn,
-  updateClockOut,
-  getTimeEntriesByDate,
-  setDuration,
-  deleteTimeEntry,
+	insertTimeEntry,
+	clockIn,
+	updateClockOut,
+	getTimeEntriesByDate,
+	setDuration,
+	deleteTimeEntry,
+	getHours,
+	updateHours,
 };

@@ -46,4 +46,22 @@ export class LogHoursService {
       data
     );
   }
+
+  getHours(user_id: string): Observable<any> {
+    return this.http.get(
+      `http://localhost:3000/api/logHours/getHours/${user_id}`
+    );
+  }
+
+  updateHours(id: number, hours: number): Observable<any> {
+    const data = {
+      id: id,
+      hours: hours,
+    };
+
+    return this.http.put(
+      `http://localhost:3000/api/logHours/updateHours`,
+      data
+    );
+  }
 }
