@@ -17,7 +17,7 @@ router.get(
 	clockingController.getTimeEntriesByDate
 );
 
-router.post("/setDuration/", clockingController.setDuration);
+router.post("/logHours/setDuration/", clockingController.setDuration);
 
 // delete a time entry
 router.delete("/time-entries/:id", clockingController.deleteTimeEntry);

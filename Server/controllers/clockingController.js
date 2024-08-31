@@ -71,8 +71,8 @@ exports.getTimeEntriesByDate = (req, res) => {
 };
 
 exports.setDuration = (req, res) => {
-	const { user_id, entry_date } = req.params;
-	timeEntryModel.setDuration(user_id, entry_date, (err, results) => {
+	const data = req.body;
+	timeEntryModel.setDuration(data, (err, results) => {
 		if (err) {
 			return res
 				.status(500)

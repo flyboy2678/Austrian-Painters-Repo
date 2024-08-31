@@ -87,12 +87,12 @@ const getTimeEntriesByDate = (user_id, entry_date) => {
 	});
 };
 
-const setDuration = (date, callback) => {
-	const query = `INSERT INTO time_entries (user_id, entry_date, duration) VALUES (?, ?, ?)`;
+const setDuration = (data, callback) => {
+	const query = `INSERT INTO time_entries (user_id, entry_date, hours) VALUES (?, ?, ?)`;
 
 	connection.query(
 		query,
-		[date.user_id, date.entry_date, date.duration],
+		[data.id, data.day, data.duration],
 		(err, results) => {
 			if (err) {
 				console.error("Error setting duration:", err);
