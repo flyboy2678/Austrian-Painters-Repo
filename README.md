@@ -1,4 +1,4 @@
-# Austrian Painter
+# Austrian Painters
 ## Run Locally
 
 Clone the project
