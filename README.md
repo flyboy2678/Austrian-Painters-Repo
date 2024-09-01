@@ -44,7 +44,7 @@ Navigate to `http://localhost:4200` to view to the project
 ## Accounts
 #### Admins
 - Email: example@gmail.com, Password: tshepo123
-The account above contains some demo data 
+- The account above contains some demo data 
 #### Users
 - Email: example1@gmail.com, Password: password123
 - Email: example2@gmail.com, Password: password123
