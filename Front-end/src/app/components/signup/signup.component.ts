@@ -8,15 +8,25 @@ import {
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet, FontAwesomeModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
+  showPassword = false;
+
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   signupForm: FormGroup;
   authService = inject(AuthService);
   router = inject(Router);
