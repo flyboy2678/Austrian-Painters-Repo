@@ -16,7 +16,11 @@ export class AppComponent implements OnInit {
   title = 'AustrianPainters';
   authService = inject(AuthService);
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private primengConfig: PrimeNGConfig) {
+    if (this.authService.isTokenExpired()) {
+      this.authService.logout();
+    }
+  }
 
   ngOnInit() {
     this.primengConfig.ripple = true; // Enable ripple effect

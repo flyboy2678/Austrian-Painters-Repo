@@ -44,9 +44,8 @@ export class EdithoursComponent {
       });
       //convert date t0 dd/mmmm/yyyy
       res.forEach((element: any) => {
-        element.date = format(element.entry_date, 'dd MMMM yyyy');
+        element.date = format(new Date(element.entry_date), 'dd MMMM yyyy');
       });
-
       this.days = res;
     });
   }
