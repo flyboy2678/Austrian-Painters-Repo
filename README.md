@@ -37,6 +37,7 @@ Start the Front-end server
 ```bash
 ng serve
 ```
+Navigate to `http://localhost:4200` to view to the project
 
 
 
