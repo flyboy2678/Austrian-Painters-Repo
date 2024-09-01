@@ -1,7 +1,52 @@
-#Austrian Painters
+# Austrian Painter
+## Run Locally
 
-## Run Project
+Clone the project
 
-Open the project in the terminal navigate to the Server folder using `cd Server` then type `npm i` to install the necessary packages, then type `node index` to start the server.
+```bash
+  git clone https://github.com/flyboy2678/Austrian-Painters-Repo.git
+```
 
-Navigate to the Front-end folder using `cd ../` then `cd Front-end` then type `npm i` to install the necessary packages, then type `ng serve` to run the front end side of the project and open the project on `http://localhost:4200`.
+Go to the Server directory
+
+```bash
+  cd Server
+```
+
+Install dependencies
+
+```bash
+  npm i
+```
+
+Start the Back-end server
+
+```bash
+  node index
+```
+
+Go the the front end directory from root directory
+```bash
+  cd Front-end
+```
+Install dependencies
+```bash
+  npm i 
+  ```
+Start the Front-end server
+```bash
+ng serve
+```
+
+
+
+## Accounts
+#### Admins
+- Email: example1@gmail.com, Password: password123
+- Email: example2@gmail.com, Password: password123
+#### Users
+- Email: example3@gmail.com, Password: password123
+- Email: example4@gmail.com, Password: password123
+- Email: example5@gmail.com, Password: password123
+- Email: example6@gmail.com, Password: password123
+- Email: example7@gmail.com, Password: password123
