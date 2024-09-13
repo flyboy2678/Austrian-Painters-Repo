@@ -14,7 +14,7 @@ import { notloggedinGuard } from './guards/notloggedin/notloggedin.guard';
 import { TestComponent } from './components/test/test.component';
 import { HoursComponent } from './components/hours/hours.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
-import { ResetpasswordComponent } from './components/forgotpassword/resetpassword/resetpassword.component';
+import { ResetPasswordComponent } from './components/forgotpassword/resetpassword/resetpassword.component';
 
 export const routes: Routes = [
   {
@@ -61,7 +61,7 @@ export const routes: Routes = [
   },
   {
     path: 'reset-password',
-    component: ResetpasswordComponent,
+    component: ResetPasswordComponent,
   },
   { path: 'test', component: TestComponent },
 ];

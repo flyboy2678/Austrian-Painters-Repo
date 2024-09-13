@@ -1,26 +1,18 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
 
 @Component({
   selector: 'app-forgotpassword',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './forgotpassword.component.html',
-  styleUrl: './forgotpassword.component.css'
+  styleUrl: './forgotpassword.component.css',
 })
 export class ForgotpasswordComponent {
-
   forgotPasswordForm: FormGroup;
   authService = inject(AuthService);
   router = inject(Router);
@@ -31,4 +23,9 @@ export class ForgotpasswordComponent {
     });
   }
 
+  onSubmit() {
+    this.authService.sendForgotPasswordEmail(
+      this.forgotPasswordForm.value.email
+    );
+  }
 }
