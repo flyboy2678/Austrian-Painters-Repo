@@ -116,7 +116,8 @@ const sendForgotPasswordEmail = (req, res) => {
 	const resetLink = `http://localhost:3000/reset-password/${token}`;
 
 	const transporter = nodemailer.createTransport({
-		service: "gmail",
+		service: "smtp.gmail.com",
+		port: 465,
 		auth: {
 			user: process.env.EMAIL_USER,
 			pass: process.env.EMAIL_PASSWORD,
@@ -124,7 +125,7 @@ const sendForgotPasswordEmail = (req, res) => {
 	});
 
 	const mailOptions = {
-		from: "ttsunke15@gmail.com",
+		// from: "ttsunke15@gmail.com",
 		to: email,
 		subject: "Password Reset",
 		html: `Click on the link to reset your password: ${resetLink}`,
