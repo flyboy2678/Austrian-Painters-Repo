@@ -27,6 +27,7 @@
             <th class="rounded-none">Task</th>
             <th class="rounded-none">Description</th>
             <th class="hidden lg:table-cell rounded-none">Due Date</th>
+            <th class="rounded-none">Priority</th>
             <th class="rounded-none">Status</th>
             <th class="hidden lg:table-cell rounded-none">Actions</th>
           </tr>
@@ -42,6 +43,7 @@
             <td class="hidden lg:table-cell p-2 text-center rounded-none">
               {{ task.DueDate }}
             </td>
+            <td>{{ task.priority }}</td>
             <td
               class="p-2 text-center rounded-none"
               [ngClass]="{

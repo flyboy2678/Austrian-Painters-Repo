@@ -1,7 +1,7 @@
 const connection = require("../config/db");
 
 const createTask = async (task, callback) => {
-	const query = `INSERT INTO Tasks (Emp_id, Name, Description, DueDate, Status, employee_name) VALUES (?, ?, ?, ?, ?, ?)`;
+	const query = `INSERT INTO Tasks (Emp_id, Name, Description, DueDate, Status, employee_name, priority) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 	const status = "Not Started";
 	connection.query(
 		query,
@@ -12,6 +12,7 @@ const createTask = async (task, callback) => {
 			task?.dueDate,
 			status,
 			task?.firstname,
+			task?.priority,
 		],
 		(err, results) => {
 			if (err) {
