@@ -13,6 +13,7 @@ import { adminGuard } from './guards/admin/admin.guard';
 import { notloggedinGuard } from './guards/notloggedin/notloggedin.guard';
 import { TestComponent } from './components/test/test.component';
 import { HoursComponent } from './components/hours/hours.component';
+import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,11 @@ export const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent,
+    canActivate: [notloggedinGuard],
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotpasswordComponent,
     canActivate: [notloggedinGuard],
   },
   { path: 'test', component: TestComponent },
