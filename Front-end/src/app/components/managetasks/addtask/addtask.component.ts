@@ -39,6 +39,7 @@ export class AddTaskComponent {
       description: ['', [Validators.required]],
       assignee: ['', [Validators.required]],
       dueDate: ['', [Validators.required]],
+      priority: ['', [Validators.required]],
     });
     // Fetch users
     this.userService.getAllUsers().subscribe((users) => {

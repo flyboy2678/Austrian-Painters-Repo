@@ -89,6 +89,27 @@
           >Please select a due date</span
         >
       </div>
+      <label for="priority">Priority</label>
+      <nz-select
+        id="priority"
+        formControlName="priority"
+        required
+        class="w-full focus:ring-1 focus:ring-purple_accent"
+      >
+        <nz-option nzLabel="Low" nzValue="Low"></nz-option>
+        <nz-option nzLabel="Medium" nzValue="Medium"></nz-option>
+        <nz-option nzLabel="High" nzValue="High"></nz-option>
+      </nz-select>
+      <div class="h-5">
+        <span
+          *ngIf="
+            taskForm.get('priority')?.invalid &&
+            taskForm.get('priority')?.touched
+          "
+          class="text-xs text-red-600 block mt-1"
+          >Please select a priority</span
+        >
+      </div>
     </form>
   </ng-container>
   <ng-template #modalFooter>

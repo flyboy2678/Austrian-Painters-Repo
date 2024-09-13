@@ -1,0 +1,47 @@
+<div class="w-full h-full flex flex-row">
+  <div class="flex flex-col w-1/2 pr-5">
+    <div class="flex flex-row w-full justify-between">
+      <h1 class="text-text_secondary">Calendar</h1>
+      <div class="flex flex-row gap-3">
+        <button (click)="prevMonth()"><fa-icon [icon]="faAngleLeft" /></button>
+        <button (click)="nextMonth()"><fa-icon [icon]="faAngleRight" /></button>
+      </div>
+    </div>
+    <h1 class="text-right">{{ currentMonth }}</h1>
+    <div class="grid grid-cols-7 gap-3">
+      <div class="text-center font-bold">Sun</div>
+      <div class="text-center font-bold">Mon</div>
+      <div class="text-center font-bold">Tue</div>
+      <div class="text-center font-bold">Wed</div>
+      <div class="text-center font-bold">Thu</div>
+      <div class="text-center font-bold">Fri</div>
+      <div class="text-center font-bold">Sat</div>
+      @for (day of prevMonthDays; track $index) {
+      <div
+        class="text-center cursor-pointer text-gray-400"
+        (click)="prevMonth()"
+      >
+        {{ format(day) }}
+      </div>
+      } @for (day of calendar; track $index) {
+      <div
+        class="text-center rounded-full cursor-pointer font-semibold"
+        [ngClass]="{
+          'bg-transparent': !isToday(day),
+          'bg-purple_accent': isToday(day),
+          'text-white': isToday(day)
+        }"
+      >
+        {{ format(day) }}
+      </div>
+      }@for (day of nextMonthDays; track $index) {
+      <div
+        class="text-center cursor-pointer text-gray-400"
+        (click)="nextMonth()"
+      >
+        {{ format(day) }}
+      </div>
+      }
+    </div>
+  </div>
+</div>

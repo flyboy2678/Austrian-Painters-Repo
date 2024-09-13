@@ -22,10 +22,13 @@ export class AuthService {
     name: string,
     surname: string,
     email: string,
-    password: string
+    password: string,
+    gender: string,
+    dob: string,
+    contact: string
   ): Observable<any> {
     console.log('email: ', email, 'password: ', password);
-    const user = { name, surname, email, password };
+    const user = { name, surname, email, password, gender, dob, contact };
     return this.http.post('http://localhost:3000/api/signup', user);
   }
 
@@ -52,6 +55,7 @@ export class AuthService {
   logout(): void {
     this.localStorage.remove(this.JWT_TOKEN);
     this.isAuthenticatedSubject.next(false);
+    // do uncomment the code below
     this.router.navigate(['/signin']);
   }
 
@@ -93,5 +97,11 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.localStorage.get(this.JWT_TOKEN);
+  }
+
+  sendForgotPasswordEmail(email: string): Observable<any> {
+    const data = { email: email };
+    console.log(data);
+    return this.http.post('http://localhost:3000/api/forgotPassword', data);
   }
 }

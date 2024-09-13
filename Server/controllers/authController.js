@@ -7,6 +7,7 @@ const {
 	getUserById,
 } = require("../models/userModel");
 const { jwtDecode } = require("jwt-decode");
+const nodemailer = require("nodemailer");
 
 const secretKey = process.env.JWT_SECRET;
 
@@ -103,4 +104,37 @@ const refreshToken = (req, res) => {
 	});
 };
 
-module.exports = { signup, login, refreshToken };
+const sendForgotPasswordEmail = (req, res) => {
+	const data = req.body;
+	console.log("data", data);
+	// const token = jwt.sign(
+	// 	{ email },
+	// 	secretKey,
+	// 	{ expiresIn: "1h" },
+	// 	{ algorithm: "HS256" }
+	// );
+	// const resetLink = `http://localhost:3000/reset-password/${token}`;
+	// const transporter = nodemailer.createTransport({
+	// 	service: "smtp.gmail.com",
+	// 	port: 465,
+	// 	auth: {
+	// 		user: process.env.EMAIL_USER,
+	// 		pass: process.env.EMAIL_PASSWORD,
+	// 	},
+	// });
+	// const mailOptions = {
+	// 	// from: "ttsunke15@gmail.com",
+	// 	to: email,
+	// 	subject: "Password Reset",
+	// 	html: `Click on the link to reset your password: ${resetLink}`,
+	// };
+	// transporter.sendMail(mailOptions, (err, info) => {
+	// 	if (err) {
+	// 		res.status(500).send("Error sending email");
+	// 		return;
+	// 	}
+	// 	res.status(200).send("Email sent");
+	// });
+};
+
+module.exports = { signup, login, refreshToken, sendForgotPasswordEmail };

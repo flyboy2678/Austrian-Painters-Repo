@@ -45,6 +45,7 @@ export class LogHoursService {
   ]);
 
   dates = this.datesSubject.asObservable(); // Expose observable for subscribing;
+  
 
   // updates fetched dtat to dates
   updateDates(dates: any[]) {
@@ -86,10 +87,10 @@ export class LogHoursService {
   };
 
   initTodayAnd7DaysAgoDates(user_id: string): Observable<any> {
+    // see that url ? put it in one line or you will end up like Tony
+    // ... depressed for an hour
     return this.http.get(
-      `http://localhost:3000/api/logHours/getUser/${Number(
-        user_id
-      )}/${this.getDate7DaysAgo()}/${this.getTodayDate()}`
+      `http://localhost:3000/api/logHours/getUser/${user_id}/${this.getDate7DaysAgo()}/${this.getTodayDate()}`
     );
   }
 
@@ -101,9 +102,19 @@ export class LogHoursService {
     // console.log('Entry Date 2:  ', end);
 
     return this.http.get(
-      `http://localhost:3000/api/logHours/getUser/${Number(
-        user_id
-      )}/${start}/${end}`
+      `http://localhost:3000/api/logHours/getUser/${user_id}/${start}/${end}`
+    );
+  }
+
+  // gets data from 365 days ago
+  get365DaysAgo(user_id: string, start: string, end: string): Observable<any> {
+    // debugging
+    // console.log('user_id: ', user_id);
+    // console.log('Entry Date 1:  ', start);
+    // console.log('Entry Date 2:  ', end);
+
+    return this.http.get(
+      `http://localhost:3000/api/logHours/getUser/${user_id}/${start}/${end}`
     );
   }
 
@@ -141,6 +152,13 @@ export class LogHoursService {
   // gets todays date and formats in yyy-mm-dd
   getTodayDate(): string {
     return this.formatDate(new Date());
+  }
+
+  // get date for 365 days ago
+  get365agoDate() {
+    const date365DaysAgo = new Date();
+    date365DaysAgo.setDate(date365DaysAgo.getDate() - 365);
+    return this.formatDate(date365DaysAgo);
   }
 
   // gets the date 7 days ago in yyyy-mm-dd format
