@@ -37,7 +37,7 @@ app.use("/insert", (req, res) => {
 
 app.use("/get/6/2024-08-28/2024-08-31", (req, res) => {
 
-  getTimeEntriesByDate('6', '2024-08-28', '2024-08-31');
+  getTimeEntriesByDate('05fa90d1978e55fd', '2024-08-28', '2024-09-12',()=>{});
 
   res.send("Getting data");
 });

@@ -86,10 +86,11 @@ export class LogHoursService {
   };
 
   initTodayAnd7DaysAgoDates(user_id: string): Observable<any> {
+
+    // see that url ? put it in one line or you will end up like Tony
+    // ... depressed for an hour
     return this.http.get(
-      `http://localhost:3000/api/logHours/getUser/${Number(
-        user_id
-      )}/${this.getDate7DaysAgo()}/${this.getTodayDate()}`
+      `http://localhost:3000/api/logHours/getUser/${user_id}/${this.getDate7DaysAgo()}/${this.getTodayDate()}`
     );
   }
 
@@ -100,10 +101,9 @@ export class LogHoursService {
     // console.log('Entry Date 1:  ', start);
     // console.log('Entry Date 2:  ', end);
 
+    
     return this.http.get(
-      `http://localhost:3000/api/logHours/getUser/${Number(
-        user_id
-      )}/${start}/${end}`
+      `http://localhost:3000/api/logHours/getUser/${user_id}/${start}/${end}`
     );
   }
 

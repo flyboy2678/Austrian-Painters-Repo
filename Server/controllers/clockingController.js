@@ -1,7 +1,7 @@
 const timeEntryModel = require("../models/clockingModel");
 
 // insert a new time entry
-exports.createTimeEntry = (req, res) => {
+const createTimeEntry = (req, res) => {
   const data = req.body;
   timeEntryModel.insertTimeEntry(data, (err, results) => {
     if (err) {
@@ -18,7 +18,7 @@ exports.createTimeEntry = (req, res) => {
 };
 
 // update an existing time entry's clock-out time
-exports.clockIn = (req, res) => {
+const clockIn = (req, res) => {
   timeEntryModel.clockIn(
     // gets id and clockout from the parameters
     req.params.id,
@@ -38,7 +38,7 @@ exports.clockIn = (req, res) => {
 };
 
 // update an existing time entry's clock-out time
-exports.updateClockOut = (req, res) => {
+const updateClockOut = (req, res) => {
   timeEntryModel.updateClockOut(
     // gets id and clockout from the parameters
     req.params.id,
@@ -59,7 +59,7 @@ exports.updateClockOut = (req, res) => {
 
 
 // get time entries for a specific date and user
-exports.getTimeEntriesByDate = (req, res) => {
+const getTimeEntriesByDate = (req, res) => {
   const { id, start, end } = req.params;
   timeEntryModel.getTimeEntriesByDate(id, start, end, (err, results) => {
     if (err) {
@@ -71,7 +71,7 @@ exports.getTimeEntriesByDate = (req, res) => {
   });
 };
 
-exports.setDuration = (req, res) => {
+const setDuration = (req, res) => {
   const data = req.body;
   timeEntryModel.setDuration(data, (err, results) => {
     if (err) {
@@ -84,7 +84,7 @@ exports.setDuration = (req, res) => {
 };
 
 // delete a time entry
-exports.deleteTimeEntry = (req, res) => {
+const deleteTimeEntry = (req, res) => {
   const { entryId } = req.params;
   timeEntryModel.deleteTimeEntry(entryId, (err, results) => {
     if (err) {
@@ -99,7 +99,7 @@ exports.deleteTimeEntry = (req, res) => {
   });
 };
 
-exports.getHours = (req, res) => {
+const getHours = (req, res) => {
 	const user_id = req.params.id;
 	timeEntryModel.getHours(user_id, (err, results) => {
 		if (err) {
@@ -111,7 +111,7 @@ exports.getHours = (req, res) => {
 	});
 };
 
-exports.updateHours = (req, res) => {
+const updateHours = (req, res) => {
 	const data = req.body;
 	timeEntryModel.updateHours(data, (err, results) => {
 		if (err) {
@@ -125,3 +125,13 @@ exports.updateHours = (req, res) => {
 		});
 	});
 };
+
+module.exports = {
+  createTimeEntry,
+  clockIn,
+  updateClockOut,
+  getHours,
+  getTimeEntriesByDate,
+  deleteTimeEntry,
+  updateHours
+}
