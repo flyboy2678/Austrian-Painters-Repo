@@ -95,11 +95,11 @@ const adminUpdateUser = (user, callback) => {
 
 const updateUser = (user, callback) => {
 	//update the firstName, LastName, and email
-	const query = `UPDATE EMPLOYEES SET FirstName = ?, LastName = ?, Email = ? WHERE Emp_id = ?`;
+	const query = `UPDATE EMPLOYEES SET FirstName = ?, LastName = ?, Email = ?, profile_picture = ? WHERE Emp_id = ?`;
 
 	connection.query(
 		query,
-		[user.firstName, user.lastName, user.email, user.id],
+		[user?.firstName, user?.lastName, user?.email,user?.profile_picture, user.id],
 		(err, results) => {
 			if (err) {
 				// console.log("Error updating user: ", err);
