@@ -129,6 +129,7 @@ const updateHours = (req, res) => {
 module.exports = {
   createTimeEntry,
   clockIn,
+  setDuration,
   updateClockOut,
   getHours,
   getTimeEntriesByDate,

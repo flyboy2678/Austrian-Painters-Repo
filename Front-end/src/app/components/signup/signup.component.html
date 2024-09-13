@@ -60,7 +60,7 @@
             formControlName="email"
             placeholder="Email"
             required
-            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:bg-purple_accent h-10"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
           />
           <div class="h-5">
             <span
@@ -70,6 +70,90 @@
               "
               class="text-xs text-red-600 block mt-1"
               >Please enter a valid email address</span
+            >
+          </div>
+        </div>
+
+        <!-- Gender Field -->
+        <div class="relative">
+          <label class="block" for="gender">Gender</label>
+          <div class="flex items-center mt-2">
+            <label class="inline-flex items-center mr-4">
+              <input
+                type="radio"
+                id="male"
+                formControlName="gender"
+                value="male"
+                class="w-4 h-4 text-purple_accent border-gray-300 focus:ring-purple_accent"
+                required
+              />
+              <span class="ml-2 text-gray-700">Male</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                id="female"
+                formControlName="gender"
+                value="female"
+                class="w-4 h-4 text-purple_accent border-gray-300 focus:ring-purple_accent"
+                required
+              />
+              <span class="ml-2 text-gray-700">Female</span>
+            </label>
+          </div>
+          <div class="h-5">
+            <span
+              *ngIf="
+                signupForm.get('gender')?.invalid &&
+                signupForm.get('gender')?.touched
+              "
+              class="text-xs text-red-600 block mt-1"
+              >Please select a gender</span
+            >
+          </div>
+        </div>
+
+        <!-- Date of  Field -->
+        <div class="relative">
+          <label class="block" for="dob">Date of Birth</label>
+          <input
+            type="date"
+            id="dob"
+            formControlName="dob"
+            placeholder="Date of birth"
+            required
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+          />
+          <div class="h-5">
+            <span
+              *ngIf="
+                signupForm.get('dob')?.invalid && signupForm.get('dob')?.touched
+              "
+              class="text-xs text-red-600 block mt-1"
+              >Please enter a valid date of birth</span
+            >
+          </div>
+        </div>
+
+        <!-- Contact Field -->
+        <div class="relative">
+          <label class="block" for="contact">Contact</label>
+          <input
+            type="text"
+            id="contact"
+            formControlName="contact"
+            placeholder="Contact"
+            required
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+          />
+          <div class="h-5">
+            <span
+              *ngIf="
+                signupForm.get('contact')?.invalid &&
+                signupForm.get('contact')?.touched
+              "
+              class="text-xs text-red-600 block mt-1"
+              >Please enter a valid phone number</span
             >
           </div>
         </div>
