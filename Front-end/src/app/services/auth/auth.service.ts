@@ -25,7 +25,7 @@ export class AuthService {
     password: string,
     gender: string,
     dob: string,
-    contact: string,
+    contact: string
   ): Observable<any> {
     console.log('email: ', email, 'password: ', password);
     const user = { name, surname, email, password, gender, dob, contact };
@@ -97,5 +97,11 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.localStorage.get(this.JWT_TOKEN);
+  }
+
+  sendForgotPasswordEmail(email: string): Observable<any> {
+    const data = { email: email };
+    console.log(data);
+    return this.http.post('http://localhost:3000/api/forgotPassword', data);
   }
 }
