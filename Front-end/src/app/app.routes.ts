@@ -52,12 +52,12 @@ export const routes: Routes = [
     path: 'forgot-password',
     component: ForgotpasswordComponent,
     canActivate: [notloggedinGuard],
+    children: [{
+      path: 'reset-password',
+      component: ResetpasswordComponent,
+      // canActivate: [notloggedinGuard],
+    }]
   },
-  // {
-  //   path: 'reset-password',
-  //   component: ResetpasswordComponent,
-  //   canActivate: [notloggedinGuard],
-  // },
   { path: 'test', component: TestComponent },
 ];
 

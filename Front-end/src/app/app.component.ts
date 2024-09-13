@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(private primengConfig: PrimeNGConfig) {
     if (this.authService.isTokenExpired()) {
-      this.authService.logout();
+      // this.authService.logout();
     }
   }
 
