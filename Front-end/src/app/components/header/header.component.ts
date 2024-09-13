@@ -8,6 +8,7 @@ import { faChevronDown, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { ChangepasswordmodalService } from '../../services/changepasswordmodal/changepasswordmodal.service';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { StreakComponent } from './streak/streak.component';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
     NzIconModule,
     EditprofileComponent,
     ChangepasswordComponent,
+    StreakComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
