@@ -14,7 +14,13 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet, FontAwesomeModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+    RouterOutlet,
+    FontAwesomeModule,
+  ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
@@ -23,10 +29,10 @@ export class SignupComponent {
   faEyeSlash = faEyeSlash;
   showPassword = false;
 
-
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
   signupForm: FormGroup;
   authService = inject(AuthService);
   router = inject(Router);
@@ -39,6 +45,9 @@ export class SignupComponent {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
+        gender: ['', Validators.required],
+        dob: ['', Validators.required],
+        contact: ['', Validators.required],
       },
       { validator: this.passwordMatchValidator }
     );
@@ -51,12 +60,16 @@ export class SignupComponent {
   }
 
   onSubmit(event: Event) {
+    // console.log(this.signupForm.value.gender  );
+    // console.log(this.signupForm.value.dob);
+    // console.log(this.signupForm.value.contact);
+
     if (this.signupForm.valid) {
       event.preventDefault();
       // Include name and surname in the sign-up logic if needed
-      const { name, surname, email, password } = this.signupForm.value;
+      const { name, surname, email, password, gender, dob, contact } = this.signupForm.value;
       this.authService
-        .signup(name, surname, email, password)
+        .signup(name, surname, email, password, gender, dob, contact)
         .subscribe((res: any) => {
           this.router.navigate(['/signin']);
         });
