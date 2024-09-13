@@ -10,16 +10,11 @@ import { AuthService } from '../../../services/auth/auth.service';
   imports: [NgxChartsModule, FilterComponent],
   templateUrl: './chart.component.html',
 })
-
-
-export class CharComponent implements OnInit{
+export class CharComponent implements OnInit {
   hours = inject(LogHoursService);
   user = inject(AuthService);
 
-  
-
-  data : any[] = [];
-  
+  data: any[] = [];
 
   // view: any = [550, 350];
 
@@ -42,7 +37,6 @@ export class CharComponent implements OnInit{
 
   constructor() {
     Object.assign(this.data);
-    
   }
 
   ngOnInit(): void {
@@ -50,7 +44,5 @@ export class CharComponent implements OnInit{
     this.hours.dates.subscribe((dates: any[]) => {
       this.data = dates;
     });
-
-    
   }
 }
