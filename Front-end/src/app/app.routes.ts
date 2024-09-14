@@ -15,6 +15,7 @@ import { TestComponent } from './components/test/test.component';
 import { HoursComponent } from './components/hours/hours.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { ResetPasswordComponent } from './components/forgotpassword/resetpassword/resetpassword.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,7 @@ export const routes: Routes = [
         canActivate: [adminGuard],
       },
       { path: 'hours', component: HoursComponent },
+      { path: 'messages', component: MessagesComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
