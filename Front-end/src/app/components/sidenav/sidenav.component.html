@@ -43,6 +43,13 @@
         <fa-icon [icon]="faHourglass"></fa-icon>
         <span class="hidden lg:block"> Hours </span>
       </button>
+      <button
+        routerLink="/tips"
+        [ngClass]="isActive('/tips') ? activeStyle : inactiveStyle"
+      >
+        <fa-icon [icon]="faLightbulb"></fa-icon>
+        <span class="hidden lg:block"> Tips </span>
+      </button>
     </div>
   </div>
 </div>
