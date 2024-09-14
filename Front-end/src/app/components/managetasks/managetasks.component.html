@@ -61,14 +61,12 @@
                 (click)="handleEditTask(task)"
               >
                 <fa-icon [icon]="faEdit"></fa-icon>
-                Edit
               </button>
               <button
                 class="text-red-500 p-2 rounded-md"
                 (click)="handleDeleteTask(task.Task_id)"
               >
                 <fa-icon [icon]="faTrash"></fa-icon>
-                Delete
               </button>
             </td>
           </tr>
@@ -77,6 +75,7 @@
       </nz-table>
     </div>
   </div>
-  <app-edittask />
+  @if(editTaskModalService.getVisible() === true) {
+  <app-edittask />}
   <app-add-task />
 </main>
