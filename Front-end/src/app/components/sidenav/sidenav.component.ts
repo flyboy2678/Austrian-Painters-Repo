@@ -15,6 +15,7 @@ import {
   faListCheck,
   faThumbTack,
   faUsers,
+  faLightbulb,
   faPaperPlane,
   faPoll
 } from '@fortawesome/free-solid-svg-icons';
@@ -40,6 +41,7 @@ export class SidenavComponent {
   faThumbTack = faThumbTack;
   faUsers = faUsers;
   faPoll= faPoll;
+  faLightbulb = faLightbulb;
   faPaperPlane = faPaperPlane;
 
   constructor(private router: Router) {

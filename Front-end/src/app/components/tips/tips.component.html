@@ -1,0 +1,44 @@
+<main
+  class="w-full h-full flex flex-col p-5 lg:p-10 justify-start text-xs lg:text-base"
+>
+  <h1
+    class="mb-2 lg:mb-5 text-base lg:text-lg font-semibold text-text_secondary"
+  >
+    Anonymous Tips
+  </h1>
+  <div class="w-full h-fit lg:h-full bg-white p-5 lg:p-10 rounded-md">
+    <button
+        class="bg-purple_accent p-2 w-full sm:w-auto rounded-md font-semibold text-white mb-5"
+        (click)="handleAddTip()"
+    >
+    <fa-icon [icon]="faPlus"></fa-icon>
+        Add Tip
+    </button>
+    
+    <div class="overflow-x-auto">
+      <nz-table
+        #basicTable
+        [nzData]="tips"
+        class="min-w-full rounded-none"
+        [nzPageSize]="6"
+      >
+        <thead>
+            <tr class="text-text_secondary rounded-none">
+                <th class="rounded-none">Task Name</th>
+                <th class="rounded-none">Tip Description</th>
+                <th class="rounded-none"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tip of basicTable.data">
+              <td>{{ tip.title }}</td>
+              <td>{{ tip.description }}</td>
+              <td>
+                <!-- Add any action buttons or links here -->
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+    </div>
+</div>
+
