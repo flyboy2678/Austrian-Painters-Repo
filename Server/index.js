@@ -36,12 +36,10 @@ app.use("/api", messagesRoutes);
 
 io.on("connection", (socket) => {
 	console.log("User connected");
-
-	socket.on("sendMessage", (message) => {
-		console.log("Message received: ", message);
-		io.emit("newMessage", message);
+	socket.on("newMessage", (data) => {
+		console.log("New message: ", data);
+		io.emit("newMessage", data);
 	});
-
 	socket.on("disconnect", () => {
 		console.log("User disconnected");
 	});

@@ -1,10 +1,9 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MessagesService } from '../../services/messages/messages.service';
 import { UserService } from '../../services/user/user.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-messages',
@@ -13,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css'],
 })
-export class MessagesComponent implements OnInit, OnDestroy {
+export class MessagesComponent implements OnInit {
   messagesService = inject(MessagesService);
   userService = inject(UserService);
   authService = inject(AuthService);
@@ -23,7 +22,21 @@ export class MessagesComponent implements OnInit, OnDestroy {
   sender_id: string = '';
   receiver_id: string = '';
   newMessage: string = '';
-  private newMessageSubscription!: Subscription;
+
+  ngOnInit() {
+    this.messagesService.onNewMessage().subscribe((data: any) => {
+      if (
+        (data.sender_id === this.sender_id &&
+          data.receiver_id === this.receiver_id) ||
+        (data.sender_id === this.receiver_id &&
+          data.receiver_id === this.sender_id)
+      ) {
+        this.messages.push(data);
+        return;
+      }
+      console.log('New message received');
+    });
+  }
 
   constructor() {
     this.user = this.authService.getCurrentUser();
@@ -31,31 +44,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.userService.getAllUsers().subscribe((data) => {
       this.users = data;
     });
-  }
-
-  ngOnInit() {
-    // Subscribe to new messages
-    this.newMessageSubscription = this.messagesService
-      .onNewMessage()
-      .subscribe((message: any) => {
-        console.log('Receiver id: ', message.receiver_id);
-        console.log('Sender id: ', message.sender_id);
-        console.log('message', message);
-        console.log('this.sender_id', this.sender_id);
-        // if (
-        //   message.receiver_id === this.receiver_id ||
-        //   message.sender_id === this.sender_id
-        // ) {
-        this.messages.push(message); // Update messages array
-        // }
-      });
-  }
-
-  ngOnDestroy() {
-    // Clean up subscription to prevent memory leaks
-    if (this.newMessageSubscription) {
-      this.newMessageSubscription.unsubscribe();
-    }
   }
 
   loadMessages() {
@@ -70,8 +58,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.messagesService
       .sendMessage(this.sender_id, this.receiver_id, this.newMessage)
       .subscribe(() => {
-        this.newMessage = ''; // Clear input field
-        this.loadMessages(); // Optionally reload messages
+        this.newMessage = '';
+        this.loadMessages();
       });
   }
 

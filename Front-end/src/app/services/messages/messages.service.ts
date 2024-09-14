@@ -18,6 +18,11 @@ export class MessagesService {
     receiver_id: string,
     message: string
   ): Observable<any> {
+    this.socket.emit('newMessage', {
+      sender_id,
+      receiver_id,
+      message,
+    });
     return this.http.post('http://localhost:3000/api/sendMessage', {
       sender_id,
       receiver_id,
