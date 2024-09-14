@@ -4,14 +4,16 @@ const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const clockingRoutes = require("./routes/clockingRoutes");
+const pollRoutes = require("./routes/pollRoutes");
+
 const {
   insertTimeEntry,
-  getTimeEntriesByDate,
   deleteTimeEntry,
   updateClockOut,
-  clockIn,
 } = require("./models/clockingModel");
+
 const { getAllUsers } = require("./models/userModel");
+const { insertPoll, getPolls } = require("./models/pollModel");
 
 const app = express();
 const port = 3000;
@@ -23,6 +25,7 @@ app.use("/api", userRoutes);
 app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
 app.use("/api", clockingRoutes);
+app.use("/api", pollRoutes);
 
 app.use("/insert", (req, res) => {
   insertTimeEntry({
@@ -34,13 +37,23 @@ app.use("/insert", (req, res) => {
   res.send("Inserting data");
 });
 
+app.use("/test-poll", (req, res) => {
+  // insertPoll(
+  //   "05fa90d1978e55fd",
+  //   {
+  //     name_and_surname: "Tony Lapuken",
+  //     poll_data: {
+  //       question: "Are you?",
+  //       poll_options: ["Yes", "No"],
+  //       poll_votes: [0, 0],
+  //     },
+  //   },
+  //   () => {}
+  // );
+  getPolls();
 
-// app.use("/get/6/2024-08-28/2024-08-31", (req, res) => {
-
-//   getTimeEntriesByDate('05fa90d1978e55fd', '2024-08-28', '2024-09-12',()=>{});
-
-//   res.send("Getting data");
-// });
+  res.send("Yini Manje?");
+});
 
 app.use("/users", (req, res) => {
   getAllUsers((result) => {});

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DateConverterService } from '../date_converter/date-converter.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { format } from 'date-fns';
 
@@ -9,6 +9,8 @@ interface DateAndHours {
   name: string;
   value: number;
 }
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +47,7 @@ export class LogHoursService {
   ]);
 
   dates = this.datesSubject.asObservable(); // Expose observable for subscribing;
-  
+
 
   // updates fetched dtat to dates
   updateDates(dates: any[]) {
