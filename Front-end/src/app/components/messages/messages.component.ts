@@ -37,6 +37,7 @@ export class MessagesComponent implements OnInit {
         console.log('after', this.messages);
         return;
       }
+
     });
   }
 

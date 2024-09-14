@@ -57,7 +57,7 @@ export class AddTaskComponent {
     const file: File = event.target.files[0];
     if (file) {
       this.selectedFile = file;
-      console.log('File selected:', file);
+      // console.log('File selected:', file);
     }
   }
 
@@ -69,15 +69,15 @@ export class AddTaskComponent {
         const documentRef = ref(storage, `documents/${this.selectedFile.name}`);
         //Upload the file to firebase storage
         const snapshot = await uploadBytes(documentRef, this.selectedFile);
-        console.log('File uploaded successfully');
+        // console.log('File uploaded successfully');
 
         //Get the download URL
         downloadURL = await getDownloadURL(snapshot.ref);
       } else {
-        console.log('No file selected for upload');
+        // console.log('No file selected for upload');
       }
     } catch (error) {
-      console.error('Error uploading file:', error);
+      // console.error('Error uploading file:', error);
     }
 
     const firstname: string = this.users.find(

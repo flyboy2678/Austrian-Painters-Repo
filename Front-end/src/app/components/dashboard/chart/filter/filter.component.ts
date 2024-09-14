@@ -86,8 +86,8 @@ export class FilterComponent implements OnInit {
     const startDate = this.dateForm.get('startDay')?.value;
     const endDate = this.dateForm.get('endDay')?.value;
 
-    console.log('Selected Start Date:', startDate);
-    console.log('Selected End Date:', endDate);
+    // console.log('Selected Start Date:', startDate);
+    // console.log('Selected End Date:', endDate);
 
     if (startDate && endDate) {
       // Retrieve the user ID from the auth service
@@ -109,7 +109,7 @@ export class FilterComponent implements OnInit {
 
           this.hours.updateDates(this.dates);
 
-          console.log(this.dates[0]);
+          // console.log(this.dates[0]);
         },
         error: (error) => {
           console.error('Error fetching data:', error);

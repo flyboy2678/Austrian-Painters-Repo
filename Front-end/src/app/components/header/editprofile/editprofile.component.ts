@@ -45,7 +45,8 @@ export class EditprofileComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
     });
     this.user = this.authService.getCurrentUser();
-    console.log('User: ', this.user);
+    // console.log('User: ', this.user);
+
     this.profileForm.patchValue({
       firstName: this.user.firstName,
       lastName: this.user.lastName,
@@ -64,10 +65,10 @@ export class EditprofileComponent implements OnInit {
       const pictureRef = ref(storage, `images/${this.user.id}`);
       deleteObject(pictureRef)
         .then(() => {
-          console.log('Profile picture deleted');
+          // console.log('Profile picture deleted');
         })
         .catch((error) => {
-          console.log('Error deleting profile picture: ', error);
+          // console.log('Error deleting profile picture: ', error);
         });
     }
     //upload the profile picture
@@ -75,13 +76,13 @@ export class EditprofileComponent implements OnInit {
     try {
       if (this.selectedFile) {
         const snapshot = await uploadBytes(pictureRef, this.selectedFile);
-        console.log('Profile picture uploaded');
+        // console.log('Profile picture uploaded');
         downloadURL = await getDownloadURL(snapshot.ref);
       } else {
-        console.log('No file selected for upload');
+        // console.log('No file selected for upload');
       }
     } catch (error) {
-      console.log('Error uploading profile picture: ', error);
+      // console.log('Error uploading profile picture: ', error);
     }
     const details = {
       ...this.profileForm.value,
@@ -100,7 +101,7 @@ export class EditprofileComponent implements OnInit {
     const file: File = event.target.files[0];
     if (file) {
       this.selectedFile = file;
-      console.log('File selected:', file);
+      // console.log('File selected:', file);
     }
   }
 }

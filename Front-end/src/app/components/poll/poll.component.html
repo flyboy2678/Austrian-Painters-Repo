@@ -1,52 +1,58 @@
-<app-addpoll/>
+<div
+  *ngIf="polls.length"
+  class="w-full flex flex-col justify-center items-center min-h-screen bg-dashboard_bg"
+>
+  <div class="w-9/12 justify-start">
+    <app-addpoll />
+  </div>
+  <div *ngFor="let poll of polls" class="poll-card w-9/12">
+    <h2>{{ poll.poll_data.question }}</h2>
 
-<div *ngIf="polls.length" class="w-full flex flex-col justify-center items-center min-h-screen bg-dashboard_bg">
-    <div *ngFor="let poll of polls" class="poll-card w-9/12">
-      <h2>{{ poll.poll_data.question }}</h2>
-  
-      <!-- Display the poll options and results -->
-      <ul *ngIf="hasUserVoted(poll); else voteTemplate">
+    <!-- Display the poll options and results -->
+    <ul *ngIf="hasUserVoted(poll); else voteTemplate">
       <!-- <ul> -->
-        <li *ngFor="let option of poll.poll_data.poll_options; let i = index">
-          {{ option }} - {{ poll.poll_data.votes[i] }} votes
-          <span *ngIf="selectedOptions[poll.id] === option">(Your vote)</span>
+      <li *ngFor="let option of poll.poll_data.poll_options; let i = index">
+        {{ option }} - {{ poll.poll_data.votes[i] }} votes
+        <span *ngIf="selectedOptions[poll.id] === option">(Your vote)</span>
+      </li>
+    </ul>
+
+    <!-- Voting UI if user has not voted -->
+    <ng-template #voteTemplate>
+      <ul>
+        <li *ngFor="let option of poll.poll_data.poll_options">
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input
+              type="radio"
+              [name]="'option' + poll.id"
+              [value]="option"
+              (change)="onVote(poll.id, option)"
+              class="sr-only peer"
+            />
+            <div
+              class="w-5 h-5 border-2 border-gray-300 rounded-full peer-checked:border-purple-500 peer-checked:bg-purple-500 peer-focus:ring-2 peer-focus:ring-purple-500"
+            >
+              <div
+                class="w-3 h-3 bg-white rounded-full mx-auto mt-1 peer-checked:scale-100"
+              ></div>
+            </div>
+            <span class="ml-3 text-gray-700">{{ option }}</span>
+          </label>
         </li>
       </ul>
-  
-      <!-- Voting UI if user has not voted -->
-      <ng-template #voteTemplate>
-        <ul>
-          <li *ngFor="let option of poll.poll_data.poll_options">
-            <label class="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  [name]="'option' + poll.id"
-                  [value]="option"
-                  (change)="onVote(poll.id, option)"
-                  class="sr-only peer"
-                />
-                <div class="w-5 h-5 border-2 border-gray-300 rounded-full peer-checked:border-purple-500 peer-checked:bg-purple-500 peer-focus:ring-2 peer-focus:ring-purple-500">
-                  <div class="w-3 h-3 bg-white rounded-full mx-auto mt-1 peer-checked:scale-100"></div>
-                </div>
-                <span class="ml-3 text-gray-700">{{ option }}</span>
-              </label>
-              
-          </li>
-        </ul>
-        <button
-          (click)="submitVote(poll.id)"
-          [disabled]="!selectedOptions[poll.id]"
-          class="bg-purple_accent border-purple_accent border-2 rounded-md text-white h-15 w-20 font-bold"
-        >
-          Vote
-        </button>
-      </ng-template>
-  
-      <p>Created by: {{ poll.name_and_surname }}</p>
-      <p>Created on: {{ poll.created_at | date : "medium" }}</p>
-    </div>
+      <button
+        (click)="submitVote(poll.id)"
+        [disabled]="!selectedOptions[poll.id]"
+        class="bg-purple_accent border-purple_accent border-2 rounded-md text-white h-15 w-20 font-bold"
+      >
+        Vote
+      </button>
+    </ng-template>
+
+    <p>Created by: {{ poll.name_and_surname }}</p>
+    <p>Created on: {{ poll.created_at | date : "medium" }}</p>
   </div>
-  <div *ngIf="!polls.length">
-    <p>No polls available</p>
-  </div>
-  
+</div>
+<div *ngIf="!polls.length">
+  <p>No polls available</p>
+</div>

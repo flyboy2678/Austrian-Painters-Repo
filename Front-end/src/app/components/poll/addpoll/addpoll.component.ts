@@ -3,10 +3,9 @@ import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AntdModule } from '../../../global_componet_lib/antd_modules';
 import { AuthService } from '../../../services/auth/auth.service';
 import { PollService } from '../../../services/poll/poll.service';
-import { Router } from '@angular/router';
+import { AntdModule } from '../../../global_componet_lib/antd_modules';
 
 @Component({
   selector: 'app-addpoll',

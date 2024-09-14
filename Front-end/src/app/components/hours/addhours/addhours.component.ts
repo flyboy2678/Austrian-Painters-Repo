@@ -51,7 +51,7 @@ export class AddhoursComponent {
     this.logHoursService
       .setDuration(this.user.id, this.form.value.day, this.form.value.hours)
       .subscribe((res) => {
-        console.log(res);
+        // console.log(res);
       });
     this.form.reset();
   }
