@@ -81,16 +81,13 @@ export class StreakComponent {
     // Iterate backwards from the most recent date in the sorted list
     for (let i = sortedDates.length - 1; i >= 0; i--) {
       const date = sortedDates[i];
-      console.log(date)
 
       if (date.getTime() === previousDate.getTime()) {
         // Continue streak if the date matches
         if (!this.isWeekend(date)) {
+          
           currentStreak += 1;
-        } else {
-          // Reset streak if a weekend is reached
-          currentStreak = 0;
-        }
+        } 
 
         // Update previousDate to the previous weekday
         previousDate = this.getPreviousWeekday(date);
@@ -105,7 +102,7 @@ export class StreakComponent {
 
   isWeekend(date: Date): boolean {
     const day = date.getDay();
-    return day === 0 || day === 6; // Sunday or Saturday
+    return day === 6 || day === 7; // Sunday or Saturday
   }
 
   getPreviousWeekday(date: Date): Date {
