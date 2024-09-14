@@ -10,6 +10,7 @@ const {
 	deleteUser,
 	adminUpdateUser,
 	changePassword,
+	updateUserStatus,
 } = require("../controllers/userController");
 
 router.post("/createUser", verifyToken, createUser);
@@ -20,5 +21,6 @@ router.get("/getUserById/:id", verifyToken, getUserById);
 router.get("/getAllUsers", verifyToken, getAllUsers);
 router.delete("/deleteUser/:id", verifyToken, deleteUser);
 router.put("/changePassword", verifyToken, changePassword);
+router.put("/updateUserStatus", verifyToken, updateUserStatus);
 
 module.exports = router;

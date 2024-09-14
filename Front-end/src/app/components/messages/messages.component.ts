@@ -44,7 +44,8 @@ export class MessagesComponent implements OnInit {
     this.user = this.authService.getCurrentUser();
     this.sender_id = this.user.id;
     this.userService.getAllUsers().subscribe((data) => {
-      this.users = data;
+      //filter out the current user
+      this.users = data.filter((user: any) => user.Emp_id !== this.user.id);
     });
   }
 

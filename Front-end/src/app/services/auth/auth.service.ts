@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { StorageService } from '../localstorage/localstorage.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private router = inject(Router);
   private http = inject(HttpClient);
+  private userService = inject(UserService);
   private localStorage = inject(StorageService);
 
   constructor() {}
@@ -55,8 +57,10 @@ export class AuthService {
   logout(): void {
     this.localStorage.remove(this.JWT_TOKEN);
     this.isAuthenticatedSubject.next(false);
-    // do uncomment the code below
+    const user = this.getCurrentUser();
     this.router.navigate(['/signin']);
+    this.userService.updateUserStatus(user.id, 'offline').subscribe();
+    // do uncomment the code below
   }
 
   getCurrentUser(): any {

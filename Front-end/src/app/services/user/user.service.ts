@@ -46,4 +46,12 @@ export class UserService {
 
     return this.http.put('http://localhost:3000/api/changePassword', user);
   }
+
+  updateUserStatus(userId: string, status: string): Observable<any> {
+    const user = {
+      id: userId,
+      status: status,
+    };
+    return this.http.put('http://localhost:3000/api/updateUserStatus', user);
+  }
 }
