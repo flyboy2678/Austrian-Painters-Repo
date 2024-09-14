@@ -1,15 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessagesService {
   private http = inject(HttpClient);
-  private socket = io('http://localhost:3000');
-  constructor() {}
+  private socket: Socket;
+  constructor() {
+    this.socket = io('http://localhost:3000');
+  }
 
   sendMessage(
     sender_id: string,
