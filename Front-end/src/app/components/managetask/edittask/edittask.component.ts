@@ -30,16 +30,14 @@ export class EdittaskComponent {
   constructor(private fb: FormBuilder) {
     this.userService.getAllUsers().subscribe((data) => {
       this.users = data;
-      console.log(this.users);
     });
     this.task = this.editTaskModalService.getTask();
-    console.log(this.task);
     this.taskForm = this.fb.group({
       taskName: [this.task?.Name, [Validators.required]],
-      description: ['', [Validators.required]],
-      assignee: ['', [Validators.required]],
-      dueDate: ['', [Validators.required]],
-      priority: ['', [Validators.required]],
+      description: [this.task?.Description, [Validators.required]],
+      assignee: [this.task?.Emp_id, [Validators.required]],
+      dueDate: [this.task?.DueDate, [Validators.required]],
+      priority: [this.task?.priority, [Validators.required]],
     });
   }
 
