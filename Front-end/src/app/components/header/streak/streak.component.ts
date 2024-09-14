@@ -9,12 +9,11 @@ import { faDoorOpen, faFire } from '@fortawesome/free-solid-svg-icons';
   standalone: true,
   imports: [FontAwesomeModule],
   templateUrl: './streak.component.html',
-  styleUrl: './streak.component.css'
+  styleUrl: './streak.component.css',
 })
 export class StreakComponent {
   // icon
   faFire = faFire;
-
 
   date = inject(LogHoursService);
   auth = inject(AuthService);
@@ -22,66 +21,68 @@ export class StreakComponent {
   data: any[] = []; // Initialize as an empty array
   streak: number = 0; // Initialize streak counter
 
-  constructor(){
+  constructor() {
     console.log(this.date.get365agoDate());
 
-    const user = this.auth.getCurrentUser();
+    const user = this.auth.getCurrentUser().id;
     console.log(user);
-    this.date.get365DaysAgo('6', this.date.get365agoDate(), this.date.getTodayDate()).subscribe({
-      next: (response) => {
-        
 
-        // maps all our data into the dates variable
-        response.map((result: any, index: number) => {
-          const formattedDate = this.date.makeDatePretty(result.entry_date);
+    this.date
+      .get365DaysAgo(user, this.date.get365agoDate(), this.date.getTodayDate())
+      .subscribe({
+        next: (response) => {
+          // maps all our data into the dates variable
+          response.map((result: any, index: number) => {
+            const formattedDate = this.date.makeDatePretty(result.entry_date);
+            console.log(formattedDate)
+            this.data[index] = formattedDate;
+          });
 
-          this.data[index] = formattedDate;
+          // this.hours.updateDates(this.dates);
 
-        });
-
-
-
-        // this.hours.updateDates(this.dates);
-
-        // console.log(this.dates);
-      },
-      error: (error) => {
-        console.error('Error fetching data:', error);
-      },
-      complete: () => {
-        this.streak = this.calculateStreak(this.data);
-        // console.log('Data fetch completed');
-      },
-    });
+          console.log(this.data);
+        },
+        error: (error) => {
+          console.error('Error fetching data:', error);
+        },
+        complete: () => {
+          this.streak = this.calculateStreak(this.data);
+          console.log(this.streak)
+          // console.log('Data fetch completed');
+        },
+      });
   }
-
-
 
   calculateStreak(dates: string[]): number {
     // Normalize and sort dates
-    const dateSet = new Set(dates.map(date => new Date(date).toDateString()));
-    const sortedDates = Array.from(dateSet).map(date => new Date(date)).sort((a, b) => a.getTime() - b.getTime());
-  
+    const dateSet = new Set(dates.map((date) => new Date(date).toDateString()));
+    const sortedDates = Array.from(dateSet)
+      .map((date) => new Date(date))
+      .sort((a, b) => a.getTime() - b.getTime());
+
     // Get today's date
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set to start of the day
-  
+
     // Calculate streak from today
     let currentStreak = 0;
     let previousDate: Date | null = today;
-  
+
     // Check if there is data for today
-    const hasTodayData = sortedDates.some(date => date.getTime() === today.getTime());
-  
+    const hasTodayData = sortedDates.some(
+      (date) => date.getTime() === today.getTime()
+    );
+
     // If today is a weekday and there is no entry for today, assume streak continues from yesterday
     if (!hasTodayData && !this.isWeekend(today)) {
       previousDate = this.getPreviousWeekday(today);
     }
-  
+
     // Iterate backwards from the most recent date in the sorted list
     for (let i = sortedDates.length - 1; i >= 0; i--) {
       const date = sortedDates[i];
-  
+      console.log(date)
+
       if (date.getTime() === previousDate.getTime()) {
         // Continue streak if the date matches
         if (!this.isWeekend(date)) {
@@ -90,7 +91,7 @@ export class StreakComponent {
           // Reset streak if a weekend is reached
           currentStreak = 0;
         }
-  
+
         // Update previousDate to the previous weekday
         previousDate = this.getPreviousWeekday(date);
       } else {
@@ -98,25 +99,24 @@ export class StreakComponent {
         break;
       }
     }
-  
+
     return currentStreak;
   }
-  
+
   isWeekend(date: Date): boolean {
     const day = date.getDay();
     return day === 0 || day === 6; // Sunday or Saturday
   }
-  
+
   getPreviousWeekday(date: Date): Date {
     const previousDay = new Date(date);
     previousDay.setDate(previousDay.getDate() - 1);
-  
+
     // Skip weekends
     while (this.isWeekend(previousDay)) {
       previousDay.setDate(previousDay.getDate() - 1);
     }
-  
+
     return previousDay;
   }
-  
 }

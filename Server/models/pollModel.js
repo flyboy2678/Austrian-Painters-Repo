@@ -15,6 +15,7 @@ const insertPoll = (user_id, data) => {
     }
   );
 };
+
 const updatePoll = (id, data,callback) => {
   const query = `UPDATE polls SET poll_data = ? WHERE id = ?`;
   console.log(data.poll_data);
