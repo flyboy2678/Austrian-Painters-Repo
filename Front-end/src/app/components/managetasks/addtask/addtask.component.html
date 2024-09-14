@@ -9,6 +9,7 @@
       <label for ="document">Upload Document</label>
       <input
         type="file"
+        accept=".pdf, .doc, .docx, .xls, .xlsx"
         id="document"
         formControlName="document"
         (change)="onFileSelected($event)"
