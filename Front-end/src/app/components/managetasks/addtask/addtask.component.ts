@@ -11,7 +11,12 @@ import { CommonModule } from '@angular/common';
 import { AddtaskmodalService } from '../../../services/addtaskmodal/addtaskmodal.service';
 import { UserService } from '../../../services/user/user.service';
 import { TasksService } from '../../../services/tasks/tasks.service';
-import {deleteObject, getDownloadURL, ref, uploadBytes} from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
 import { storage } from '../../../../firebase/config';
 
 @Component({
@@ -29,8 +34,7 @@ export class AddTaskComponent {
   users: any;
   selectedFile: File | null = null;
   //create a child reference
-  documentRef = ref(storage, 'documents');   // documentRef now points to 'documents'
-
+  documentRef = ref(storage, 'documents'); // documentRef now points to 'documents'
 
   // Add a property to control modal visibility
   constructor(private fb: FormBuilder) {
@@ -60,30 +64,27 @@ export class AddTaskComponent {
   async handleSubmit(): Promise<void> {
     let downloadURL;
 
-      try{
-        if (this.selectedFile) {
-          const documentRef = ref(storage, `documents/${this.selectedFile.name}`); 
+    try {
+      if (this.selectedFile) {
+        const documentRef = ref(storage, `documents/${this.selectedFile.name}`);
         //Upload the file to firebase storage
         const snapshot = await uploadBytes(documentRef, this.selectedFile);
         console.log('File uploaded successfully');
 
         //Get the download URL
         downloadURL = await getDownloadURL(snapshot.ref);
-        }
-        else{
-          console.log('No file selected for upload');
-        }
+      } else {
+        console.log('No file selected for upload');
       }
-      catch(error){
-        console.error('Error uploading file:', error);
-      }
-    
- 
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+
     const firstname: string = this.users.find(
       (user: any) => user.Emp_id === this.taskForm.value.assignee
     ).FirstName;
     this.tasksService
-      .createTask({ ...this.taskForm.value, firstname })
+      .createTask({ ...this.taskForm.value, downloadURL, firstname })
       .subscribe(() => {});
     this.taskForm.reset();
     this.modalService.closeModal();
@@ -92,6 +93,4 @@ export class AddTaskComponent {
   handleCancel(): void {
     this.modalService.closeModal();
   }
-
-
 }

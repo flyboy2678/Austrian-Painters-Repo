@@ -2,7 +2,7 @@ const connection = require("../config/db");
 const nodemailer = require("nodemailer");
 
 const createTask = async (task, callback) => {
-	const query = `INSERT INTO Tasks (Emp_id, Name, Description, DueDate, Status, employee_name, priority) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+	const query = `INSERT INTO Tasks (Emp_id, Name, Description, DueDate, Status, employee_name, priority, document) VALUES (?,?, ?, ?, ?, ?, ?, ?)`;
 	const status = "Not Started";
 	connection.query(
 		query,
@@ -14,6 +14,7 @@ const createTask = async (task, callback) => {
 			status,
 			task?.firstname,
 			task?.priority,
+			task?.downloadURL,
 		],
 		(err, results) => {
 			if (err) {

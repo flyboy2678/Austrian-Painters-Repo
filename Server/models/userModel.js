@@ -37,7 +37,17 @@ const createUser = async (user, callback) => {
 	//create user in the database
 	connection.query(
 		query,
-		[userId, user?.name, user?.surname, user?.email, password, role, user?.gender, user?.dob, user?.contact],
+		[
+			userId,
+			user?.name,
+			user?.surname,
+			user?.email,
+			password,
+			role,
+			user?.gender,
+			user?.dob,
+			user?.contact,
+		],
 		(err, results) => {
 			if (err) {
 				// console.log("Error creating user: ", err);
@@ -99,7 +109,13 @@ const updateUser = (user, callback) => {
 
 	connection.query(
 		query,
-		[user?.firstName, user?.lastName, user?.email,user?.profile_picture, user.id],
+		[
+			user?.firstName,
+			user?.lastName,
+			user?.email,
+			user?.profile_picture,
+			user.id,
+		],
 		(err, results) => {
 			if (err) {
 				// console.log("Error updating user: ", err);

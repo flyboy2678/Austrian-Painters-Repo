@@ -19,7 +19,7 @@ import { StreakComponent } from './streak/streak.component';
     NzIconModule,
     EditprofileComponent,
     ChangepasswordComponent,
-    StreakComponent
+    StreakComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
