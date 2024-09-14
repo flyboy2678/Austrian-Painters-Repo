@@ -6,6 +6,15 @@
 >
   <ng-container *nzModalContent>
     <form [formGroup]="taskForm">
+      <label for ="document">Upload Document</label>
+      <input
+        type="file"
+        accept=".pdf, .doc, .docx, .xls, .xlsx"
+        id="document"
+        formControlName="document"
+        (change)="onFileSelected($event)"
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
       <label for="taskName">Task Name</label>
       <input
         type="text"

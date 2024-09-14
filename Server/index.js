@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
+const socketIo = require("socket.io");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
@@ -17,6 +19,17 @@ const { insertPoll, getPolls } = require("./models/pollModel");
 
 const app = express();
 const port = 3000;
+
+const server = http.createServer(app);
+const io = socketIo(server, {
+	cors: {
+		origin: "http://localhost:4200",
+		methods: ["GET", "POST"],
+	},
+});
+
+// Set io instance in socketManager
+setSocketIO(io);
 
 app.use(cors());
 app.use(express.json());
@@ -75,6 +88,6 @@ app.use("/test", (req, res) => {
   res.send("Tester");
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+server.listen(port, () => {
+	console.log(`Server running on port ${port}`);
 });

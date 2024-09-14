@@ -15,6 +15,7 @@ import {
   faListCheck,
   faThumbTack,
   faUsers,
+  faPaperPlane,
   faPoll
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -39,6 +40,7 @@ export class SidenavComponent {
   faThumbTack = faThumbTack;
   faUsers = faUsers;
   faPoll= faPoll;
+  faPaperPlane = faPaperPlane;
 
   constructor(private router: Router) {
     this.user = this.authservice.getCurrentUser();

@@ -1,7 +1,8 @@
 const connection = require("../config/db");
+const nodemailer = require("nodemailer");
 
 const createTask = async (task, callback) => {
-	const query = `INSERT INTO Tasks (Emp_id, Name, Description, DueDate, Status, employee_name, priority) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+	const query = `INSERT INTO Tasks (Emp_id, Name, Description, DueDate, Status, employee_name, priority, document) VALUES (?,?, ?, ?, ?, ?, ?, ?)`;
 	const status = "Not Started";
 	connection.query(
 		query,
@@ -13,6 +14,7 @@ const createTask = async (task, callback) => {
 			status,
 			task?.firstname,
 			task?.priority,
+			task?.downloadURL,
 		],
 		(err, results) => {
 			if (err) {
@@ -68,10 +70,45 @@ const deleteTask = (id, callback) => {
 	});
 };
 
+const updateTask = (task, callback) => {
+	const query = `UPDATE Tasks SET Name = ?, Description = ?, DueDate = ?, Status = ?, priority = ? WHERE Task_id = ?`;
+	connection.query(
+		query,
+		[
+			task?.taskName,
+			task?.description,
+			task?.dueDate,
+			task?.status,
+			task?.priority,
+			task?.id,
+		],
+		(err, results) => {
+			if (err) {
+				console.log("Error updating task: ", err);
+				return;
+			}
+			callback(null, results);
+		}
+	);
+};
+
+const updateReminder = (taskid, callback) => {
+	const query = `UPDATE Tasks SET reminded = ? WHERE Task_id = ?`;
+	connection.query(query, ["true", taskid], (err, results) => {
+		if (err) {
+			console.log("Error updating reminder: ", err);
+			return;
+		}
+		callback(null, results);
+	});
+};
+
 module.exports = {
 	createTask,
 	getUserTasks,
 	getAllTasks,
 	deleteTask,
 	setProgress,
+	updateTask,
+	updateReminder,
 };

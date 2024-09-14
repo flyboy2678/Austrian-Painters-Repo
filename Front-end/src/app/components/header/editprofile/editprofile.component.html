@@ -6,6 +6,15 @@
 >
   <ng-container *nzModalContent>
     <form [formGroup]="profileForm">
+      <label for="profile_picture">Change profile picture</label>
+      <input
+        type="file"
+        accept=".jpg, .jpeg, .png"
+        id="profile_picture"
+        formControlName="profile_picture"
+        (change)="onFileSelected($event)"
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-purple_accent h-10"
+      />
       <label for="firstName">First Name</label>
       <input
         type="text"

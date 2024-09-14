@@ -43,6 +43,13 @@
         <fa-icon [icon]="faHourglass"></fa-icon>
         <span class="hidden lg:block"> Hours </span>
       </button>
+      <button
+        routerLink="/messages"
+        [ngClass]="isActive('/messages') ? activeStyle : inactiveStyle"
+      >
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+        <span class="hidden lg:block"> Messages </span>
+      </button>
       
       <button
         routerLink="/poll"
