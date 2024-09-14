@@ -15,6 +15,7 @@ import { TestComponent } from './components/test/test.component';
 import { HoursComponent } from './components/hours/hours.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { ResetPasswordComponent } from './components/forgotpassword/resetpassword/resetpassword.component';
+import { PollComponent } from './components/poll/poll.component';
 import { TipsComponent } from './components/tips/tips.component';
 import { MessagesComponent } from './components/messages/messages.component';
 
@@ -38,7 +39,7 @@ export const routes: Routes = [
       },
       { path: 'hours', component: HoursComponent },
       {path: 'tips', component: TipsComponent},
-      { path: 'messages', component: MessagesComponent },
+      { path: 'poll', component: PollComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

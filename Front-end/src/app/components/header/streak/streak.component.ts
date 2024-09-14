@@ -39,7 +39,6 @@ export class StreakComponent {
 
         });
 
-        console.log(this.data);
 
 
         // this.hours.updateDates(this.dates);
@@ -52,7 +51,6 @@ export class StreakComponent {
       complete: () => {
         this.streak = this.calculateStreak(this.data);
         // console.log('Data fetch completed');
-        console.log(this.calculateStreak(this.data));
       },
     });
   }

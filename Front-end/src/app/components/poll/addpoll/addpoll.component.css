@@ -1,0 +1,28 @@
+.custom-input-group {
+    border: none; /* Default border color */
+    transition: border-color 0.3s ease;
+  }
+  
+  .custom-input-group:hover {
+    border-color: #8146FF; /* Border color on hover */
+  }
+  
+  .custom-input-group input {
+    transition: border-color 0.3s ease;
+  }
+  
+  .custom-input-group:hover input {
+    border-color: #8146FF; /* Border color for the input on hover */
+  }
+  
+  .custom-textarea {
+    border: 1px solid #d9d9d9; /* Default border color */
+    border-radius: 8px; /* Border radius */
+    transition: border-color 0.3s ease, border-radius 0.3s ease;
+  }
+  
+  .custom-textarea:hover {
+    border-color: #8146FF; /* Border color on hover */
+    border-radius: 8px; /* Ensure the radius remains consistent on hover */
+  }
+  

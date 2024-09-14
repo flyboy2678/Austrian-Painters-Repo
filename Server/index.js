@@ -6,8 +6,16 @@ const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const clockingRoutes = require("./routes/clockingRoutes");
-const messagesRoutes = require("./routes/messagesRoutes");
-const { setSocketIO } = require("./socketIo/config");
+const pollRoutes = require("./routes/pollRoutes");
+
+const {
+  insertTimeEntry,
+  deleteTimeEntry,
+  updateClockOut,
+} = require("./models/clockingModel");
+
+const { getAllUsers } = require("./models/userModel");
+const { insertPoll, getPolls } = require("./models/pollModel");
 
 const app = express();
 const port = 3000;
@@ -30,14 +38,54 @@ app.use("/api", userRoutes);
 app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
 app.use("/api", clockingRoutes);
-app.use("/api", messagesRoutes);
+app.use("/api", pollRoutes);
 
-io.on("connection", (socket) => {
-	console.log("User connected");
+app.use("/insert", (req, res) => {
+  insertTimeEntry({
+    user_id: "6",
+    entry_date: "2024-08-29",
+    clock_in: "2024-08-29 08:00:00",
+    clock_out: null,
+  });
+  res.send("Inserting data");
+});
 
-	socket.on("disconnect", () => {
-		console.log("User disconnected");
-	});
+app.use("/test-poll", (req, res) => {
+  // insertPoll(
+  //   "05fa90d1978e55fd",
+  //   {
+  //     name_and_surname: "Tony Lapuken",
+  //     poll_data: {
+  //       question: "Are you?",
+  //       poll_options: ["Yes", "No"],
+  //       poll_votes: [0, 0],
+  //     },
+  //   },
+  //   () => {}
+  // );
+  getPolls();
+
+  res.send("Yini Manje?");
+});
+
+app.use("/users", (req, res) => {
+  getAllUsers((result) => {});
+  res.send("Users");
+});
+
+app.use("/delete", (req, res) => {
+  deleteTimeEntry("0", (result) => {});
+  res.send("Delete");
+});
+
+app.use("/test", (req, res) => {
+  // clockIn("6", {
+  //   clock_in: "2024-08-29 17:17:00",
+  // });
+  updateClockOut("6", {
+    clock_out: "2024-08-29 23:33:00",
+  });
+  res.send("Tester");
 });
 
 server.listen(port, () => {

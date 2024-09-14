@@ -1,0 +1,84 @@
+<button
+  (click)="showModal()"
+  class="bg-purple_accent border-purple_accent border-2 rounded-md text-white p-2 font-bold m-5"
+  nz-tooltip="Add Poll"
+>
+  <fa-icon
+    [icon]="faAdd"
+    class="text-white hover:text-purple_accent duration-200 m-5"
+  ></fa-icon>
+</button>
+
+<nz-modal
+  nzDraggable
+  nzCentered
+  [(nzVisible)]="isVisible"
+  nzOkText="Confirm"
+  nzTitle="Enter Poll"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleConfirm()"
+  [nzOkLoading]="isOkLoading"
+>
+  <!-- content in body -->
+  <div *nzModalContent>
+    <!-- poll questions -->
+    <textarea
+      rows="3"
+      nz-input
+      [(ngModel)]="poll_question"
+      class="custom-textarea"
+    ></textarea>
+
+    <div class="m-10"></div>
+
+    <!-- poll options -->
+    <div *ngIf="poll_options.length > 0" class="mt-4">
+      <p>Poll Options:</p>
+      <ul>
+        <li *ngFor="let option of poll_options; let i = index">
+          <p class="font-bold">Option {{ i + 1 }}:</p>
+          {{ option }}
+        </li>
+      </ul>
+    </div>
+    <nz-input-group
+      nzSearch
+      nzSize="large"
+      [nzAddOnAfter]="suffixButton"
+      class="custom-input-group"
+    >
+      <input
+        type="text"
+        nz-input
+        placeholder="enter poll option"
+        [(ngModel)]="inputValue"
+      />
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="large"
+        (click)="addOption()"
+        style="background-color: #8146ff"
+      >
+        Add
+      </button>
+    </ng-template>
+  </div>
+
+  <div *nzModalFooter>
+    <button
+      (click)="handleCancel()"
+      class="border-red-400 border-2 rounded-md text-red-400 hover:text-red-600 hover:border-red-600 duration-500 p-2 font-bold"
+    >
+      Cancel
+    </button>
+    <button
+      (click)="handleConfirm()"
+      class="bg-purple_accent border-purple_accent border-2 rounded-md text-white p-2 font-bold m-5"
+    >
+      Upload Poll
+    </button>
+  </div>
+</nz-modal>

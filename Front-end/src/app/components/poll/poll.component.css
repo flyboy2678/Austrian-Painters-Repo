@@ -1,0 +1,61 @@
+.poll-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  h2 {
+    margin: 0 0 16px 0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    padding: 8px 0;
+  }
+
+  /* Hide the default radio button */
+.custom-radio input[type="radio"] {
+    display: none;
+  }
+  
+  /* Style the custom radio button */
+  .custom-radio .radio-button {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 10px;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  
+  /* Style when radio button is checked */
+  .custom-radio input[type="radio"]:checked + .radio-button {
+    border-color: #8146FF;
+    background-color: #8146FF;
+  }
+  
+  /* Style the inner circle for checked state */
+  .custom-radio .radio-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Inner circle when radio button is checked */
+  .custom-radio input[type="radio"]:checked + .radio-button::after {
+    background-color: #fff;
+  }
+  

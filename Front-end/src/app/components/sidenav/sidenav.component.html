@@ -57,6 +57,14 @@
         <fa-icon [icon]="faPaperPlane"></fa-icon>
         <span class="hidden lg:block"> Messages </span>
       </button>
+      
+      <button
+        routerLink="/poll"
+        [ngClass]="isActive('/poll') ? activeStyle : inactiveStyle"
+      >
+        <fa-icon [icon]="faPoll"></fa-icon>
+        <span class="hidden lg:block"> Poll </span>
+      </button>
     </div>
   </div>
 </div>

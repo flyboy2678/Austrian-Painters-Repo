@@ -17,6 +17,7 @@ import {
   faUsers,
   faLightbulb,
   faPaperPlane,
+  faPoll
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -39,6 +40,7 @@ export class SidenavComponent {
   faListCheck = faListCheck;
   faThumbTack = faThumbTack;
   faUsers = faUsers;
+  faPoll= faPoll;
   faLightbulb = faLightbulb;
   faPaperPlane = faPaperPlane;
 
