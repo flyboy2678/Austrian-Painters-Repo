@@ -92,8 +92,15 @@ imagesRef = ref(storage, 'images');   // imagesRef now points to 'images'
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
+      const validTypes = ['image/jpeg', 'image/png', 'image/jpg','image.JPG','image.JPEG','image.PNG'];
+      if(validTypes.includes(file.type)){
       this.selectedFile = file;
       console.log('File selected:', file);
+      }
+      else{
+        console.error('Invalid file type');
+        alert('Invalid file type. Please select an image file');
+      }
     }
   }
 
