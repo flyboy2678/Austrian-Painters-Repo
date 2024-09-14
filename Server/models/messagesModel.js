@@ -20,7 +20,7 @@ const sendMessage = (data, callback) => {
 				io.emit("newMessage", {
 					sender_id,
 					receiver_id,
-					message,
+					message_text: message,
 				});
 			} else {
 				console.log("Socket.IO instance is not available");
@@ -44,7 +44,7 @@ const getMessages = (users, callback) => {
 				console.log("Error getting messages: ", err);
 				return callback(err);
 			}
-			console.log("Messages: ", results);
+			// console.log("Messages: ", results);
 			callback(null, results);
 		}
 	);

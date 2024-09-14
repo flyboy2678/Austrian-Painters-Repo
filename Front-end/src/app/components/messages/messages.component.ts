@@ -25,16 +25,18 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this.messagesService.onNewMessage().subscribe((data: any) => {
+      // console.log(data);
       if (
         (data.sender_id === this.sender_id &&
           data.receiver_id === this.receiver_id) ||
         (data.sender_id === this.receiver_id &&
           data.receiver_id === this.sender_id)
       ) {
+        console.log('before', this.messages);
         this.messages.push(data);
+        console.log('after', this.messages);
         return;
       }
-      console.log('New message received');
     });
   }
 
