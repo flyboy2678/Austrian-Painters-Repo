@@ -30,4 +30,11 @@ export class TasksService {
   deleteTask(taskid: string): Observable<any> {
     return this.http.delete(`http://localhost:3000/api/deleteTask/${taskid}`);
   }
+
+  updateTask(task: any): Observable<any> {
+    return this.http.put(
+      `http://localhost:3000/api/updateTask/${task._id}`,
+      task
+    );
+  }
 }

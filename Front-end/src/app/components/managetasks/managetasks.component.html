@@ -58,7 +58,7 @@
             <td class="hidden lg:table-cell text-center rounded-none">
               <button
                 class="text-purple_accent p-2 rounded-md"
-                (click)="handleEditTask(task.Task_id)"
+                (click)="handleEditTask(task)"
               >
                 <fa-icon [icon]="faEdit"></fa-icon>
                 Edit
@@ -77,5 +77,6 @@
       </nz-table>
     </div>
   </div>
+  <app-edittask />
   <app-add-task />
 </main>
