@@ -5,6 +5,7 @@ const socketIo = require("socket.io");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const pollRoutes = require("./routes/pollRoutes");
 const clockingRoutes = require("./routes/clockingRoutes");
 const messagesRoutes = require("./routes/messagesRoutes");
 const { setSocketIO } = require("./socketIo/config");
@@ -29,6 +30,7 @@ app.use(express.json());
 app.use("/api", userRoutes);
 app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
+app.use("/api", pollRoutes);
 app.use("/api", clockingRoutes);
 app.use("/api", messagesRoutes);
 
