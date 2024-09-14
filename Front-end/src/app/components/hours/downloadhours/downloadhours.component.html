@@ -1,0 +1,62 @@
+<!-- Download Your Data Button -->
+<button nz-button nzType="primary" (click)="downloadCSV()" class="mr-5">
+    <fa-icon [icon]="faFilter" class="mr-2"></fa-icon>
+    Download Your Data
+  </button>
+  
+  <!-- Modal Button for Filtering Dates -->
+  <button nz-button nzType="default" (click)="showModal()">
+    <fa-icon [icon]="faFilter" class="hover:text-purple_accent duration-200 mr-5"></fa-icon>
+  </button>
+  
+  <nz-modal
+    nzDraggable
+    nzCentered
+    [(nzVisible)]="isVisible"
+    nzOkText="Confirm"
+    nzTitle="Filter by date"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleConfirm()"
+    [nzOkLoading]="isOkLoading"
+  >
+    <div *nzModalContent>
+      <form [formGroup]="dateForm" (ngSubmit)="onSubmit()">
+        <p>Start Day</p>
+        <input
+          type="date"
+          id="startDay"
+          formControlName="startDay"
+          required
+          class="w-full border border-gray-300 rounded-lg p-2 focus:outline-purple_accent mb-10"
+        />
+  
+        <p>End Day</p>
+        <input
+          type="date"
+          id="endDay"
+          formControlName="endDay"
+          required
+          class="w-full border border-gray-300 rounded-lg p-2 focus:outline-purple_accent"
+        />
+      </form>
+    </div>
+    <div *nzModalFooter>
+      <button
+        nz-button
+        nzType="default"
+        (click)="handleCancel()"
+        class="border-red-400 border-2 rounded-md text-red-400 hover:text-red-600 hover:border-red-600 duration-500 p-2 font-bold"
+      >
+        Cancel
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        (click)="handleConfirm()"
+        class="bg-purple_accent border-purple_accent border-2 rounded-md text-white p-2 font-bold ml-5"
+      >
+        Confirm
+      </button>
+    </div>
+  </nz-modal>
+  

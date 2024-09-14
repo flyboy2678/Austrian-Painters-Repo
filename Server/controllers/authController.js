@@ -1,18 +1,17 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
-const { createUser, getUserByEmail, getUserById } = require("../models/userModel");
+const { createUser, getUserByEmail, getUserById, updateUserStatus } = require("../models/userModel");
 const { jwtDecode } = require("jwt-decode");
 const nodemailer = require("nodemailer");
 
 const secretKey = process.env.JWT_SECRET;
 
-// Variable to track user status and activity
-let userStatus = "offline"; // Default is offline
+// Variable to track user activity
 let inactivityTimer = null; // Timer to track inactivity
 
 // Function to set user status to 'tired' after 30 minutes of inactivity
-const setInactivityTimeout = () => {
+const setInactivityTimeout = (emp_id) => {
     // Clear any existing timer
     if (inactivityTimer) {
         clearTimeout(inactivityTimer);
@@ -20,19 +19,13 @@ const setInactivityTimeout = () => {
 
     // Set a new timer for 30 minutes (1800000 ms)
     inactivityTimer = setTimeout(() => {
-        userStatus = "tired";
-        console.log("User is now tired due to 30 minutes of inactivity.");
+        // Set user status to 'tired' after inactivity
+        updateUserStatus(emp_id, "tired");
+        console.log(`User with Emp_id: ${emp_id} is now tired due to 30 minutes of inactivity.`);
     }, 1800000); // 30 minutes
 };
 
-// Function to get the user's status
-const getUserStatus = (req, res) => {
-    if (req.token) {
-        res.status(200).send({ status: userStatus });
-    } else {
-        res.status(200).send({ status: "offline" });
-    }
-};
+
 
 // Signup function
 const signup = (req, res) => {
@@ -90,13 +83,13 @@ const login = (req, res) => {
                 { algorithm: "HS256" }
             );
 
-            // Set user status to online when successfully logged in
-            userStatus = "online";
+            // Set user status to online in the database when successfully logged in
+            updateUserStatus(user.Emp_id, "online");
 
             // Reset inactivity timeout every time the user logs in
-            setInactivityTimeout();
+            setInactivityTimeout(user.Emp_id);
 
-            res.status(200).send({ token, status: userStatus });
+            res.status(200).send({ token, status: "online" });
         });
     });
 };
@@ -133,13 +126,13 @@ const refreshToken = (req, res) => {
             { algorithm: "HS256" }
         );
 
-        // Set user status to online after token refresh
-        userStatus = "online";
+        // Set user status to online in the database after token refresh
+        updateUserStatus(user.Emp_id, "online");
 
         // Reset inactivity timeout every time the user refreshes their token
-        setInactivityTimeout();
+        setInactivityTimeout(user.Emp_id);
 
-        res.status(200).send({ token, status: userStatus });
+        res.status(200).send({ token, status: "online" });
     });
 };
 
@@ -181,9 +174,15 @@ const sendForgotPasswordEmail = (req, res) => {
 
 // Logout function to update the status to offline
 const logout = (req, res) => {
-    userStatus = "offline"; // Update the user's status to offline
-    clearTimeout(inactivityTimer); // Clear inactivity timer on logout
-    res.status(200).send({ status: userStatus });
+    const { emp_id } = req.body;
+
+    // Set the user's status to offline in the database
+    updateUserStatus(emp_id, "offline");
+
+    // Clear inactivity timer on logout
+    clearTimeout(inactivityTimer);
+
+    res.status(200).send({ status: "offline" });
 };
 
-module.exports = { signup, login, refreshToken, sendForgotPasswordEmail, getUserStatus, logout };
+module.exports = { signup, login, refreshToken, sendForgotPasswordEmail, logout };

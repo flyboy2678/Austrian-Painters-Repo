@@ -166,6 +166,62 @@ const changePassword = async (user, callback) => {
 	});
 };
 
+
+const updateUserStatus = (emp_id, status) => {
+    const query = `
+        UPDATE EMPLOYEES
+        SET status = ?
+        WHERE Emp_id = ?
+    `;
+
+    connection.query(
+        query,
+        [status, emp_id],
+        (err, results) => {
+            if (err) {
+                console.error("Error updating status:", err);
+                return;
+            }
+
+            if (results.affectedRows === 0) {
+                console.log("No user found with the given Emp_id.");
+            } else {
+                console.log("Status updated successfully for Emp_id:", emp_id);
+            }
+        }
+    );
+};
+
+const getUserStatus = (emp_id, callback) => {
+    const query = `
+        SELECT status
+        FROM EMPLOYEES
+        WHERE Emp_id = ?
+    `;
+
+    connection.query(
+        query,
+        [emp_id],
+        (err, results) => {
+            if (err) {
+                console.error("Error retrieving status:", err);
+                callback(err, null); // Pass error to the callback
+                return;
+            }
+
+            if (results.length === 0) {
+                console.log("No user found with the given Emp_id.");
+                callback(null, null); // No user found
+            } else {
+                const status = results[0].status;
+                console.log("User status retrieved successfully:", status);
+                callback(null, status); // Pass the status to the callback
+            }
+        }
+    );
+};
+
+
 module.exports = {
 	createUser,
 	getUserByEmail,
@@ -174,5 +230,7 @@ module.exports = {
 	getAllUsers,
 	deleteUser,
 	adminUpdateUser,
+	updateUserStatus,
+	getUserStatus,
 	changePassword,
 };

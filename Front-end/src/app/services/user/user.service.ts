@@ -46,4 +46,9 @@ export class UserService {
 
     return this.http.put('http://localhost:3000/api/changePassword', user);
   }
+
+  getStatus(userid: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/api/getStatus/${userid}`);
+  }
+
 }

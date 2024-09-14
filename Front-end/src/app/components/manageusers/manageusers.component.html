@@ -38,6 +38,7 @@
             </th>
             <th class="p-2 rounded-none">Email</th>
             <th class="p-2 rounded-none">Role</th>
+            <th class="p-2 rounded-none">Status</th> <!-- Added Status column -->
             <th class="p-2 rounded-none">Actions</th>
           </tr>
         </thead>
@@ -49,6 +50,9 @@
             <td class="p-2 text-center rounded-none">
               @if (user.Admin == 1) { Manager } @else { Employee }
             </td>
+            <td class="p-2 text-center rounded-none">
+              {{ user.status || 'offline' }} <!-- Display the user status -->
+            </td> <!-- Status field -->
             <td
               class="p-2 text-center flex flex-row justify-center gap-2 rounded-none"
             >

@@ -168,6 +168,7 @@ const updateHours = (data, callback) => {
 	});
 };
 
+
 module.exports = {
 	insertTimeEntry,
 	clockIn,
