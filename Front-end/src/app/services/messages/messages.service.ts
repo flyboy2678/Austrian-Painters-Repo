@@ -34,6 +34,7 @@ export class MessagesService {
   onNewMessage() {
     return new Observable((observer) => {
       this.socket.on('newMessage', (data) => {
+        console.log('Listening for new messages');
         observer.next(data);
       });
     });

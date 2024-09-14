@@ -17,7 +17,7 @@ const sendMessage = (data, callback) => {
 			const io = getSocketIO();
 			if (io) {
 				// Check if io is defined
-				io.emit("newMessage", {
+				io.emit("sendMessage", {
 					sender_id,
 					receiver_id,
 					message,

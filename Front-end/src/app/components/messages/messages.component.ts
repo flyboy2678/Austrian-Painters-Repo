@@ -38,12 +38,16 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.newMessageSubscription = this.messagesService
       .onNewMessage()
       .subscribe((message: any) => {
-        if (
-          message.receiver_id === this.sender_id ||
-          message.sender_id === this.sender_id
-        ) {
-          this.messages.push(message); // Update messages array
-        }
+        console.log('Receiver id: ', message.receiver_id);
+        console.log('Sender id: ', message.sender_id);
+        console.log('message', message);
+        console.log('this.sender_id', this.sender_id);
+        // if (
+        //   message.receiver_id === this.receiver_id ||
+        //   message.sender_id === this.sender_id
+        // ) {
+        this.messages.push(message); // Update messages array
+        // }
       });
   }
 
