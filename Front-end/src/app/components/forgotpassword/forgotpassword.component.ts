@@ -24,8 +24,8 @@ export class ForgotpasswordComponent {
   }
 
   onSubmit() {
-    this.authService.sendForgotPasswordEmail(
-      this.forgotPasswordForm.value.email
-    );
+    this.authService
+      .sendForgotPasswordEmail(this.forgotPasswordForm.value.email)
+      .subscribe();
   }
 }
