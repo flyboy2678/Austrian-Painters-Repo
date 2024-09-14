@@ -15,7 +15,7 @@ const insertPoll = (user_id, data) => {
     }
   );
 };
-const updatePoll = (id, data) => {
+const updatePoll = (id, data,callback) => {
   const query = `UPDATE polls SET poll_data = ? WHERE id = ?`;
   console.log(data.poll_data);
   connection.query(
@@ -26,6 +26,7 @@ const updatePoll = (id, data) => {
         console.error("Error fetching data:", err);
         return;
       }
+      callback(null, results);
       console.log("Poll entries:", results);
     }
   );
