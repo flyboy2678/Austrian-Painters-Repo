@@ -13,6 +13,12 @@
     >
       @if(user?.profile_picture){
       <img [src]="user?.profile_picture" class="rounded-full w-10 h-10" />
+      }@else {
+      <div
+        class="rounded-full w-10 h-10 bg-purple_accent flex justify-center items-center text-white"
+      >
+        {{ user?.firstName[0] }}{{ user?.lastName[0] }}
+      </div>
       }
     </div>
     <h1 class="text-center">

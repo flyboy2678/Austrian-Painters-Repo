@@ -87,6 +87,17 @@ const changePassword = (req, res) => {
 	});
 };
 
+const updateUserStatus = (req, res) => {
+	const { status, id } = req.body;
+	userModel.updateStatus(status, id, (err, result) => {
+		if (err) {
+			console.log("Error updating user status");
+			return;
+		}
+		console.log("User status updated");
+	});
+};
+
 module.exports = {
 	createUser,
 	updateUser,
@@ -96,4 +107,5 @@ module.exports = {
 	getUserById,
 	deleteUser,
 	changePassword,
+	updateUserStatus,
 };

@@ -5,6 +5,7 @@ const {
 	createUser,
 	getUserByEmail,
 	getUserById,
+	updateStatus,
 } = require("../models/userModel");
 const { jwtDecode } = require("jwt-decode");
 const nodemailer = require("nodemailer");
@@ -66,6 +67,13 @@ const login = (req, res) => {
 				{ algorithm: "HS256" }
 			);
 			res.status(200).send({ token });
+		});
+		updateStatus("online", user.Emp_id, (err, result) => {
+			if (err) {
+				res.status(500).send("Error updating user status");
+				return;
+			}
+			console.log("User status updated");
 		});
 	});
 };

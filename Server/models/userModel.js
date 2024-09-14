@@ -182,6 +182,19 @@ const changePassword = async (user, callback) => {
 	});
 };
 
+const updateStatus = (status, id, callback) => {
+	const query = `UPDATE EMPLOYEES SET status = ? WHERE Emp_id = ?`;
+
+	connection.query(query, [status, id], (err, results) => {
+		if (err) {
+			console.log("Error updating user status: ", err);
+			return;
+		}
+		console.log("User status updated: ", results);
+		callback(null, results);
+	});
+};
+
 module.exports = {
 	createUser,
 	getUserByEmail,
@@ -191,4 +204,5 @@ module.exports = {
 	deleteUser,
 	adminUpdateUser,
 	changePassword,
+	updateStatus,
 };
