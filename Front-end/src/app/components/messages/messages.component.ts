@@ -46,6 +46,7 @@ export class MessagesComponent {
       .subscribe(() => {
         this.loadMessages();
       });
+    this.newMessage = '';
   }
 
   selectUser(receiverId: any) {
