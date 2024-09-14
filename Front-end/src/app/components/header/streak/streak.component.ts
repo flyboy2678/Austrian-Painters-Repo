@@ -22,10 +22,10 @@ export class StreakComponent {
   streak: number = 0; // Initialize streak counter
 
   constructor() {
-    console.log(this.date.get365agoDate());
+    // console.log(this.date.get365agoDate());
 
     const user = this.auth.getCurrentUser().id;
-    console.log(user);
+    // console.log(user);
 
     this.date
       .get365DaysAgo(user, this.date.get365agoDate(), this.date.getTodayDate())
@@ -34,20 +34,20 @@ export class StreakComponent {
           // maps all our data into the dates variable
           response.map((result: any, index: number) => {
             const formattedDate = this.date.makeDatePretty(result.entry_date);
-            console.log(formattedDate)
+            // console.log(formattedDate)
             this.data[index] = formattedDate;
           });
 
           // this.hours.updateDates(this.dates);
 
-          console.log(this.data);
+          // console.log(this.data);
         },
         error: (error) => {
           console.error('Error fetching data:', error);
         },
         complete: () => {
           this.streak = this.calculateStreak(this.data);
-          console.log(this.streak)
+          // console.log(this.streak)
           // console.log('Data fetch completed');
         },
       });

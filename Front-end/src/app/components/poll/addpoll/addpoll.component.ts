@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { PollService } from '../../../services/poll/poll.service';
-import { Router } from '@angular/router';
 import { AntdModule } from '../../../global_componet_lib/antd_modules';
 
 @Component({

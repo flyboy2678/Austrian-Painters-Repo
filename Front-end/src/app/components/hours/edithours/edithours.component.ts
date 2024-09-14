@@ -54,14 +54,14 @@ export class EdithoursComponent {
     this.logHoursService
       .updateHours(this.form.value.day, this.form.value.hours)
       .subscribe((res) => {
-        console.log(res);
+        // console.log(res);
       });
     this.form.reset();
   }
 
   onChange(event: Event): void {
     const day = this.days?.find((day: any) => day.id === event);
-    console.log(day?.hours);
+    // console.log(day?.hours);
     this.form.get('hours')?.setValue(day?.hours);
   }
 

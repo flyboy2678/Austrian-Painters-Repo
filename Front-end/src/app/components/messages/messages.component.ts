@@ -34,7 +34,7 @@ export class MessagesComponent implements OnInit {
         this.messages.push(data);
         return;
       }
-      console.log('New message received');
+      // console.log('New message received');
     });
   }
 

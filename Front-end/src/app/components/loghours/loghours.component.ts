@@ -25,17 +25,17 @@ export class LoghoursComponent {
   date = new Date
   // our clockIn method will be called when the users clocks in
   clockIn() {
-    console.log(this.date);
+    // console.log(this.date);
     this.disableClockIn = !this.disableClockIn;
     this.disableClockOut = !this.disableClockOut;
 
-    console.log("Clock In");
+    // console.log("Clock In");
   }
 
   // our clockIn method will be called when the users clocks in
   clockOut(){
     this.disableClockOut = true;
 
-    console.log("Clocked in");
+    // console.log("Clocked in");
   }
 }
