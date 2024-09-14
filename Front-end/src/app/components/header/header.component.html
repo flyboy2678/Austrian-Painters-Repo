@@ -9,9 +9,11 @@
     class="flex flex-row items-center text-center hover:cursor-pointer gap-2"
   >
     <div
-      class="rounded-full bg-dashboard_bg w-fit p-2 font-bold text-purple_accent"
+      class="rounded-full bg-dashboard_bg w-fit font-bold text-purple_accent"
     >
-      {{ initials }}
+      @if(user?.profile_picture){
+      <img [src]="user?.profile_picture" class="rounded-full w-10 h-10" />
+      }
     </div>
     <h1 class="text-center">
       {{ user?.firstName }}

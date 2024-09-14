@@ -50,6 +50,13 @@
         <fa-icon [icon]="faLightbulb"></fa-icon>
         <span class="hidden lg:block"> Tips </span>
       </button>
+      <button
+        routerLink="/messages"
+        [ngClass]="isActive('/messages') ? activeStyle : inactiveStyle"
+      >
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+        <span class="hidden lg:block"> Messages </span>
+      </button>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@
   [nzFooter]="modalFooter"
   nzTitle="Add User"
   (nzOnOk)="handleSubmit()"
+  (nzOnCancel)="handleCancel()"
 >
   <ng-container *nzModalContent>
     <form [formGroup]="taskForm">
